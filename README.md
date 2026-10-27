@@ -49,7 +49,7 @@ To run the CMS with its functions locally, use `npx netlify dev` with a `.env` f
    |---|---|
    | `CMS_PASSWORD` | Password for `/admin/`. Without it, the CMS refuses every request. |
    | `GITHUB_TOKEN` | A **fine-grained** GitHub token with access to **this repo only**, permission **Contents: Read and write**. |
-   | `GITHUB_REPO` | `owner/repo`, e.g. `nijemeis/eurofizzion-website` |
+   | `GITHUB_REPO` | `owner/repo`, e.g. `nijemeis/eurofizzion` |
    | `GITHUB_BRANCH` | Optional; defaults to `main`. Must be the branch Netlify deploys. |
    | `CONTENT_DIR` | Optional; defaults to `content`. Only change it if the site lives in a subfolder of the repo. |
    | `YOUTUBE_API_KEY` | A YouTube Data API v3 key (Google Cloud Console). Restrict it to the YouTube Data API. |
