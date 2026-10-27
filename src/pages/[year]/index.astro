@@ -1,0 +1,11 @@
+---
+import ContestPage from '../../components/ContestPage.astro';
+import { allYears } from '../../lib/content';
+
+export function getStaticPaths() {
+  return allYears.map((y) => ({ params: { year: String(y) } }));
+}
+const year = Number(Astro.params.year);
+---
+
+<ContestPage year={year} />

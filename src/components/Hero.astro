@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/eurofizzion-logo.jpg';
+import Sparkles from './Sparkles.astro';
+import type { Upcoming } from '../lib/types';
+
+interface Props {
+  up: Upcoming;
+  hasBoard: boolean;
+}
+const { up, hasBoard } = Astro.props;
+const units = ['days', 'hours', 'minutes', 'seconds'];
+---
+
+<section class="hero" id="top">
+  <Sparkles count={60} seed={1956} />
+  <div class="hero-inner">
+    <Image
+      src={logo}
+      alt="Eurofizzion.com — the ultimate Eurovision fan hub"
+      class="hero-logo"
+      width={1400}
+      widths={[640, 960, 1400]}
+      sizes="(max-width: 960px) 100vw, 940px"
+      format="webp"
+      quality={82}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-line">The countdown to {up.city} is on</div>
+    <div class="countdown" data-countdown={up.finalISO} role="timer" aria-label={`Countdown to the ${up.city} ${up.year} Grand Final`}>
+      {
+        units.map((u) => (
+          <div class="cd-tile">
+            <div class="cd-v" data-unit={u}>
+              {u === 'days' ? '–' : '--'}
+            </div>
+            <div class="cd-l">{u}</div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="hero-meta">until the Grand Final · {up.venue}, {up.host} · {up.finalDateLabel}</div>
+    <div class="hero-ctas">
+      <a href="#entries" class="cta cta-gold">Watch every entry</a>
+      {hasBoard && <a href="#scoreboard" class="cta cta-pink">Replay the vote</a>}
+    </div>
+  </div>
+</section>

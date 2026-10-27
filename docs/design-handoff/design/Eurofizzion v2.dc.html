@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Pacifico&family=Kaushan+Script&family=Yellowtail&family=Lobster&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Sacramento&display=swap">
+  <script src="esc-data.js"></script>
+  <title>Eurofizzion — the ultimate Eurovision fan hub</title>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #090d35; color: #f7f4ff; font-family: "DM Sans", system-ui, sans-serif; }
+    a { color: #ffd23f; text-decoration: none; }
+    a:hover { color: #ff3fb4; }
+    :focus-visible { outline: 2px solid #2de2f5; outline-offset: 3px; }
+    ::selection { background: rgba(255, 63, 180, .4); }
+    @keyframes twinkle { 0%, 100% { opacity: .1; transform: scale(.5) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(45deg); } }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  </style>
+</helmet>
+<div style="--script:{{ scriptFont }};min-height:100vh;color:#f7f4ff;overflow-x:hidden;background:radial-gradient(1100px 700px at 8% -5%, rgba(224, 60, 255, .22), transparent 60%), radial-gradient(1000px 650px at 95% 2%, rgba(45, 226, 245, .16), transparent 60%), radial-gradient(900px 600px at 50% 110%, rgba(63, 125, 255, .18), transparent 60%), #090d35">
+
+  <header style="position:sticky;top:0;z-index:30;background:rgba(9, 13, 53, .72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255, 255, 255, .07)">
+    <nav style="max-width:1320px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a href="#top" style="display:flex;align-items:baseline;gap:1px;margin-right:auto;line-height:1">
+        <span style="font-family:Unbounded, sans-serif;font-weight:800;font-size:22px;background:linear-gradient(90deg, #ff3fb4, #b04dff);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-0.02em">Euro</span>
+        <span style="font-family:Pacifico, cursive;font-size:24px;background:linear-gradient(180deg, #ffe066, #ff9f2e 70%, #ff3fb4);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 4px 4px 2px">fizzion</span>
+      </a>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-size:14px;font-weight:500">
+        <a href="#entries" style="color:#e8e4ff" style-hover="color:#ffd23f">Entries</a>
+        <a href="#scoreboard" style="color:#e8e4ff" style-hover="color:#ffd23f">Scoreboard</a>
+        <a href="#odds" style="color:#e8e4ff" style-hover="color:#ffd23f">Odds</a>
+        <a href="#burgas" style="color:#e8e4ff" style-hover="color:#ffd23f">Burgas 2027</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(255, 255, 255, .06);border:1px solid rgba(255, 255, 255, .08)">
+        <button onClick="{{ yearNav.prev }}" aria-label="Older contest" title="Older contest" style="width:32px;height:32px;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:#fff;background:transparent;opacity:{{ yearNav.prevOp }}" style-hover="background:rgba(255, 255, 255, .1)"><svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M168.49,199.51a12,12,0,0,1-17,17l-80-80a12,12,0,0,1,0-17l80-80a12,12,0,0,1,17,17L97,128Z"></path></svg></button>
+        <button onClick="{{ yearNav.toggle }}" style="display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:7px 14px;color:#fff;background:linear-gradient(90deg, #ff3fb4, #9b5cff);white-space:nowrap" style-hover="filter:brightness(1.12)">{{ yearNav.city }} {{ yearNav.label }}<svg width="12" height="12" viewBox="0 0 256 256" fill="currentColor"><path d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z"></path></svg></button>
+        <button onClick="{{ yearNav.next }}" aria-label="Newer contest" title="Newer contest" style="width:32px;height:32px;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:#fff;background:transparent;opacity:{{ yearNav.nextOp }}" style-hover="background:rgba(255, 255, 255, .1)"><svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M184.49,136.49l-80,80a12,12,0,0,1-17-17L159,128,87.51,56.49a12,12,0,1,1,17-17l80,80A12,12,0,0,1,184.49,136.49Z"></path></svg></button>
+      </div>
+    </nav>
+  </header>
+
+  <sc-if value="{{ picker }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:40;background:rgba(6, 8, 36, .55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">
+      <div onClick="{{ stop }}" style="position:absolute;top:70px;right:max(16px, calc((100vw - 1320px) / 2 + 24px));width:min(600px, calc(100vw - 32px));max-height:calc(100vh - 90px);overflow-y:auto;padding:22px;border-radius:26px;background:linear-gradient(170deg, #1a2070, #0f1548);border:1px solid rgba(255, 63, 180, .45);box-shadow:0 0 70px rgba(255, 63, 180, .25), 0 30px 70px rgba(0, 0, 0, .55);display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <div style="font-family:var(--script, Pacifico), cursive;font-size:26px;color:#ffd23f;padding-bottom:2px;text-shadow:0 0 16px rgba(255, 210, 63, .45)">Time machine</div>
+            <div style="font-size:13px;color:#c8c2ff">Every contest since Lugano 1956</div>
+          </div>
+          <div style="display:flex;gap:14px;font-size:12px;color:#c8c2ff;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;background:rgba(255, 210, 63, .25);border:1px solid rgba(255, 210, 63, .7)"></span>Full results</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:3px;border:1px solid rgba(255, 255, 255, .3)"></span>Winner only</span>
+          </div>
+        </div>
+        <sc-for list="{{ decades }}" as="d" hint-placeholder-count="0">
+          <div style="display:grid;grid-template-columns:52px minmax(0, 1fr);gap:10px;align-items:center">
+            <div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:12px;color:#ff8fd6">{{ d.label }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ d.years }}" as="y" hint-placeholder-count="0">
+                <button onClick="{{ y.pick }}" title="{{ y.title }}" style="font:inherit;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer;width:50px;padding:6px 0;border-radius:10px;border:1px solid {{ y.border }};color:{{ y.color }};background:{{ y.bg }}" style-hover="border-color:#ff3fb4">{{ y.year }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <section id="top" style="position:relative;padding:0 24px 48px;overflow:hidden">
+    <div style="position:absolute;inset:0;pointer-events:none">{{ sparkles }}</div>
+    <div style="position:relative;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <img class="lighten" src="assets/eurofizzion-logo.jpg" alt="Eurofizzion.com — the ultimate Eurovision fan hub" style="width:auto;max-width:100%;height:min(52vh, 520px);min-height:260px;object-fit:contain;margin-top:-2vh;display:block;mix-blend-mode:lighten;-webkit-mask-image:radial-gradient(ellipse 72% 78% at 50% 48%, #000 62%, transparent 100%);mask-image:radial-gradient(ellipse 72% 78% at 50% 48%, #000 62%, transparent 100%)">
+
+      <div style="font-family:var(--script, Pacifico), cursive;font-size:24px;color:#ffd23f;margin-top:4px;text-shadow:0 0 18px rgba(255, 210, 63, .5)">The countdown to Burgas is on</div>
+      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center">
+        <sc-for list="{{ countdown }}" as="u" hint-placeholder-count="4">
+          <div style="min-width:96px;padding:16px 14px 12px;border-radius:20px;background:linear-gradient(160deg, rgba(255, 63, 180, .22), rgba(63, 125, 255, .14));border:1px solid rgba(255, 255, 255, .14);box-shadow:0 0 30px rgba(224, 60, 255, .18), inset 0 1px 0 rgba(255, 255, 255, .12)">
+            <div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:40px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.02em">{{ u.v }}</div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#c8c2ff;margin-top:8px">{{ u.l }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:14px;color:#c8c2ff;margin-top:14px">until the Grand Final · Arena Burgas, Bulgaria · Saturday 15 May 2027</div>
+      <div style="display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;justify-content:center">
+        <a href="#entries" style="padding:13px 24px;border-radius:999px;font-weight:700;font-size:15px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e);box-shadow:0 8px 30px rgba(255, 159, 46, .35)" style-hover="color:#1a0b33;filter:brightness(1.08)">Watch every entry</a>
+        <a href="#scoreboard" style="padding:13px 24px;border-radius:999px;font-weight:700;font-size:15px;color:#fff;background:linear-gradient(90deg, #ff3fb4, #9b5cff);box-shadow:0 8px 30px rgba(255, 63, 180, .35)" style-hover="color:#fff;filter:brightness(1.1)">Replay the vote</a>
+      </div>
+    </div>
+  </section>
+
+  <div style="position:relative;padding:14px 0;background:linear-gradient(90deg, rgba(255, 63, 180, .16), rgba(63, 125, 255, .16), rgba(45, 226, 245, .16));border-top:1px solid rgba(255, 255, 255, .08);border-bottom:1px solid rgba(255, 255, 255, .08)">{{ parade }}</div>
+
+  <section style="padding:64px 24px 0;max-width:1320px;margin:0 auto">
+    <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr));gap:32px;align-items:center;padding:32px;border-radius:32px;overflow:hidden;background:linear-gradient(120deg, rgba(255, 210, 63, .16), rgba(255, 63, 180, .14) 45%, rgba(63, 125, 255, .14));border:1px solid rgba(255, 210, 63, .35);box-shadow:0 0 60px rgba(255, 210, 63, .12)">
+      <div style="display:flex;align-items:center;gap:24px;min-width:0">
+        <span style="display:grid;place-items:center;flex:none;width:120px;height:120px;border-radius:50%;padding:4px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4);box-shadow:0 0 50px rgba(255, 63, 180, .45);animation:floaty 5s ease-in-out infinite">
+          <div role="img" aria-label="{{ spot.country }}" style="width:100%;height:100%;border-radius:50%;border:4px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ spot.flagBg }}"></div>
+        </span>
+        <div style="min-width:0">
+          <div style="display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;background:linear-gradient(90deg, #ffd23f, #ff9f2e);color:#1a0b33;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">{{ spot.kicker }}</div>
+          <div style="font-family:Unbounded, sans-serif;font-weight:800;font-size:clamp(36px, 5vw, 64px);line-height:1;letter-spacing:-0.03em;margin-top:12px">{{ spot.artist }}</div>
+          <div style="font-family:var(--script, Pacifico), cursive;font-size:34px;line-height:1.15;color:#ffd23f;margin-top:12px;padding-bottom:4px;text-shadow:0 0 18px rgba(255, 210, 63, .35)">{{ spot.song }}</div>
+          <div style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#ff8fd6">{{ spot.country }}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <sc-if value="{{ spot.hasStats }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(96px, 1fr));gap:10px">
+          <sc-for list="{{ spot.stats }}" as="st" hint-placeholder-count="0">
+            <div style="padding:14px 12px;border-radius:18px;background:rgba(9, 13, 53, .55)"><div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:28px;color:{{ st.color }}">{{ st.v }}</div><div style="font-size:12px;color:#c8c2ff;margin-top:4px">{{ st.l }}</div></div>
+          </sc-for>
+        </div>
+        </sc-if>
+        <p style="font-size:15px;line-height:1.5;color:#e8e4ff;margin:0;text-wrap:pretty">{{ spot.note }}</p>
+        <sc-if value="{{ spot.canWatch }}" hint-placeholder-val="{{ true }}"><button onClick="{{ spot.open }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;padding:11px 20px;border-radius:999px;color:#fff;background:linear-gradient(90deg, #ff3fb4, #9b5cff)" style-hover="filter:brightness(1.12)">▶ Watch the winning performance</button></sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section id="entries" style="padding:88px 24px 0;max-width:1320px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px">
+      <div>
+        <div style="font-family:var(--script, Pacifico), cursive;font-size:26px;color:#ffd23f;text-shadow:0 0 16px rgba(255, 210, 63, .45)">The entries</div>
+        <h2 style="font-family:Unbounded, sans-serif;font-weight:800;font-size:clamp(32px, 4.4vw, 52px);letter-spacing:-0.03em;line-height:1.05;margin:6px 0 8px">{{ yearTitle }}</h2>
+        <p style="margin:0;font-size:15px;color:#c8c2ff">{{ entriesSub }}</p>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+          <button onClick="{{ f.pick }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid {{ f.border }};color:{{ f.color }};background:{{ f.bg }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ hasEntries }}" hint-placeholder-val="{{ true }}"><div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));gap:22px 16px;margin-top:30px">
+      <sc-for list="{{ entries }}" as="e" hint-placeholder-count="0">
+        <button onClick="{{ e.open }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:linear-gradient(180deg, rgba(40, 48, 140, .55), rgba(20, 26, 90, .55));border:1px solid rgba(255, 255, 255, .09);transition:transform .25s, box-shadow .25s, border-color .25s" style-hover="transform:translateY(-6px);border-color:rgba(255, 63, 180, .7);box-shadow:0 18px 50px rgba(255, 63, 180, .28), 0 0 0 1px rgba(255, 63, 180, .4)">
+          <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0f1548;margin:8px 8px 0;border-radius:18px;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white, black);transform:translateZ(0)">
+            <div style="position:absolute;left:-25%;top:-25%;width:150%;height:150%;background:center / cover no-repeat;background-image:{{ e.flagBg }};filter:blur(18px) saturate(1.6);opacity:0.85"></div>
+            <sc-if value="{{ e.hasVideo }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:5px;border-radius:14px;background:#0f1548 50% 50% / 118% auto no-repeat;background-image:{{ e.thumbBg }};box-shadow:0 0 0 1px rgba(255, 255, 255, .12)"></div>
+            </sc-if>
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(9, 13, 53, .92), rgba(9, 13, 53, .1) 60%)"></div>
+            <div style="position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(9, 13, 53, .6);color:#e8e4ff;backdrop-filter:blur(6px)">{{ e.roLabel }}</div>
+            <div style="position:absolute;top:10px;right:10px;font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;color:{{ e.badgeColor }};background:{{ e.badgeBg }};box-shadow:{{ e.badgeGlow }}">{{ e.placeLabel }}</div>
+            <div style="position:absolute;inset:0;display:grid;place-items:center">
+              <div style="width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg, #ff3fb4, #9b5cff);box-shadow:0 0 0 6px rgba(255, 63, 180, .2), 0 0 34px rgba(255, 63, 180, .65);color:#fff">
+                <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" style="margin-left:3px"><path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path></svg>
+              </div>
+            </div>
+            <sc-if value="{{ e.hasVideo }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;right:10px;bottom:14px;font-size:11px;font-weight:700;letter-spacing:0.06em;padding:4px 10px;border-radius:999px;color:#0b1040;background:#2de2f5;box-shadow:0 0 14px rgba(45, 226, 245, .5)">{{ e.formats }}</div></sc-if>
+            <div style="position:absolute;left:14px;bottom:10px;display:flex;align-items:center;gap:10px">
+              <span style="display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;padding:2px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)">
+                <div style="width:100%;height:100%;border-radius:50%;border:2px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ e.flagBg }}"></div>
+              </span>
+              <span style="font-family:Unbounded, sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;text-shadow:0 2px 10px rgba(0, 0, 0, .6)">{{ e.country }}</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;padding:14px 16px 18px">
+            <div style="font-size:18px;font-weight:700;line-height:1.2">{{ e.artist }}</div>
+            <div style="font-size:15px;line-height:1.3;color:#ffd23f">“{{ e.song }}”</div>
+            <div style="font-size:12px;color:#a9a3e0;margin-top:6px">{{ e.subLabel }}</div>
+          </div>
+        </button>
+      </sc-for>
+    </div></sc-if>
+    <sc-if value="{{ noEntries }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:30px;padding:44px 28px;border-radius:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;background:linear-gradient(160deg, rgba(40, 48, 140, .45), rgba(20, 26, 90, .45));border:1px dashed rgba(255, 255, 255, .2)">
+        <div style="font-family:var(--script, Pacifico), cursive;font-size:28px;color:#ffd23f;padding-bottom:4px">{{ emptyTitle }}</div>
+        <p style="margin:0;max-width:520px;font-size:16px;line-height:1.5;color:#e8e4ff;text-wrap:pretty">{{ emptyText }}</p>
+        <sc-if value="{{ canImport }}" hint-placeholder-val="{{ false }}">
+          <a href="Eurofizzion%20CMS.dc.html" style="margin-top:6px;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)" style-hover="color:#1a0b33;filter:brightness(1.08)">Import it in the CMS</a>
+        </sc-if>
+      </div>
+    </sc-if>
+  </section>
+
+  <sc-if value="{{ hasEntries }}" hint-placeholder-val="{{ true }}">
+  <section id="scoreboard" style="padding:100px 24px 0;max-width:1320px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px">
+      <div>
+        <div style="font-family:var(--script, Pacifico), cursive;font-size:26px;color:#ffd23f;text-shadow:0 0 16px rgba(255, 210, 63, .45)">And the points go to…</div>
+        <h2 style="font-family:Unbounded, sans-serif;font-weight:800;font-size:clamp(32px, 4.4vw, 52px);letter-spacing:-0.03em;line-height:1.05;margin:6px 0 10px">Scoreboard · {{ yearTitle }}</h2>
+        <sc-if value="{{ hasSplit }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:18px;font-size:13px;color:#e8e4ff;flex-wrap:wrap">
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:4px;background:linear-gradient(90deg, #ff3fb4, #b04dff)"></span>Professional juries</span>
+          <span style="display:flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:4px;background:linear-gradient(90deg, #3f7dff, #2de2f5)"></span>Televote — viewers at home</span>
+        </div></sc-if>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="3">
+          <button onClick="{{ s.pick }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 15px;border:1px solid {{ s.border }};color:{{ s.color }};background:{{ s.bg }}">{{ s.label }}</button>
+        </sc-for>
+        <sc-if value="{{ hasSplit }}" hint-placeholder-val="{{ true }}"><button onClick="{{ revealAction }}" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:11px 20px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e);box-shadow:0 6px 24px rgba(255, 159, 46, .4)" style-hover="filter:brightness(1.08)">{{ revealLabel }}</button></sc-if>
+      </div>
+    </div>
+
+    <div style="margin-top:26px;padding:16px 20px;border-radius:20px;background:linear-gradient(90deg, rgba(255, 63, 180, .18), rgba(63, 125, 255, .14));border:1px solid rgba(255, 255, 255, .1);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span style="font-family:Unbounded, sans-serif;font-weight:800;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;border-radius:999px;background:rgba(9, 13, 53, .6);color:#ffd23f">{{ phaseTag }}</span>
+      <span style="font-size:17px;font-weight:500">{{ phaseText }}</span>
+    </div>
+
+    <div style="position:relative;margin-top:16px;height:{{ boardHeight }}">
+      <sc-for list="{{ board }}" as="r" hint-placeholder-count="0">
+        <div onClick="{{ r.open }}" style="position:absolute;left:0;right:0;top:{{ r.top }};height:50px;display:grid;grid-template-columns:44px minmax(150px, 280px) minmax(0, 1fr) 84px;gap:12px;align-items:center;padding:0 10px 0 6px;border-radius:16px;cursor:pointer;background:{{ r.bg }};border:1px solid {{ r.border }};box-shadow:{{ r.shadow }};transition:top .8s cubic-bezier(.34, 1.3, .5, 1), background .3s, border-color .3s, box-shadow .3s">
+          <div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:16px;text-align:center;color:{{ r.rankColor }}">{{ r.rank }}</div>
+          <div style="display:flex;align-items:center;gap:10px;min-width:0">
+            <span style="display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;padding:2px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)">
+              <div style="width:100%;height:100%;border-radius:50%;border:2px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ r.flagBg }}"></div>
+            </span>
+            <div style="min-width:0">
+              <div style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.country }}</div>
+              <div style="font-size:12px;color:#a9a3e0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.artist }} · {{ r.song }}</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;background:rgba(255, 255, 255, .07)">
+              <div style="width:{{ r.jw }};background:{{ r.barA }};transition:width .8s cubic-bezier(.2, .8, .2, 1)"></div>
+              <div style="width:{{ r.tw }};background:linear-gradient(90deg, #3f7dff, #2de2f5);transition:width .8s cubic-bezier(.2, .8, .2, 1)"></div>
+            </div>
+            <sc-if value="{{ r.split }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums">
+              <span style="color:#ff8fd6">J {{ r.jury }}</span>
+              <span style="color:#4fe8f7">T {{ r.teleShown }}</span>
+              <span style="color:#ffd23f;opacity:{{ r.flashOp }};transition:opacity .4s">+{{ r.tele }} from the public!</span>
+            </div></sc-if>
+          </div>
+          <div style="height:36px;border-radius:12px;display:grid;place-items:center;font-family:Unbounded, sans-serif;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums;background:{{ r.boxBg }};color:{{ r.boxColor }};transition:background .3s">{{ r.score }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin-top:28px">
+      <sc-for list="{{ highlights }}" as="h" hint-placeholder-count="3">
+        <div style="padding:20px;border-radius:24px;background:linear-gradient(160deg, rgba(40, 48, 140, .5), rgba(20, 26, 90, .5));border:1px solid rgba(255, 255, 255, .09);display:flex;flex-direction:column;gap:12px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:{{ h.color }}">{{ h.kicker }}</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:36px;height:36px;flex:none;border-radius:50%;background:#0f1548 center / cover no-repeat;background-image:{{ h.flagBg }};box-shadow:0 0 0 2px #0f1548, 0 0 0 4px {{ h.color }}"></div>
+            <span style="font-size:18px;font-weight:700">{{ h.country }}</span>
+            <span style="margin-left:auto;font-family:Unbounded, sans-serif;font-weight:800;font-size:22px;color:{{ h.color }}">{{ h.value }}</span>
+          </div>
+          <div style="font-size:13px;color:#c8c2ff">{{ h.desc }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <sc-if value="{{ hasOdds }}" hint-placeholder-val="{{ true }}">
+  <section id="odds" style="padding:100px 24px 0;max-width:1320px;margin:0 auto">
+    <div style="font-family:var(--script, Pacifico), cursive;font-size:26px;color:#ffd23f;text-shadow:0 0 16px rgba(255, 210, 63, .45)">The bookies’ crystal ball</div>
+    <h2 style="font-family:Unbounded, sans-serif;font-weight:800;font-size:clamp(32px, 4.4vw, 52px);letter-spacing:-0.03em;line-height:1.05;margin:6px 0 12px">Did the odds get it right?</h2>
+    <p style="font-size:18px;color:#e8e4ff;max-width:760px;margin:0 0 6px;text-wrap:pretty">{{ oddsInsight }}</p>
+    <p style="font-size:12px;color:#a9a3e0;margin:0">{{ oddsNote }}</p>
+
+    <div style="margin-top:26px;padding:20px 22px;border-radius:28px;background:linear-gradient(160deg, rgba(40, 48, 140, .45), rgba(20, 26, 90, .45));border:1px solid rgba(255, 255, 255, .09)">
+      <div style="display:flex;gap:18px;font-size:12px;color:#e8e4ff;margin-bottom:10px;flex-wrap:wrap">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:50%;border:2px solid #c8c2ff"></span>Position in the betting</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:12px;height:12px;border-radius:50%;background:#2de2f5;box-shadow:0 0 10px #2de2f5"></span>Final placing</span>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(130px, 220px) 64px minmax(0, 1fr) 90px;gap:14px;padding:6px 0;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a9a3e0">
+        <span>Country</span><span>Odds</span><span style="display:flex;justify-content:space-between"><span>1st</span><span>{{ lastPlace }}</span></span><span style="text-align:right">Movement</span>
+      </div>
+      <sc-for list="{{ oddsRows }}" as="o" hint-placeholder-count="0">
+        <div onClick="{{ o.open }}" style="display:grid;grid-template-columns:minmax(130px, 220px) 64px minmax(0, 1fr) 90px;gap:14px;align-items:center;padding:9px 0;cursor:pointer;border-radius:12px" style-hover="background:rgba(255, 255, 255, .04)">
+          <div style="display:flex;align-items:center;gap:10px;min-width:0">
+            <span style="display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;padding:2px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)">
+              <div style="width:100%;height:100%;border-radius:50%;border:2px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ o.flagBg }}"></div>
+            </span>
+            <span style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ o.country }}</span>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#ffd23f;font-variant-numeric:tabular-nums">{{ o.oddsLabel }}</div>
+          <div style="position:relative;height:26px;margin:0 8px">
+            <div style="position:absolute;left:-8px;right:-8px;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:rgba(255, 255, 255, .08)"></div>
+            <div style="position:absolute;top:50%;height:4px;margin-top:-2px;border-radius:4px;left:{{ o.segL }};width:{{ o.segW }};background:{{ o.segColor }}"></div>
+            <div style="position:absolute;top:50%;left:{{ o.oddsX }};width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid #c8c2ff;background:#0f1548"></div>
+            <div style="position:absolute;top:50%;left:{{ o.placeX }};width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:{{ o.dotColor }};box-shadow:0 0 14px {{ o.dotColor }}"></div>
+          </div>
+          <div style="font-size:13px;font-weight:700;text-align:right;color:{{ o.deltaColor }};font-variant-numeric:tabular-nums">{{ o.deltaLabel }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="burgas" style="margin-top:120px;position:relative;overflow:hidden;padding:96px 24px 104px;background:radial-gradient(900px 500px at 20% 0%, rgba(255, 63, 180, .28), transparent 60%), radial-gradient(900px 500px at 85% 20%, rgba(45, 226, 245, .22), transparent 60%), linear-gradient(180deg, rgba(63, 125, 255, .12), rgba(155, 92, 255, .2))">
+    <div style="position:absolute;inset:0;pointer-events:none">{{ sparklesB }}</div>
+    <div style="position:relative;max-width:1320px;margin:0 auto">
+      <div style="font-family:var(--script, Pacifico), cursive;font-size:28px;color:#ffd23f;text-shadow:0 0 16px rgba(255, 210, 63, .5)">Next stop, the Black Sea</div>
+      <h2 style="font-family:Unbounded, sans-serif;font-weight:800;font-size:clamp(56px, 10vw, 144px);letter-spacing:-0.04em;line-height:1;margin:8px 0 18px;padding-bottom:0.08em;background:linear-gradient(90deg, #ff3fb4, #b04dff 35%, #3f7dff 65%, #2de2f5);-webkit-background-clip:text;background-clip:text;color:transparent">Burgas 2027</h2>
+      <p style="font-size:19px;line-height:1.5;color:#e8e4ff;max-width:640px;margin:0;text-wrap:pretty">Bulgaria hosts for the very first time after Dara’s win in Vienna. Three live shows at Arena Burgas, and the Eurovision Village down at the Port of Burgas.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));gap:14px;margin-top:40px">
+        <sc-for list="{{ up.shows }}" as="s" hint-placeholder-count="3">
+          <div style="padding:24px;border-radius:26px;background:rgba(9, 13, 53, .55);border:1px solid {{ s.border }};box-shadow:{{ s.glow }};display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:{{ s.color }}">{{ s.name }}</div>
+            <div style="font-family:Unbounded, sans-serif;font-weight:800;font-size:34px;letter-spacing:-0.02em;line-height:1">{{ s.date }}</div>
+            <div style="font-size:13px;color:#c8c2ff">Arena Burgas · 2027</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top:14px;padding:24px;border-radius:26px;background:rgba(9, 13, 53, .55);border:1px solid rgba(255, 255, 255, .1);display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px">
+          <span style="font-family:Unbounded, sans-serif;font-weight:800;font-size:40px;line-height:1;color:#ffd23f">{{ up.intending }}</span>
+          <span style="font-size:16px;color:#e8e4ff">broadcasters have provisionally confirmed for 2027</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ up.chips }}" as="c" hint-placeholder-count="4">
+            <span style="display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:999px;font-size:13px;font-weight:700;background:{{ c.bg }};color:{{ c.color }}">
+              <span style="width:24px;height:24px;flex:none;border-radius:50%;background:#0f1548 center / cover no-repeat;background-image:{{ c.flagBg }}"></span>
+              {{ c.country }} · {{ c.label }}
+            </span>
+          </sc-for>
+        </div>
+        <div style="font-size:13px;color:#a9a3e0">Entries appear here as each country picks its act.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1320px;margin:0 auto;padding:44px 24px 60px;display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:center;font-size:13px;color:#a9a3e0">
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+      <span style="font-family:Unbounded, sans-serif;font-weight:800;font-size:18px;background:linear-gradient(90deg, #ff3fb4, #b04dff);-webkit-background-clip:text;background-clip:text;color:transparent">Euro</span><span style="font-family:Pacifico, cursive;font-size:20px;color:#ffd23f;margin-left:-8px;padding-bottom:3px">fizzion</span>
+      <span>eurofizzion.eu · eurofizzion.com</span>
+      <a href="Eurofizzion%20CMS.dc.html" style="font-size:12px;font-weight:700;color:#a9a3e0" style-hover="color:#ffd23f">CMS</a>
+    </div>
+    <div style="max-width:580px;text-wrap:pretty">An unofficial fan site, not affiliated with the EBU or the Eurovision Song Contest. 2026 results and odds from public sources; earlier figures are fan-compiled.</div>
+  </footer>
+
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;background:rgba(6, 8, 36, .86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)">
+      <div onClick="{{ stop }}" style="width:min(940px, 100%);max-height:92vh;overflow-y:auto;border-radius:28px;background:linear-gradient(170deg, #1a2070, #0f1548);border:1px solid rgba(255, 63, 180, .45);box-shadow:0 0 80px rgba(255, 63, 180, .3), 0 30px 80px rgba(0, 0, 0, .6)">
+        <div style="position:relative;aspect-ratio:16/9;background:#090d35;overflow:hidden;margin:10px 10px 0;border-radius:20px;isolation:isolate;transform:translateZ(0)">
+          <sc-if value="{{ m.hasVideo }}" hint-placeholder-val="{{ false }}">
+            <iframe src="{{ m.embed }}" title="{{ m.title }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:20px" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>
+          </sc-if>
+          <sc-if value="{{ m.noVideo }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;left:-20%;top:-20%;width:140%;height:140%;background:center / cover no-repeat;background-image:{{ m.flagBg }};filter:blur(40px) saturate(1.5);opacity:0.55"></div>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center">
+              <div style="font-family:var(--script, Pacifico), cursive;font-size:24px;color:#ffd23f">Lights, camera…</div>
+              <div style="font-size:15px;color:#f7f4ff">{{ m.emptyText }}</div>
+              <form onSubmit="{{ m.submit }}" style="display:flex;gap:8px;width:min(500px, 100%)">
+                <input placeholder="Paste a YouTube link or video ID" value="{{ ytInput }}" onChange="{{ onYtInput }}" style="flex:1;min-width:0;font:inherit;font-size:14px;padding:12px 16px;border-radius:999px;border:1px solid rgba(255, 255, 255, .2);background:rgba(9, 13, 53, .75);color:#f7f4ff">
+                <button type="submit" style="font:inherit;font-weight:700;font-size:14px;cursor:pointer;border:0;border-radius:999px;padding:12px 20px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)">Load</button>
+              </form>
+              <div style="font-size:12px;color:#ff8fd6;min-height:18px">{{ ytErr }}</div>
+              <a href="{{ m.search }}" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:#2de2f5" style-hover="color:#ffd23f">Find it on YouTube ↗</a>
+            </div>
+          </sc-if>
+          <button onClick="{{ closeModal }}" aria-label="Close" style="position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255, 255, 255, .2);cursor:pointer;display:grid;place-items:center;color:#fff;background:rgba(9, 13, 53, .7)" style-hover="background:rgba(255, 63, 180, .5)">
+            <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+          </button>
+        </div>
+        <div style="padding:16px 26px 26px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <sc-for list="{{ m.tabs }}" as="t" hint-placeholder-count="2">
+              <button onClick="{{ t.pick }}" style="display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:8px 15px;border:1px solid {{ t.border }};color:{{ t.color }};background:{{ t.bg }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ t.dot }};box-shadow:{{ t.dotGlow }}"></span>{{ t.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;padding:2px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)">
+              <div style="width:100%;height:100%;border-radius:50%;border:2px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ m.flagBg }}"></div>
+            </span>
+            <span style="font-family:Unbounded, sans-serif;font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase">{{ m.country }} · {{ m.yearTitle }}</span>
+            <span style="margin-left:auto;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;color:{{ m.badgeColor }};background:{{ m.badgeBg }}">{{ m.placeLabel }}</span>
+          </div>
+          <div>
+            <div style="font-family:Unbounded, sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.02em;line-height:1.1">{{ m.artist }}</div>
+            <div style="font-family:var(--script, Pacifico), cursive;font-size:22px;color:#ffd23f;margin-top:4px;padding-bottom:4px">{{ m.song }}</div>
+          </div>
+          <sc-if value="{{ m.isFinalist }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:10px">
+              <div style="padding:12px;border-radius:16px;background:rgba(9, 13, 53, .55)"><div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:24px;color:#ffd23f">{{ m.total }}</div><div style="font-size:12px;color:#c8c2ff">total points</div></div>
+              <div style="padding:12px;border-radius:16px;background:rgba(9, 13, 53, .55)"><div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:24px;color:#ff6fc8">{{ m.jury }}</div><div style="font-size:12px;color:#c8c2ff">jury</div></div>
+              <div style="padding:12px;border-radius:16px;background:rgba(9, 13, 53, .55)"><div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:24px;color:#4fe8f7">{{ m.tele }}</div><div style="font-size:12px;color:#c8c2ff">televote</div></div>
+            </div>
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;background:rgba(255, 255, 255, .08)">
+              <div style="width:{{ m.jw }};background:linear-gradient(90deg, #ff3fb4, #b04dff)"></div>
+              <div style="width:{{ m.tw }};background:linear-gradient(90deg, #3f7dff, #2de2f5)"></div>
+            </div>
+          </sc-if>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;color:#a9a3e0">
+            <span>{{ m.subLabel }}</span>
+            <sc-if value="{{ m.hasLocal }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ m.removeLocal }}" style="margin-left:auto;font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:0;background:none;color:#ff8fd6" style-hover="color:#ffd23f">Unlink this video</button>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;scriptFont&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Kaushan Script&quot;,&quot;Yellowtail&quot;,&quot;Pacifico&quot;,&quot;Lobster&quot;,&quot;Dancing Script&quot;,&quot;Great Vibes&quot;,&quot;Sacramento&quot;],&quot;default&quot;:&quot;Kaushan Script&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;sparkles&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:90,&quot;step&quot;:5,&quot;default&quot;:60,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;revealSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:300,&quot;max&quot;:2000,&quot;step&quot;:100,&quot;unit&quot;:&quot;ms&quot;,&quot;default&quot;:900,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Vote reveal&quot;},&quot;showNonQualifiers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;defaultYear&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;2026&quot;,&quot;2025&quot;,&quot;2024&quot;,&quot;2023&quot;],&quot;default&quot;:&quot;2026&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { year: null, filter: 'all', sort: 'total', reveal: null, open: null, openYear: null, vtype: null, picker: false, now: Date.now(), yt: {}, ytInput: '', ytErr: '', ready: !!window.ESC_DATA };
+
+  stars = Array.from({ length: 90 }, (_, i) => ({
+    x: Math.random() * 100, y: Math.random() * 100, s: 6 + Math.random() * 14,
+    d: Math.random() * 4, t: 2.2 + Math.random() * 3,
+    c: ['#ffd23f', '#ff3fb4', '#2de2f5', '#ffffff', '#b04dff', '#ff9f2e'][i % 6]
+  }));
+
+  componentDidMount() {
+    if (!window.ESC_DATA) this._poll = setInterval(() => { if (window.ESC_DATA) { clearInterval(this._poll); this.setState({ ready: true }); } }, 80);
+    this._tick = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    try { this.setState({ yt: JSON.parse(localStorage.getItem('eurofizzion-yt') || '{}') }); } catch (e) {}
+    this._key = e => { if (e.key === 'Escape') this.setState({ open: null, picker: false }); };
+    this._storage = e => { if (e.key === 'eurofizzion-cms') this.forceUpdate(); };
+    window.addEventListener('keydown', this._key);
+    window.addEventListener('storage', this._storage);
+  }
+  componentWillUnmount() { clearInterval(this._poll); clearInterval(this._tick); clearInterval(this._rv); window.removeEventListener('keydown', this._key); window.removeEventListener('storage', this._storage); }
+
+  saveYt(changes) {
+    const yt = { ...this.state.yt };
+    for (const [k, id] of Object.entries(changes)) { if (id) yt[k] = id; else delete yt[k]; }
+    this.setState({ yt, ytInput: '', ytErr: '' });
+    try { localStorage.setItem('eurofizzion-yt', JSON.stringify(yt)); } catch (e) {}
+  }
+
+  startReveal() {
+    clearInterval(this._rv);
+    this.setState({ reveal: 0 });
+    this._rv = setInterval(() => {
+      this.setState(s => {
+        if (s.reveal == null) return null;
+        const n = s.reveal + 1;
+        if (n >= this._N) clearInterval(this._rv);
+        return { reveal: Math.min(n, this._N) };
+      });
+    }, this.props.revealSpeed ?? 900);
+  }
+  stopReveal() { clearInterval(this._rv); this.setState({ reveal: null }); }
+
+  scriptFont() {
+    const F = { 'Pacifico': 'Pacifico', 'Yellowtail': 'Yellowtail', 'Kaushan Script': '"Kaushan Script"', 'Lobster': 'Lobster', 'Dancing Script': '"Dancing Script"', 'Great Vibes': '"Great Vibes"', 'Sacramento': 'Sacramento' };
+    return F[this.props.scriptFont] || '"Kaushan Script"';
+  }
+  flag(c) {
+    if (c === 'yu' || c === 'cs') return 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#c6363c"/><rect width="3" height="1.34" fill="#fff"/><rect width="3" height=".67" fill="#0c4076"/></svg>');
+    return 'https://flagcdn.com/w160/' + c + '.png';
+  }
+
+  getData() {
+    const B = window.ESC_DATA;
+    if (!B) return null;
+    let raw = '';
+    try { raw = localStorage.getItem('eurofizzion-cms') || ''; } catch (e) {}
+    if (this._d && this._dRaw === raw) return this._d;
+    let cms = {};
+    try { cms = JSON.parse(raw || '{}') || {}; } catch (e) {}
+    const years = { ...B.years };
+    Object.entries(cms.years || {}).forEach(([y, Y]) => {
+      if (years[y]) years[y] = { ...years[y], yt: { ...(years[y].yt || {}), ...(Y.yt || {}) } };
+      else if (Y.entries && Y.entries.length) years[y] = { odds: {}, yt: {}, ...Y };
+    });
+    this._dRaw = raw; this._d = { ...B, years }; this._parade = null;
+    return this._d;
+  }
+
+  sparkleLayer(count, key) {
+    const h = React.createElement;
+    return h('div', { key, style: { position: 'absolute', inset: 0 } }, this.stars.slice(0, count).map((s, i) => h('span', {
+      key: i, style: {
+        position: 'absolute', left: s.x + '%', top: s.y + '%', width: s.s, height: s.s, background: s.c,
+        clipPath: 'polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%)',
+        filter: 'drop-shadow(0 0 6px ' + s.c + ')', animation: 'twinkle ' + s.t + 's ease-in-out ' + s.d + 's infinite', opacity: 0.1
+      }
+    })));
+  }
+
+  parade(D) {
+    if (this._parade) return this._parade;
+    const h = React.createElement;
+    const codes = [...new Set(Object.values(D.years).flatMap(Y => Y.entries.map(e => e[0])))].filter(c => D.countries[c]).sort((a, b) => D.countries[a].localeCompare(D.countries[b]));
+    const item = (c, i) => h('span', { key: i, style: { display: 'inline-flex', alignItems: 'center', gap: 10, marginRight: 34, whiteSpace: 'nowrap' } },
+      h('span', { style: { display: 'grid', placeItems: 'center', width: 30, height: 30, borderRadius: '50%', padding: 2, background: 'conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)' } },
+        h('span', { style: { width: '100%', height: '100%', borderRadius: '50%', border: '2px solid #0f1548', boxSizing: 'border-box', background: '#0f1548 center / cover no-repeat', backgroundImage: 'url("' + this.flag(c) + '")' } })),
+      h('span', { style: { fontFamily: 'Unbounded, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#f7f4ff' } }, D.countries[c]));
+    const all = codes.concat(codes);
+    this._parade = h('div', { style: { overflow: 'hidden', maskImage: 'linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)' } },
+      h('div', { style: { display: 'inline-flex', animation: 'marquee 90s linear infinite', willChange: 'transform' } }, all.map(item)));
+    return this._parade;
+  }
+
+  renderVals() {
+    const D = this.getData(), P = this.props, S = this.state;
+    const showNQ = P.showNonQualifiers ?? true;
+    const density = P.sparkles ?? 60;
+    const ord = n => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+    const flag = c => this.flag(c), bgOf = c => 'url("' + this.flag(c) + '")';
+    const pad = n => String(n).padStart(2, '0');
+    const pct = (a, b) => (b ? (a / b) * 100 : 0) + '%';
+    const pill = on => ({ border: on ? 'transparent' : 'rgba(255, 255, 255, .16)', color: on ? '#fff' : '#e8e4ff', bg: on ? 'linear-gradient(90deg, #ff3fb4, #9b5cff)' : 'rgba(255, 255, 255, .04)' });
+    const badge = p => p === 1 ? { badgeColor: '#1a0b33', badgeBg: 'linear-gradient(90deg, #ffd23f, #ff9f2e)', badgeGlow: '0 0 18px rgba(255, 210, 63, .6)' }
+      : p && p <= 10 ? { badgeColor: '#fff', badgeBg: 'linear-gradient(90deg, #ff3fb4, #9b5cff)', badgeGlow: 'none' }
+      : p ? { badgeColor: '#fff', badgeBg: 'rgba(63, 125, 255, .75)', badgeGlow: 'none' }
+      : { badgeColor: '#e8e4ff', badgeBg: 'rgba(9, 13, 53, .7)', badgeGlow: 'none' };
+
+    const ms = Math.max(0, Date.parse(D ? D.upcoming.finalISO : '2027-05-15T21:00:00+02:00') - S.now);
+    const countdown = [
+      { v: Math.floor(ms / 864e5), l: 'days' }, { v: pad(Math.floor(ms / 36e5) % 24), l: 'hours' },
+      { v: pad(Math.floor(ms / 6e4) % 60), l: 'minutes' }, { v: pad(Math.floor(ms / 1e3) % 60), l: 'seconds' }
+    ];
+    const base = {
+      countdown, ytInput: S.ytInput, ytErr: S.ytErr, picker: S.picker,
+      sparkles: this.sparkleLayer(density, 'a'), sparklesB: this.sparkleLayer(Math.round(density / 2), 'b'),
+      closeModal: () => this.setState({ open: null }), closePicker: () => this.setState({ picker: false }), stop: e => e.stopPropagation(),
+      onYtInput: e => this.setState({ ytInput: e.target.value, ytErr: '' })
+    };
+    const none = { spot: { stats: [] }, decades: [], yearNav: {}, entries: [], filters: [], sorts: [], board: [], highlights: [], oddsRows: [], up: { shows: [], chips: [] }, m: {}, modalOpen: false, hasEntries: false, noEntries: false, hasSplit: false, hasOdds: false };
+    if (!D) return { ...base, ...none, scriptFont: this.scriptFont(), ready: false };
+
+    const C = D.countries, A = D.archive || {};
+    const fullYears = Object.keys(D.years).map(Number);
+    const allYears = [...new Set(Object.keys(A).map(Number).concat(fullYears))].sort((a, b) => b - a);
+    const latest = Math.max(...fullYears);
+    const year = S.year ?? Number(P.defaultYear ?? latest);
+    const pick = y => { clearInterval(this._rv); this.setState({ year: y, filter: 'all', reveal: null, picker: false }); };
+    const cityOf = y => (D.years[y] && D.years[y].city) || (A[y] && A[y][0]) || '';
+    const yi = allYears.indexOf(year), older = allYears[yi + 1], newer = allYears[yi - 1];
+    const yearNav = { label: year, city: cityOf(year), prev: () => older && pick(older), next: () => newer && pick(newer),
+      prevOp: older ? 1 : 0.3, nextOp: newer ? 1 : 0.3, toggle: () => this.setState(s => ({ picker: !s.picker })) };
+    const decMap = {};
+    allYears.forEach(y => { const d = Math.floor(y / 10) * 10; (decMap[d] = decMap[d] || []).push(y); });
+    const decades = Object.keys(decMap).map(Number).sort((a, b) => b - a).map(d => ({
+      label: d + 's',
+      years: decMap[d].slice().sort((a, b) => a - b).map(y => {
+        const on = y === year, full = !!D.years[y], a = A[y] || [];
+        const wc = a[2] || (full ? (D.years[y].entries.find(t => t[3] === 1) || [])[0] : null);
+        return { year: y, pick: () => pick(y), title: cityOf(y) + ' ' + y + (wc ? ' · won by ' + C[wc] : y === 2020 ? ' · cancelled' : ''),
+          bg: on ? 'linear-gradient(135deg, #ff3fb4, #9b5cff)' : full ? 'rgba(255, 210, 63, .12)' : 'rgba(255, 255, 255, .03)',
+          color: on ? '#fff' : full ? '#ffe58a' : y === 2020 ? '#6f69a8' : '#c8c2ff',
+          border: on ? 'transparent' : full ? 'rgba(255, 210, 63, .5)' : 'rgba(255, 255, 255, .1)' };
+      })
+    }));
+
+    const build = yr => {
+      const Y = D.years[yr], odds = Y.odds || {}, ytm = Y.yt || {};
+      return Y.entries.map(t => {
+        const [c, a, s, p, j, tv, or, st, ro, sfp, sfpts, tot] = t;
+        const k = yr + '-' + c, src = ytm[c];
+        const live = S.yt[k + '-live'] || S.yt[k] || (typeof src === 'string' ? src : (src && src.live) || '');
+        const mv = S.yt[k + '-mv'] || (src && typeof src === 'object' && src.mv) || '';
+        const id = live || mv;
+        const total = tot != null ? tot : (j != null && tv != null ? j + tv : null);
+        const e = { c, k, yr, country: C[c] || c.toUpperCase(), artist: a, song: s, place: p, jury: j, tele: tv, total, oddsRank: or, odds: odds[c] || '', status: st, id, flag: flag(c), flagBg: bgOf(c), ...badge(p) };
+        const semi = st === 'SF2' ? 'Semi-final 2' : st === 'SF' ? 'Semi-final' : 'Semi-final 1';
+        const isSemi = st && st.indexOf('SF') === 0;
+        e.placeLabel = p === 1 ? '★ Winner' : p ? ord(p) : st === 'DQ' ? 'Disqualified' : isSemi ? 'Semi-finalist' : 'Took part';
+        e.roLabel = ro ? 'Nº ' + ro : st === 'A' ? 'Auto-qualified' : isSemi ? semi.replace('-final', '') : String(yr);
+        e.subLabel = p ? (j != null && tv != null ? total + ' pts · ' + j + ' jury · ' + tv + ' televote' : total != null ? total + ' points' : '')
+          : st === 'DQ' ? 'Removed before the final'
+          : isSemi ? semi + (sfp ? ' · ' + ord(sfp) + (sfpts != null ? ' with ' + sfpts + ' pts' : '') : ' · did not qualify')
+          : '';
+        e.hasVideo = !!id; e.noVideo = !id; e.live = live; e.mv = mv;
+        e.formats = live && mv ? '▶ Live · MV' : live ? '▶ Live' : '▶ Music video';
+        e.thumb = id ? 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' : '';
+        e.thumbBg = id ? 'url(' + e.thumb + ')' : 'none';
+        e.open = () => this.setState({ open: c, openYear: yr, vtype: null, ytInput: '', ytErr: '' });
+        return e;
+      });
+    };
+
+    let V;
+    const Y = D.years[year];
+    if (!Y) {
+      const a = A[year] || [], city = a[0] || '', wc = a[2];
+      const title = (city + ' ' + year).trim();
+      V = { yearTitle: title, hasEntries: false, noEntries: true, entries: [], filters: [], board: [], sorts: [], highlights: [], oddsRows: [], hasSplit: false, hasOdds: false, boardHeight: '0px',
+        phaseTag: '', phaseText: '', revealLabel: '', revealAction: () => {}, oddsInsight: '', oddsNote: '', lastPlace: '',
+        entriesSub: wc ? 'Only the winner is on file for this contest so far.' : '',
+        emptyTitle: wc ? 'Results coming soon' : 'No contest this year',
+        emptyText: wc ? 'The full line-up and scoreboard for ' + title + ' haven’t been added yet.' : 'The 2020 contest in Rotterdam was cancelled because of the COVID-19 pandemic.',
+        canImport: !!wc,
+        spot: wc ? { kicker: '★ Winner · ' + title, flagBg: bgOf(wc), artist: a[3], song: a[4], country: C[wc], stats: [], hasStats: false, note: a[5] || '', canWatch: false }
+          : { kicker: 'Cancelled · ' + title, flagBg: 'none', artist: 'No contest', song: '', country: 'Rotterdam, Netherlands', stats: [], hasStats: false, note: 'Broadcasters aired the special Eurovision: Europe Shine a Light instead.', canWatch: false } };
+    } else {
+      const all = build(year);
+      const finals = all.filter(e => e.place).sort((a, b) => a.place - b.place);
+      const nq = all.filter(e => !e.place);
+      const N = finals.length; this._N = N;
+      const hasSplit = N > 0 && finals.every(e => e.jury != null && e.tele != null);
+      const winner = finals[0] || all[0], second = finals[1];
+      const yearTitle = Y.city + ' ' + year;
+      const maxT = Math.max(1, ...finals.map(e => e.total || 0));
+
+      const stats = [];
+      if (winner && winner.total != null) {
+        stats.push({ v: winner.total, l: 'points', color: '#ffd23f' });
+        if (hasSplit) stats.push({ v: winner.jury, l: 'jury', color: '#ff6fc8' }, { v: winner.tele, l: 'televote', color: '#4fe8f7' });
+        if (second && second.total != null) stats.push({ v: '+' + (winner.total - second.total), l: 'vs ' + second.country, color: '#f7f4ff' });
+      }
+      const spot = { ...winner, kicker: '★ Winner · ' + yearTitle, stats, hasStats: stats.length > 0, note: Y.note || (A[year] && A[year][5]) || '', canWatch: true, open: winner.open };
+
+      const list = !showNQ || S.filter === 'final' ? finals : S.filter === 'semi' ? nq : finals.concat(nq);
+      const filters = showNQ && nq.length ? [['all', 'All ' + all.length], ['final', 'Grand final ' + N], ['semi', 'Out in the semis ' + nq.length]]
+        .map(([key, label]) => ({ label, ...pill(S.filter === key), pick: () => this.setState({ filter: key }) })) : [];
+
+      const R = hasSplit ? S.reveal : null;
+      const revealOrder = finals.slice().sort((a, b) => a.jury - b.jury || b.place - a.place);
+      const revealed = new Set(R == null ? finals.map(e => e.c) : revealOrder.slice(0, R).map(e => e.c));
+      const current = R ? revealOrder[R - 1] : null;
+      const scoreOf = e => !hasSplit ? (e.total || 0) : R != null ? e.jury + (revealed.has(e.c) ? e.tele : 0) : e[S.sort];
+      const ranked = finals.slice().sort((a, b) => scoreOf(b) - scoreOf(a) || a.place - b.place);
+      const rankOf = new Map(ranked.map((e, i) => [e.c, i]));
+      const ROW = 56;
+      const board = finals.map(e => {
+        const i = rankOf.get(e.c), isCur = current && current.c === e.c, lead = i === 0;
+        const showTele = hasSplit && revealed.has(e.c) && !(R == null && S.sort === 'jury');
+        const showJury = !(R == null && S.sort === 'tele');
+        return { ...e, rank: i + 1, top: i * ROW + 'px', split: hasSplit, score: hasSplit ? scoreOf(e) : (e.total != null ? e.total : '—'),
+          teleShown: revealed.has(e.c) ? e.tele : '—', flashOp: isCur ? 1 : 0,
+          barA: hasSplit ? 'linear-gradient(90deg, #ff3fb4, #b04dff)' : 'linear-gradient(90deg, #ffd23f, #ff9f2e)',
+          jw: hasSplit ? (showJury ? pct(e.jury, maxT) : '0%') : pct(e.total || 0, maxT), tw: showTele ? pct(e.tele, maxT) : '0%',
+          rankColor: lead ? '#ffd23f' : '#a9a3e0',
+          bg: isCur ? 'rgba(255, 63, 180, .2)' : lead ? 'rgba(255, 210, 63, .1)' : 'rgba(255, 255, 255, .035)',
+          border: isCur ? 'rgba(255, 63, 180, .8)' : lead ? 'rgba(255, 210, 63, .55)' : 'rgba(255, 255, 255, .07)',
+          shadow: isCur ? '0 0 30px rgba(255, 63, 180, .35)' : lead ? '0 0 24px rgba(255, 210, 63, .2)' : 'none',
+          boxBg: lead ? 'linear-gradient(135deg, #ffd23f, #ff9f2e)' : 'rgba(255, 255, 255, .08)', boxColor: lead ? '#1a0b33' : '#f7f4ff' };
+      });
+      const sortLabels = { total: 'total', jury: 'jury', tele: 'televote' };
+      const sorts = hasSplit && R == null ? Object.entries(sortLabels).map(([key, label]) => ({ label: 'By ' + label, ...pill(S.sort === key), pick: () => this.setState({ sort: key }) })) : [];
+      let phaseTag, phaseText;
+      if (!hasSplit) { phaseTag = 'Final results'; phaseText = 'Points as announced on the night.' + (year < 2016 ? ' Jury and televote scores were only published separately from 2016.' : ''); }
+      else if (R == null) { phaseTag = 'Final results'; phaseText = 'Ranked by ' + sortLabels[S.sort] + ' points. Hit play to relive the televote reveal.'; }
+      else if (R === 0) { phaseTag = 'Juries'; phaseText = 'The juries have spoken. Now for the points from the viewers at home…'; }
+      else if (R < N) { phaseTag = 'Televote ' + R + '/' + N; phaseText = current.country + ' receives ' + current.tele + ' points from the public!'; }
+      else { phaseTag = '★ Winner'; phaseText = winner.country + ' wins ' + yearTitle + ' with ' + winner.total + ' points!'; }
+      const revealLabel = R == null ? '▶ Play the vote reveal' : R < N ? 'Skip to the result' : '↺ Back to full results';
+      const revealAction = () => (R == null ? this.startReveal() : this.stopReveal());
+
+      let highlights = [];
+      if (hasSplit) {
+        const top = key => finals.reduce((a, b) => (b[key] > a[key] ? b : a));
+        const jt = top('jury'), tt = top('tele');
+        const gap = finals.reduce((a, b) => (Math.abs(b.jury - b.tele) > Math.abs(a.jury - a.tele) ? b : a));
+        highlights = [
+          { kicker: 'Jury favourite', color: '#ff6fc8', country: jt.country, flagBg: jt.flagBg, value: jt.jury, desc: jt.artist + ' — “' + jt.song + '” · finished ' + ord(jt.place) },
+          { kicker: 'Televote favourite', color: '#4fe8f7', country: tt.country, flagBg: tt.flagBg, value: tt.tele, desc: tt.artist + ' — “' + tt.song + '” · finished ' + ord(tt.place) },
+          { kicker: 'Biggest jury vs public split', color: '#ffd23f', country: gap.country, flagBg: gap.flagBg, value: gap.jury + ' / ' + gap.tele,
+            desc: gap.jury > gap.tele ? 'The juries loved it far more than the viewers did' : 'The viewers loved it far more than the juries did' }
+        ];
+      }
+
+      const x = n => (N > 1 ? ((n - 1) / (N - 1)) * 100 : 0) + '%';
+      const oddsRows = finals.filter(e => e.oddsRank).sort((a, b) => a.oddsRank - b.oddsRank).map(e => {
+        const d = e.oddsRank - e.place;
+        return { ...e, oddsLabel: e.odds || '#' + e.oddsRank, oddsX: x(e.oddsRank), placeX: x(e.place),
+          segL: x(Math.min(e.oddsRank, e.place)), segW: (N > 1 ? (Math.abs(d) / (N - 1)) * 100 : 0) + '%',
+          segColor: d > 0 ? 'linear-gradient(90deg, #2de2f5, #3f7dff)' : 'linear-gradient(90deg, #ff3fb4, #9b5cff)',
+          dotColor: e.place === 1 ? '#ffd23f' : d > 0 ? '#2de2f5' : '#ff3fb4',
+          deltaLabel: d > 0 ? '▲ ' + d + ' up' : d < 0 ? '▼ ' + (-d) + ' down' : 'Spot on',
+          deltaColor: d > 0 ? '#4fe8f7' : d < 0 ? '#ff8fd6' : '#ffd23f' };
+      });
+      const fav = oddsRows[0];
+      let oddsInsight = '';
+      if (fav) {
+        const fo = fav.odds ? ' at ' + fav.odds : '';
+        oddsInsight = fav.place === 1
+          ? 'The favourite delivered: ' + fav.country + ' went in top of the betting' + fo + ' and won.'
+          : fav.country + ' went in as the bookies’ favourite' + fo + ' and finished ' + ord(fav.place) + '. ' +
+            (winner.oddsRank ? winner.country + ' won from ' + ord(winner.oddsRank) + ' in the betting' + (winner.odds ? ' (' + winner.odds + ')' : '') + '.' : winner.country + ' won from outside the top ' + oddsRows.length + ' in the betting.');
+      }
+      const oddsNote = Y.sourced ? 'Pre-final winner odds as listed by Oddschecker on the day of the final.' : 'Approximate pre-final betting order for the top ' + oddsRows.length + ' — fan-compiled.';
+
+      const sub = [all.length + ' songs'];
+      if (nq.length) sub.push(N + ' in the Grand Final');
+      if (Y.date) sub.push(Y.date);
+      if (Y.venue) sub.push(Y.venue);
+      if (Y.source) sub.push('Results via ' + Y.source);
+
+      V = { yearTitle, spot, entries: list, filters, sorts, board, boardHeight: N * ROW + 'px', hasEntries: true, noEntries: false, hasSplit,
+        hasOdds: oddsRows.length > 1, phaseTag, phaseText, revealLabel, revealAction, highlights, oddsRows, oddsInsight, oddsNote,
+        lastPlace: ord(Math.max(N, 1)), entriesSub: sub.join(' · '), emptyTitle: '', emptyText: '', canImport: false };
+    }
+
+    let m = {}, modalOpen = false;
+    if (S.open && D.years[S.openYear]) {
+      const e = build(S.openYear).find(r => r.c === S.open);
+      if (e) {
+        modalOpen = true;
+        const Yo = D.years[e.yr];
+        const vt = S.vtype || (e.live ? 'live' : e.mv ? 'mv' : 'live');
+        const vid = vt === 'live' ? e.live : e.mv;
+        const tabs = [['live', 'Live performance', e.live], ['mv', 'Official music video', e.mv]].map(([key, label, has]) => ({
+          label, ...pill(vt === key), dot: has ? '#2de2f5' : 'rgba(255, 255, 255, .28)', dotGlow: has ? '0 0 8px #2de2f5' : 'none',
+          pick: () => this.setState({ vtype: key, ytInput: '', ytErr: '' }) }));
+        m = { ...e, tabs, hasVideo: !!vid, noVideo: !vid,
+          emptyText: vt === 'live' ? 'No live performance linked yet — paste one in' : 'No official music video linked yet — paste one in',
+          isFinalist: !!e.place && e.jury != null, yearTitle: Yo.city + ' ' + e.yr, title: e.country + ' — ' + e.artist + ', ' + e.song,
+          jw: pct(e.jury, e.total), tw: pct(e.tele, e.total),
+          embed: vid ? 'https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&rel=0' : '',
+          search: 'https://www.youtube.com/results?search_query=' + encodeURIComponent(e.country + ' ' + e.artist + ' ' + e.song + ' Eurovision ' + e.yr + ' ' + (vt === 'live' ? 'live' : 'official music video')),
+          hasLocal: !!(S.yt[e.k + '-' + vt] || (vt === 'live' && S.yt[e.k])),
+          removeLocal: () => this.saveYt(vt === 'live' ? { [e.k + '-live']: null, [e.k]: null } : { [e.k + '-mv']: null }),
+          submit: ev => {
+            ev.preventDefault();
+            const v = (S.ytInput || '').trim();
+            const hit = v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([\w-]{11})/) || v.match(/^([\w-]{11})$/);
+            if (hit) this.saveYt({ [e.k + '-' + vt]: hit[1] }); else this.setState({ ytErr: 'That doesn’t look like a YouTube link.' });
+          } };
+      }
+    }
+
+    const U = D.upcoming;
+    const showColors = [['#ff3fb4', 'rgba(255, 63, 180, .5)'], ['#2de2f5', 'rgba(45, 226, 245, .5)'], ['#ffd23f', 'rgba(255, 210, 63, .6)']];
+    const up = {
+      intending: U.intending,
+      shows: U.shows.map(([name, date], i) => ({ name, date, color: showColors[i][0], border: showColors[i][1], glow: '0 0 40px ' + showColors[i][1].replace(/[\d.]+\)$/, '.18)') })),
+      chips: [
+        ...U.debut.map(c => ({ c, label: 'Debut', bg: 'linear-gradient(90deg, #ffd23f, #ff9f2e)', color: '#1a0b33' })),
+        ...U.returning.map(c => ({ c, label: 'Returning', bg: 'linear-gradient(90deg, #ff3fb4, #9b5cff)', color: '#fff' })),
+        ...U.leaving.map(c => ({ c, label: 'Not returning', bg: 'rgba(255, 255, 255, .1)', color: '#e8e4ff' }))
+      ].map(o => ({ ...o, country: C[o.c], flagBg: bgOf(o.c) }))
+    };
+
+    return { ...base, ...V, scriptFont: this.scriptFont(), ready: true, parade: this.parade(D), yearNav, decades, modalOpen, m, up };
+  }
+}
+</script>
+</body>
+</html>

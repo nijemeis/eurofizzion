@@ -1,0 +1,98 @@
+---
+import Ring from './Ring.astro';
+import type { FullView } from '../lib/derive';
+
+interface Props {
+  view: FullView;
+}
+const { view } = Astro.props;
+const { finals, hasSplit, maxTotal, yearTitle, year } = view;
+const pct = (a: number | null) => ((a || 0) / maxTotal) * 100 + '%';
+// Initial (no-JS) state is the final result, ranked by total, as on the night.
+const phaseText = hasSplit
+  ? 'Ranked by total points. Hit play to relive the televote reveal.'
+  : 'Points as announced on the night.' + (year < 2016 ? ' Jury and televote scores were only published separately from 2016.' : '');
+---
+
+<section class="wrap board-section" id="scoreboard" data-board>
+  <div class="section-head">
+    <div>
+      <div class="kicker">And the points go to…</div>
+      <h2 class="h2" style="margin-bottom:10px">Scoreboard · {yearTitle}</h2>
+      {
+        hasSplit && (
+          <div class="legend">
+            <span><i style="background:var(--grad-jury)" />Professional juries</span>
+            <span><i style="background:var(--grad-tele)" />Televote — viewers at home</span>
+          </div>
+        )
+      }
+    </div>
+    {
+      hasSplit && (
+        <div class="board-ctl">
+          <div class="board-ctl" data-sorts role="group" aria-label="Sort scoreboard">
+            <button type="button" class="pill" data-sort="total" aria-pressed="true">By total</button>
+            <button type="button" class="pill" data-sort="jury" aria-pressed="false">By jury</button>
+            <button type="button" class="pill" data-sort="tele" aria-pressed="false">By televote</button>
+          </div>
+          <button type="button" class="reveal-btn" data-reveal>▶ Play the vote reveal</button>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="phase" aria-live="polite">
+    <span class="phase-tag" data-phase-tag>Final results</span>
+    <span class="phase-text" data-phase-text>{phaseText}</span>
+  </div>
+
+  <div class:list={['board', { 'no-split': !hasSplit }]} style={`--n:${finals.length}`}>
+    {
+      finals.map((e, i) => (
+        <div class:list={['brow', { lead: i === 0 }]} style={`--rank:${i}`} data-c={e.c} data-open={e.c} tabindex="0" role="button" aria-label={`${e.country}, ${e.total ?? 'no'} points — play`}>
+          <div class="b-rank" data-rank>{i + 1}</div>
+          <div class="b-who">
+            <Ring code={e.c} />
+            <div>
+              <div class="b-country">{e.country}</div>
+              <div class="b-song">{e.artist} · {e.song}</div>
+            </div>
+          </div>
+          <div class="b-bars">
+            <div class="bar">
+              <i class="bj" style={`width:${hasSplit ? pct(e.jury) : pct(e.total)}`} />
+              {hasSplit && <i class="bt" style={`width:${pct(e.tele)}`} />}
+            </div>
+            {hasSplit && (
+              <div class="b-nums">
+                <span class="j">J {e.jury}</span>
+                <span class="t" data-t>T {e.tele}</span>
+                <span class="flash">+{e.tele} from the public!</span>
+              </div>
+            )}
+          </div>
+          <div class="b-score" data-score>{e.total ?? '—'}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    view.highlights.length > 0 && (
+      <div class="highlights">
+        {view.highlights.map((h) => (
+          <div class="hl">
+            <div class={`hl-kicker tone-${h.tone}`}>{h.kicker}</div>
+            <div class="hl-row">
+              <span class={`hl-flag flag tone-${h.tone}`} style={`background-image:url(/flags/${h.c}.svg)`} />
+              <span class="hl-country">{h.country}</span>
+              <span class={`hl-value tone-${h.tone}`}>{h.value}</span>
+            </div>
+            <div class="hl-desc">{h.desc}</div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</section>

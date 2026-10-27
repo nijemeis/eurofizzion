@@ -1,0 +1,38 @@
+{
+  "year": 2027,
+  "edition": 71,
+  "city": "Burgas",
+  "host": "Bulgaria",
+  "hostCode": "bg",
+  "venue": "Arena Burgas",
+  "village": "Port of Burgas",
+  "finalISO": "2027-05-15T21:00:00+02:00",
+  "finalDateLabel": "Saturday 15 May 2027",
+  "kicker": "Next stop, the Black Sea",
+  "blurb": "Bulgaria hosts for the very first time after Dara’s win in Vienna. Three live shows at Arena Burgas, and the Eurovision Village down at the Port of Burgas.",
+  "shows": [
+    {
+      "name": "Semi-final 1",
+      "date": "Tue 11 May"
+    },
+    {
+      "name": "Semi-final 2",
+      "date": "Thu 13 May"
+    },
+    {
+      "name": "Grand Final",
+      "date": "Sat 15 May"
+    }
+  ],
+  "intending": 33,
+  "debut": [
+    "ca"
+  ],
+  "returning": [
+    "nl",
+    "mk"
+  ],
+  "leaving": [
+    "cz"
+  ]
+}

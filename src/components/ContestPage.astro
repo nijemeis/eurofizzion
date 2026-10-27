@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import FlagParade from './FlagParade.astro';
+import Spotlight from './Spotlight.astro';
+import Entries from './Entries.astro';
+import Scoreboard from './Scoreboard.astro';
+import Odds from './Odds.astro';
+import NextContest from './NextContest.astro';
+import Footer from './Footer.astro';
+import VideoModal from './VideoModal.astro';
+import { allYears, archive, contests, countries, upcoming } from '../lib/content';
+import { contestView, decades, emptyView } from '../lib/derive';
+
+interface Props {
+  year: number;
+}
+const { year } = Astro.props;
+const contest = contests[year];
+const view = contest ? contestView(contest, countries, archive[year]) : emptyView(year, archive[year], countries);
+const full = view.kind === 'full' ? view : null;
+const hasBoard = !!full && full.finals.length > 0;
+const hasOdds = !!full && full.oddsRows.length > 1;
+
+const i = allYears.indexOf(year);
+const older = allYears[i + 1];
+const newer = allYears[i - 1];
+const city = contest?.city || archive[year]?.city || '';
+const winner = view.spot.code ? `${view.spot.artist} (${view.spot.country}) won with “${view.spot.song}”.` : view.spot.note;
+const title = `${city} ${year} — Eurovision results, videos & scoreboard | Eurofizzion`;
+const description = full
+  ? `Every entry from Eurovision ${year} in ${city}: watch the performances, replay the vote and compare the odds. ${winner}`
+  : `Eurovision ${year} in ${city}. ${winner}`;
+---
+
+<Base title={title} description={description} canonical={`/${year}/`}>
+  <div class="page">
+    <Header
+      year={year}
+      city={city}
+      older={older}
+      newer={newer}
+      decades={decades(allYears, year, archive, new Set(Object.keys(contests).map(Number)), countries)}
+      hasBoard={hasBoard}
+      hasOdds={hasOdds}
+      next={`${upcoming.city} ${upcoming.year}`}
+    />
+    <main>
+      <Hero up={upcoming} hasBoard={hasBoard} />
+      <FlagParade />
+      <Spotlight spot={view.spot} />
+      <Entries view={view} />
+      {hasBoard && full && <Scoreboard view={full} />}
+      {hasOdds && full && <Odds view={full} />}
+      <NextContest up={upcoming} />
+    </main>
+    <Footer />
+  </div>
+  {full && <VideoModal view={full} />}
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</Base>

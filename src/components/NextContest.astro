@@ -1,0 +1,58 @@
+---
+import Sparkles from './Sparkles.astro';
+import { countries } from '../lib/content';
+import type { Upcoming } from '../lib/types';
+
+interface Props {
+  up: Upcoming;
+}
+const { up } = Astro.props;
+const chips = [
+  ...up.debut.map((c) => ({ c, label: 'Debut', kind: 'debut' })),
+  ...up.returning.map((c) => ({ c, label: 'Returning', kind: 'returning' })),
+  ...up.leaving.map((c) => ({ c, label: 'Not returning', kind: 'leaving' })),
+];
+---
+
+<section class="next" id="next">
+  <Sparkles count={30} seed={2027} />
+  <div class="next-inner">
+    <div class="next-kicker">{up.kicker}</div>
+    <h2 class="next-title">{up.city} {up.year}</h2>
+    <p class="next-blurb">{up.blurb}</p>
+
+    <div class="shows">
+      {
+        up.shows.map((s, i) => (
+          <div class={`show show-${i % 3}`}>
+            <div class="show-name">{s.name}</div>
+            <div class="show-date">{s.date}</div>
+            <div class="show-where">
+              {up.venue} · {up.year}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="part">
+      <div class="part-head">
+        <b>{up.intending}</b>
+        <span>broadcasters have provisionally confirmed for {up.year}</span>
+      </div>
+      {
+        chips.length > 0 && (
+          <div class="part-chips">
+            {chips.map((o) => (
+              <span class={`pchip pchip-${o.kind}`}>
+                <i class="flag" style={`background-image:url(/flags/${o.c}.svg)`} />
+                {countries[o.c] || o.c} · {o.label}
+              </span>
+            ))}
+          </div>
+        )
+      }
+      <div class="part-foot">Entries appear here as each country picks its act.</div>
+    </div>
+  </div>
+</section>

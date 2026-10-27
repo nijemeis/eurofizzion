@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+import type { FullView } from '../lib/derive';
+
+interface Props {
+  view: FullView;
+}
+const { view } = Astro.props;
+// Everything the modal and the scoreboard need on the client, inlined into the page. No fetches at view time.
+const data = {
+  year: view.year,
+  yearTitle: view.yearTitle,
+  hasSplit: view.hasSplit,
+  maxTotal: view.maxTotal,
+  revealOrder: view.revealOrder,
+  entries: view.entries.map((e) => ({
+    c: e.c,
+    country: e.country,
+    artist: e.artist,
+    song: e.song,
+    place: e.place,
+    jury: e.jury,
+    tele: e.tele,
+    total: e.total,
+    live: e.live,
+    mv: e.mv,
+    badge: e.badge,
+    placeLabel: e.placeLabel,
+    subLabel: e.subLabel,
+  })),
+};
+---
+
+<script type="application/json" id="contest-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+
+<div class="modal" data-modal hidden>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="m-artist">
+    <div class="player">
+      <div data-m-frame></div>
+      <div class="player-empty" data-m-empty hidden>
+        <div class="blur" data-m-blur></div>
+        <div class="msg">
+          <div class="script">Lights, camera…</div>
+          <div data-m-empty-text></div>
+          <a data-m-search target="_blank" rel="noopener">Find it on YouTube ↗</a>
+        </div>
+      </div>
+      <button type="button" class="modal-close" data-m-close aria-label="Close"><Icon name="close" size={16} /></button>
+    </div>
+    <div class="modal-body">
+      <div class="tabs" role="group" aria-label="Video">
+        <button type="button" class="pill" data-m-tab="live"><i></i>Live performance</button>
+        <button type="button" class="pill" data-m-tab="mv"><i></i>Official music video</button>
+      </div>
+      <div class="m-who">
+        <span class="ring"><span class="flag" data-m-flag></span></span>
+        <span class="m-label" data-m-label></span>
+        <span class="badge" data-m-badge></span>
+      </div>
+      <div>
+        <div class="m-artist" id="m-artist" data-m-artist></div>
+        <div class="m-song" data-m-song></div>
+      </div>
+      <div data-m-stats hidden style="display:flex;flex-direction:column;gap:14px">
+        <div class="m-stats">
+          <div><b class="tone-gold" data-m-total></b><span>total points</span></div>
+          <div><b class="tone-jury" data-m-jury></b><span>jury</span></div>
+          <div><b class="tone-tele" data-m-tele></b><span>televote</span></div>
+        </div>
+        <div class="bar"><i class="bj" data-m-jw></i><i class="bt" data-m-tw></i></div>
+      </div>
+      <div class="m-sub" data-m-sub></div>
+    </div>
+  </div>
+</div>

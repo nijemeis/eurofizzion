@@ -1,0 +1,28 @@
+---
+// The CMS. Protected by netlify/edge-functions/admin-auth.ts. The published content is inlined at build
+// time, so opening the CMS costs no function calls; only import, video search and publish do.
+import '@fontsource/unbounded/700.css';
+import '@fontsource/unbounded/800.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/pacifico/latin-400.css';
+import '../../styles/cms.css';
+import App from '../../components/cms/App.tsx';
+import { archive, contests, countries } from '../../lib/content';
+
+const data = { contests, archive, countries, builtAt: new Date().toISOString() };
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Eurofizzion CMS</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <App client:only="preact" data={data} />
+  </body>
+</html>

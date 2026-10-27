@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Pacifico&display=swap">
+  <script src="esc-data.js"></script>
+  <title>Eurofizzion CMS</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #090d35; color: #f7f4ff; font-family: "DM Sans", system-ui, sans-serif; }
+    a { color: #ffd23f; text-decoration: none; }
+    a:hover { color: #ff3fb4; }
+    :focus-visible { outline: 2px solid #2de2f5; outline-offset: 2px; }
+    input::placeholder, textarea::placeholder { color: #8a84c4; }
+    button:disabled { opacity: .45; cursor: not-allowed !important; }
+  </style>
+</helmet>
+<div style="min-height:100vh;color:#f7f4ff;background:radial-gradient(900px 500px at 0% 0%, rgba(224, 60, 255, .14), transparent 60%), radial-gradient(900px 500px at 100% 0%, rgba(45, 226, 245, .1), transparent 60%), #090d35">
+
+  <header style="position:sticky;top:0;z-index:10;height:60px;display:flex;align-items:center;gap:14px;padding:0 20px;background:rgba(9, 13, 53, .88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255, 255, 255, .08)">
+    <div style="display:flex;align-items:baseline;line-height:1">
+      <span style="font-family:Unbounded, sans-serif;font-weight:800;font-size:20px;background:linear-gradient(90deg, #ff3fb4, #b04dff);-webkit-background-clip:text;background-clip:text;color:transparent">Euro</span>
+      <span style="font-family:Pacifico, cursive;font-size:22px;color:#ffd23f;padding:0 4px 4px 2px">fizzion</span>
+    </div>
+    <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;padding:4px 10px;border-radius:999px;background:rgba(45, 226, 245, .15);color:#4fe8f7;border:1px solid rgba(45, 226, 245, .4)">CMS</span>
+    <span style="margin-left:auto;font-size:12px;color:#a9a3e0">{{ savedNote }}</span>
+    <a href="Eurofizzion%20v2.dc.html" style="font-size:13px;font-weight:700;padding:8px 14px;border-radius:999px;color:#fff;background:linear-gradient(90deg, #ff3fb4, #9b5cff)" style-hover="color:#fff;filter:brightness(1.12)">View site ↗</a>
+  </header>
+
+  <div style="display:grid;grid-template-columns:minmax(190px, 240px) minmax(0, 1fr);align-items:start">
+    <aside style="position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;padding:16px 10px 28px;border-right:1px solid rgba(255, 255, 255, .07);display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:6px;padding:0 8px;font-size:11px;color:#a9a3e0">
+        <span style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#ffd23f"></span>Bundled with the site</span>
+        <span style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#2de2f5"></span>Imported via CMS</span>
+        <span style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:rgba(255, 255, 255, .22)"></span>Winner only</span>
+      </div>
+      <sc-for list="{{ decades }}" as="d" hint-placeholder-count="0">
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="font-family:Unbounded, sans-serif;font-weight:700;font-size:11px;color:#ff8fd6;padding:4px 8px">{{ d.label }}</div>
+          <sc-for list="{{ d.years }}" as="y" hint-placeholder-count="0">
+            <button onClick="{{ y.pick }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:10px;background:{{ y.bg }}" style-hover="background:rgba(255, 255, 255, .07)">
+              <span style="font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:{{ y.color }}">{{ y.year }}</span>
+              <span style="flex:1;min-width:0;font-size:12px;color:#a9a3e0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ y.city }}</span>
+              <span style="width:8px;height:8px;flex:none;border-radius:50%;background:{{ y.dot }}"></span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </aside>
+
+    <main style="padding:24px 28px 64px;display:flex;flex-direction:column;gap:20px;min-width:0">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
+        <div style="display:flex;align-items:center;gap:16px;min-width:0">
+          <div style="width:56px;height:56px;flex:none;border-radius:50%;padding:3px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)">
+            <div style="width:100%;height:100%;border-radius:50%;border:3px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ cur.flagBg }}"></div>
+          </div>
+          <div style="min-width:0">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:{{ cur.statusColor }}">{{ cur.status }}</div>
+            <h1 style="font-family:Unbounded, sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.02em;line-height:1.1;margin:4px 0 2px">{{ cur.title }}</h1>
+            <div style="font-size:14px;color:#c8c2ff">{{ cur.sub }}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.pick }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid {{ t.border }};color:{{ t.color }};background:{{ t.bg }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ tabResults }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:18px 20px;border-radius:20px;background:rgba(255, 255, 255, .04);border:1px solid rgba(255, 255, 255, .09);display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <sc-if value="{{ res.canImport }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ res.importNow }}" disabled="{{ busy }}" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:10px 18px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)" style-hover="filter:brightness(1.08)">{{ res.importLabel }}</button>
+            </sc-if>
+            <sc-if value="{{ res.hasPreview }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ res.save }}" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:10px 18px;color:#fff;background:linear-gradient(90deg, #ff3fb4, #9b5cff)" style-hover="filter:brightness(1.12)">Save to site</button>
+              <button onClick="{{ res.discard }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid rgba(255, 255, 255, .18);color:#e8e4ff;background:transparent" style-hover="border-color:#ff3fb4">Discard preview</button>
+            </sc-if>
+            <sc-if value="{{ res.canRemove }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ res.remove }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid rgba(255, 143, 214, .4);color:#ff8fd6;background:transparent" style-hover="background:rgba(255, 63, 180, .12)">Remove imported results</button>
+            </sc-if>
+            <a href="{{ res.wikiUrl }}" target="_blank" rel="noopener" style="font-size:13px;font-weight:700;color:#4fe8f7;padding:9px 6px" style-hover="color:#ffd23f">Open on Wikipedia ↗</a>
+          </div>
+          <div style="font-size:14px;line-height:1.5;color:{{ res.msgColor }}">{{ res.msg }}</div>
+        </div>
+
+        <sc-if value="{{ res.hasRows }}" hint-placeholder-val="{{ false }}">
+          <div style="border-radius:20px;overflow:hidden;border:1px solid {{ res.tableBorder }}">
+            <div style="display:grid;grid-template-columns:44px minmax(120px, 1fr) minmax(120px, 1.3fr) minmax(120px, 1.3fr) 56px 56px 60px 120px;gap:10px;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a9a3e0;background:rgba(255, 255, 255, .05)">
+              <span>Pl.</span><span>Country</span><span>Artist</span><span>Song</span><span style="text-align:right">Jury</span><span style="text-align:right">Tele</span><span style="text-align:right">Total</span><span>Stage</span>
+            </div>
+            <sc-for list="{{ res.rows }}" as="row" hint-placeholder-count="0">
+              <div style="display:grid;grid-template-columns:44px minmax(120px, 1fr) minmax(120px, 1.3fr) minmax(120px, 1.3fr) 56px 56px 60px 120px;gap:10px;align-items:center;padding:8px 14px;font-size:13px;border-top:1px solid rgba(255, 255, 255, .05)">
+                <span style="font-family:Unbounded, sans-serif;font-weight:700;font-size:13px;color:{{ row.placeColor }}">{{ row.place }}</span>
+                <span style="display:flex;align-items:center;gap:8px;min-width:0"><span style="width:22px;height:22px;flex:none;border-radius:50%;background:#0f1548 center / cover no-repeat;background-image:{{ row.flagBg }}"></span><span style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.country }}</span></span>
+                <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.artist }}</span>
+                <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ffd23f">{{ row.song }}</span>
+                <span style="text-align:right;color:#ff8fd6;font-variant-numeric:tabular-nums">{{ row.jury }}</span>
+                <span style="text-align:right;color:#4fe8f7;font-variant-numeric:tabular-nums">{{ row.tele }}</span>
+                <span style="text-align:right;font-weight:700;font-variant-numeric:tabular-nums">{{ row.total }}</span>
+                <span style="font-size:12px;color:#a9a3e0">{{ row.stage }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ tabVideos }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:18px 20px;border-radius:20px;background:rgba(255, 255, 255, .04);border:1px solid rgba(255, 255, 255, .09);display:flex;flex-direction:column;gap:14px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;align-items:end">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;color:#c8c2ff">
+              YouTube Data API key
+              <input type="password" value="{{ apiKey }}" onChange="{{ onKey }}" placeholder="AIza…" style="font:inherit;font-size:14px;font-weight:400;padding:11px 14px;border-radius:12px;border:1px solid rgba(255, 255, 255, .18);background:rgba(9, 13, 53, .7);color:#f7f4ff">
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px;color:#e8e4ff;padding-bottom:10px;cursor:pointer">
+              <input type="checkbox" checked="{{ official }}" onChange="{{ onOfficial }}" style="width:18px;height:18px;accent-color:#ff3fb4">
+              Only search the official Eurovision Song Contest channel
+            </label>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <button onClick="{{ v.findAll }}" disabled="{{ v.cantFind }}" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:10px 18px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)" style-hover="filter:brightness(1.08)">{{ v.findLabel }}</button>
+            <sc-if value="{{ busy }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ v.stop }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid rgba(255, 255, 255, .18);color:#e8e4ff;background:transparent">Stop</button>
+            </sc-if>
+            <span style="font-size:13px;color:#4fe8f7">{{ prog }}</span>
+            <span style="margin-left:auto;font-size:13px;color:#c8c2ff">{{ v.counts }}</span>
+          </div>
+          <div style="font-size:12px;line-height:1.5;color:#a9a3e0;max-width:820px;text-wrap:pretty">Fills only the empty slots, using titles that match the artist and song (“Live”, “Grand Final” → live; “Official Music Video” → music video). Each lookup costs about 100 of the free 10,000 daily API units, so roughly 100 entries a day. No key? Use the search links on each row and paste the link.</div>
+        </div>
+
+        <sc-if value="{{ v.empty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:28px;border-radius:20px;border:1px dashed rgba(255, 255, 255, .2);text-align:center;color:#c8c2ff">Import this contest’s results first — videos are linked per entry.</div>
+        </sc-if>
+
+        <sc-for list="{{ v.rows }}" as="row" hint-placeholder-count="0">
+          <div style="padding:14px 16px;border-radius:20px;background:rgba(255, 255, 255, .035);border:1px solid rgba(255, 255, 255, .08);display:flex;flex-direction:column;gap:12px">
+            <div style="display:grid;grid-template-columns:minmax(180px, 1fr) minmax(0, 1fr) minmax(0, 1fr);gap:14px;align-items:center">
+              <div style="display:flex;align-items:center;gap:10px;min-width:0">
+                <span style="width:34px;height:34px;flex:none;border-radius:50%;padding:2px;background:conic-gradient(#ff3fb4, #9b5cff, #3f7dff, #2de2f5, #ffd23f, #ff3fb4)"><span style="display:block;width:100%;height:100%;border-radius:50%;border:2px solid #0f1548;background:#0f1548 center / cover no-repeat;background-image:{{ row.flagBg }}"></span></span>
+                <div style="min-width:0">
+                  <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c8c2ff">{{ row.country }}</div>
+                  <div style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.artist }}</div>
+                  <div style="font-size:13px;color:#ffd23f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.song }}</div>
+                </div>
+              </div>
+              <sc-for list="{{ row.slots }}" as="s" hint-placeholder-count="0">
+                <div style="display:flex;align-items:center;gap:10px;min-width:0;padding:6px;border-radius:14px;background:{{ s.slotBg }};border:1px solid {{ s.slotBorder }}">
+                  <div style="width:96px;aspect-ratio:16/9;flex:none;border-radius:10px;background:#0f1548 center / cover no-repeat;background-image:{{ s.thumbBg }};display:grid;place-items:center;font-size:18px;color:rgba(255, 255, 255, .25)">{{ s.icon }}</div>
+                  <div style="min-width:0;display:flex;flex-direction:column;gap:2px">
+                    <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:{{ s.labelColor }}">{{ s.label }}</div>
+                    <div style="font-size:12px;color:#e8e4ff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ s.title }}</div>
+                    <div style="display:flex;gap:10px;font-size:12px;font-weight:700">
+                      <a href="{{ s.search }}" target="_blank" rel="noopener" style="color:#4fe8f7" style-hover="color:#ffd23f">Search ↗</a>
+                      <sc-if value="{{ s.has }}" hint-placeholder-val="{{ false }}">
+                        <a href="{{ s.watch }}" target="_blank" rel="noopener" style="color:#c8c2ff" style-hover="color:#ffd23f">Watch</a>
+                        <button onClick="{{ s.clear }}" style="all:unset;cursor:pointer;color:#ff8fd6" style-hover="color:#ffd23f">Clear</button>
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <input value="{{ row.paste }}" onChange="{{ row.onPaste }}" placeholder="Paste a YouTube link" style="flex:1;min-width:200px;max-width:420px;font:inherit;font-size:13px;padding:8px 12px;border-radius:999px;border:1px solid rgba(255, 255, 255, .16);background:rgba(9, 13, 53, .7);color:#f7f4ff">
+              <button onClick="{{ row.toLive }}" style="font:inherit;font-size:12px;font-weight:700;cursor:pointer;border-radius:999px;padding:8px 13px;border:1px solid rgba(255, 63, 180, .5);color:#ff8fd6;background:transparent" style-hover="background:rgba(255, 63, 180, .14)">→ Live</button>
+              <button onClick="{{ row.toMv }}" style="font:inherit;font-size:12px;font-weight:700;cursor:pointer;border-radius:999px;padding:8px 13px;border:1px solid rgba(45, 226, 245, .5);color:#4fe8f7;background:transparent" style-hover="background:rgba(45, 226, 245, .12)">→ Music video</button>
+              <button onClick="{{ row.find }}" disabled="{{ row.cantFind }}" style="font:inherit;font-size:12px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:9px 14px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)">Find on YouTube</button>
+              <span style="font-size:12px;color:#c8c2ff">{{ row.msg }}</span>
+            </div>
+            <sc-if value="{{ row.hasCands }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:10px">
+                <sc-for list="{{ row.cands }}" as="c" hint-placeholder-count="0">
+                  <div style="display:flex;flex-direction:column;gap:6px;padding:6px 6px 10px;border-radius:14px;background:rgba(9, 13, 53, .6);border:1px solid {{ c.border }}">
+                    <div style="position:relative;aspect-ratio:16/9;border-radius:10px;background:#0f1548 center / cover no-repeat;background-image:{{ c.thumbBg }}">
+                      <span style="position:absolute;top:6px;left:6px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;color:{{ c.kindColor }};background:{{ c.kindBg }}">{{ c.kindLabel }}</span>
+                      <span style="position:absolute;bottom:6px;right:6px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff;background:rgba(9, 13, 53, .8)">{{ c.matchLabel }}</span>
+                    </div>
+                    <div style="font-size:12px;line-height:1.35;padding:0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ c.title }}</div>
+                    <div style="font-size:11px;color:#a9a3e0;padding:0 4px">{{ c.channel }}</div>
+                    <div style="display:flex;gap:6px;padding:0 4px">
+                      <button onClick="{{ c.useLive }}" style="flex:1;font:inherit;font-size:11px;font-weight:700;cursor:pointer;border-radius:999px;padding:6px 0;border:1px solid rgba(255, 63, 180, .5);color:#ff8fd6;background:transparent" style-hover="background:rgba(255, 63, 180, .14)">Use as live</button>
+                      <button onClick="{{ c.useMv }}" style="flex:1;font:inherit;font-size:11px;font-weight:700;cursor:pointer;border-radius:999px;padding:6px 0;border:1px solid rgba(45, 226, 245, .5);color:#4fe8f7;background:transparent" style-hover="background:rgba(45, 226, 245, .12)">Use as MV</button>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </sc-if>
+
+      <sc-if value="{{ tabExport }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:18px 20px;border-radius:20px;background:rgba(255, 255, 255, .04);border:1px solid rgba(255, 255, 255, .09);display:flex;flex-direction:column;gap:12px">
+          <p style="margin:0;font-size:14px;line-height:1.55;color:#e8e4ff;max-width:760px;text-wrap:pretty">Everything you import or link here is saved in this browser and shows on the site straight away. To publish it for every visitor, download this file and upload it to your server or database — the site merges it over the bundled data.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <button onClick="{{ download }}" style="font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:0;border-radius:999px;padding:10px 18px;color:#1a0b33;background:linear-gradient(90deg, #ffd23f, #ff9f2e)">Download eurofizzion-cms.json</button>
+            <button onClick="{{ copy }}" style="font:inherit;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:9px 16px;border:1px solid rgba(255, 255, 255, .18);color:#e8e4ff;background:transparent" style-hover="border-color:#ff3fb4">Copy JSON</button>
+            <span style="font-size:13px;color:#4fe8f7">{{ copyMsg }}</span>
+          </div>
+          <textarea readOnly="{{ true }}" value="{{ exportJson }}" style="width:100%;height:420px;resize:vertical;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:12px;line-height:1.5;padding:14px;border-radius:14px;border:1px solid rgba(255, 255, 255, .12);background:rgba(9, 13, 53, .8);color:#c8c2ff"></textarea>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: !!window.ESC_DATA, year: null, tab: 'results', store: { years: {} }, preview: null, msg: '', msgKind: '', busy: false, apiKey: '', official: true, cands: {}, paste: {}, rowMsg: {}, prog: '', copyMsg: '' };
+  OFFICIAL = 'UCRpjHHu8ivVWs73uxHlWwFA';
+
+  componentDidMount() {
+    if (!window.ESC_DATA) this._poll = setInterval(() => { if (window.ESC_DATA) { clearInterval(this._poll); this.setState({ ready: true }); } }, 80);
+    let store = { years: {} };
+    try { store = JSON.parse(localStorage.getItem('eurofizzion-cms') || 'null') || store; } catch (e) {}
+    if (!store.years) store.years = {};
+    this._live = store;
+    let apiKey = '';
+    try { apiKey = localStorage.getItem('eurofizzion-ytkey') || ''; } catch (e) {}
+    this.setState({ store, apiKey });
+  }
+  componentWillUnmount() { clearInterval(this._poll); this._stop = true; }
+
+  st() { return this._live || this.state.store; }
+  persist(store) {
+    this._live = store;
+    try { localStorage.setItem('eurofizzion-cms', JSON.stringify(store)); } catch (e) {}
+    this.setState({ store });
+  }
+  norm(s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+  flag(c) {
+    if (c === 'yu' || c === 'cs') return 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#c6363c"/><rect width="3" height="1.34" fill="#fff"/><rect width="3" height=".67" fill="#0c4076"/></svg>');
+    return 'https://flagcdn.com/w80/' + c + '.png';
+  }
+  codeMap() {
+    if (this._map) return this._map;
+    const m = {};
+    Object.entries(window.ESC_DATA.countries).forEach(([c, n]) => { m[this.norm(n)] = c; });
+    Object.assign(m, { 'czech republic': 'cz', 'macedonia': 'mk', 'fyr macedonia': 'mk', 'f y r macedonia': 'mk', 'west germany': 'de', 'bosnia herzegovina': 'ba', 'the netherlands': 'nl', 'holland': 'nl', 'great britain': 'gb', 'uk': 'gb', 'turkiye': 'tr', 'russian federation': 'ru' });
+    return (this._map = m);
+  }
+
+  baseYt(yr, c) { const b = window.ESC_DATA.years[yr]; const v = b && b.yt && b.yt[c]; return typeof v === 'string' ? { live: v } : v ? { ...v } : {}; }
+  curYt(yr, c) { const Y = this.st().years[yr]; return (Y && Y.yt && Y.yt[c]) || this.baseYt(yr, c); }
+  setYt(yr, c, patch) {
+    const st = this.st(), Y = st.years[yr] || {}, yt = { ...(Y.yt || {}) };
+    yt[c] = { ...this.curYt(yr, c), ...patch };
+    this.persist({ ...st, years: { ...st.years, [yr]: { ...Y, yt } } });
+  }
+  entriesFor(yr) {
+    const b = window.ESC_DATA.years[yr], Y = this.st().years[yr];
+    return (b && b.entries) || (Y && Y.entries) || [];
+  }
+
+  async importWiki(yr) {
+    this.setState({ busy: true, msg: 'Fetching the Wikipedia article…', msgKind: '', preview: null });
+    try {
+      const r = await fetch('https://en.wikipedia.org/api/rest_v1/page/html/Eurovision_Song_Contest_' + yr);
+      if (!r.ok) throw new Error('Wikipedia returned ' + r.status);
+      const out = this.parseWiki(await r.text(), yr);
+      this.setState({ busy: false, preview: out.entries.length ? out.entries : null, msg: out.msg, msgKind: out.entries.length ? 'ok' : 'err' });
+    } catch (e) { this.setState({ busy: false, msg: 'Import failed: ' + e.message, msgKind: 'err' }); }
+  }
+
+  parseWiki(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const map = this.codeMap();
+    const line = el => { if (!el) return ''; const x = el.cloneNode(true); x.querySelectorAll('sup, style, .reference').forEach(n => n.remove()); x.querySelectorAll('br').forEach(b => b.replaceWith('\n')); return (x.textContent.split('\n').map(s => s.trim()).filter(Boolean)[0] || '').replace(/\[[^\]]*\]/g, '').replace(/\s+/g, ' ').trim(); };
+    const code = el => map[this.norm(line(el))] || null;
+    const num = el => { const m = line(el).replace(/,/g, '').match(/^-?\d+/); return m ? +m[0] : null; };
+    const kindOf = h => /qualif|kvalif|pre-?selection|national/i.test(h) ? null : /semi/i.test(h) ? (/(2|two|second)/i.test(h) ? 'SF2' : /(1|one|first)/i.test(h) ? 'SF1' : 'SF') : /final/i.test(h) ? 'F' : 'X';
+    let heading = '';
+    const res = [], splits = [];
+    doc.querySelectorAll('h2, h3, h4, table').forEach(el => {
+      if (el.tagName !== 'TABLE') { heading = el.textContent.trim(); return; }
+      if (!el.classList.contains('wikitable')) return;
+      const kind = kindOf(heading); if (!kind) return;
+      const rows = [...el.querySelectorAll('tr')];
+      const hr = rows.find(r => r.querySelector('th') && !r.querySelector('td'));
+      const H = hr ? [...hr.children].map(c => line(c).toLowerCase()) : [];
+      const col = re => H.findIndex(h => re.test(h));
+      const ci = col(/country/), ai = col(/artist|performer/), si = col(/^song/), pi = col(/points/), li = col(/^place/), ri = col(/^(r\/o|draw|running)/);
+      if (ci >= 0 && si >= 0 && (pi >= 0 || li >= 0)) {
+        const list = [];
+        rows.forEach(r => {
+          const cells = [...r.children];
+          if (r === hr || !r.querySelector('td') || cells.length < H.length) return;
+          const c = code(cells[ci]); if (!c) return;
+          list.push({ c, artist: line(cells[ai]), song: line(cells[si]).replace(/^[\s"“”]+|[\s"“”]+$/g, ''), points: pi >= 0 ? num(cells[pi]) : null, place: li >= 0 ? num(cells[li]) : null, ro: ri >= 0 ? num(cells[ri]) : null });
+        });
+        if (list.length) res.push({ kind, list });
+      } else if (kind === 'F' || kind === 'X') {
+        const htxt = rows.filter(r => !r.querySelector('td')).map(r => r.textContent).join(' ').toLowerCase();
+        const jPos = htxt.search(/jury/), tPos = htxt.search(/televot/);
+        if (jPos < 0 || tPos < 0) return;
+        const m = {};
+        rows.forEach(r => {
+          const cells = [...r.children]; let k = -1, c = null;
+          for (let i = 0; i < cells.length; i++) { c = code(cells[i]); if (c) { k = i; break; } }
+          if (k < 0) return;
+          const n = [];
+          for (let i = k + 1; i < cells.length && n.length < 3; i++) { const v = num(cells[i]); if (v == null) break; n.push(v); }
+          if (n.length < 3) return;
+          let ti = n.findIndex((v, i) => v === n.filter((_, j) => j !== i).reduce((a, b) => a + b, 0));
+          if (ti < 0) return;
+          const rest = n.filter((_, j) => j !== ti);
+          m[c] = jPos < tPos ? { jury: rest[0], tele: rest[1] } : { jury: rest[1], tele: rest[0] };
+        });
+        if (Object.keys(m).length > 3) splits.push(m);
+      }
+    });
+    const fin = res.find(t => t.kind === 'F') || res.find(t => t.kind === 'X');
+    if (!fin) return { entries: [], msg: 'Couldn’t find a results table on that Wikipedia page. Open it and check the article layout.' };
+    const semis = res.filter(t => t.kind.indexOf('SF') === 0);
+    const sp = Object.assign({}, ...splits);
+    if (fin.list.every(e => e.place == null) && fin.list.some(e => e.points != null)) {
+      const sorted = fin.list.slice().sort((a, b) => (b.points || 0) - (a.points || 0));
+      fin.list.forEach(e => { e.place = sorted.findIndex(x => (x.points || 0) === (e.points || 0)) + 1; });
+    }
+    const fc = new Set(fin.list.map(e => e.c)), inSemi = new Set(semis.flatMap(t => t.list.map(e => e.c)));
+    const entries = fin.list.map(e => {
+      const s = sp[e.c];
+      return [e.c, e.artist, e.song, e.place, s ? s.jury : null, s ? s.tele : null, null, semis.length && !inSemi.has(e.c) ? 'A' : '', e.ro, null, null, e.points];
+    });
+    let nq = 0;
+    semis.forEach(t => t.list.forEach(e => { if (!fc.has(e.c) && !entries.some(x => x[0] === e.c)) { nq++; entries.push([e.c, e.artist, e.song, null, null, null, null, t.kind, null, e.place, e.points, null]); } }));
+    const hasSplit = fin.list.every(e => sp[e.c]);
+    return { entries, msg: 'Found ' + fin.list.length + ' finalists' + (nq ? ' and ' + nq + ' semi-final non-qualifiers' : '') + (hasSplit ? ', with the jury/televote split' : '') + '. Check the preview below, then save.' };
+  }
+
+  saveImport(yr) {
+    const st = this.st(), Y = st.years[yr] || {}, a = window.ESC_DATA.archive[yr] || [];
+    this.persist({ ...st, years: { ...st.years, [yr]: { ...Y, city: a[0], host: window.ESC_DATA.countries[a[1]] || '', entries: this.state.preview, odds: {}, source: 'Wikipedia', importedAt: new Date().toISOString() } } });
+    this.setState({ preview: null, msg: 'Saved — the site now shows this contest.', msgKind: 'ok' });
+  }
+  removeImport(yr) {
+    const st = this.st(), Y = { ...(st.years[yr] || {}) };
+    delete Y.entries; delete Y.source; delete Y.importedAt;
+    this.persist({ ...st, years: { ...st.years, [yr]: Y } });
+    this.setState({ msg: 'Imported results removed.', msgKind: '' });
+  }
+
+  async search(yr, t) {
+    const [, a, s] = t;
+    const p = new URLSearchParams({ part: 'snippet', type: 'video', maxResults: '8', videoEmbeddable: 'true', q: a + ' ' + s + ' Eurovision ' + yr, key: this.state.apiKey.trim() });
+    if (this.state.official) p.set('channelId', this.OFFICIAL);
+    const r = await fetch('https://www.googleapis.com/youtube/v3/search?' + p);
+    const j = await r.json();
+    if (j.error) throw new Error(j.error.message || 'YouTube API error');
+    const dec = x => { const el = document.createElement('textarea'); el.innerHTML = x; return el.value; };
+    const toks = x => this.norm(x).split(' ').filter(w => w.length > 1);
+    const ST = toks(s), AT = toks(a);
+    return (j.items || []).map(it => {
+      const title = dec(it.snippet.title), T = ' ' + this.norm(title) + ' ';
+      const hit = arr => (arr.length ? arr.filter(w => T.indexOf(' ' + w + ' ') >= 0).length / arr.length : 0);
+      const match = hit(ST) * 0.6 + hit(AT) * 0.4;
+      const bad = /rehearsal|reaction|cover|karaoke|lyric|instrumental|preview|recap|snippet|interview|press/.test(T);
+      let kind = bad ? 'other' : /official (music )?video|music video|videoclip|video clip/.test(T) ? 'mv' : /live|grand final|semi final|first semi|second semi/.test(T) ? 'live' : 'other';
+      if (kind === 'other' && !bad && yr < 2000) kind = 'live';
+      const th = it.snippet.thumbnails || {};
+      return { id: it.id && it.id.videoId, title, channel: dec(it.snippet.channelTitle || ''), thumb: (th.medium || th.default || {}).url || '', match, kind };
+    }).filter(x => x.id);
+  }
+
+  async findOne(yr, t) {
+    const c = t[0], k = yr + '-' + c;
+    this.setState(s => ({ rowMsg: { ...s.rowMsg, [k]: 'Searching…' } }));
+    try {
+      const cands = await this.search(yr, t);
+      const cur = this.curYt(yr, c), patch = {};
+      ['live', 'mv'].forEach(slot => {
+        if (cur[slot]) return;
+        const b = cands.filter(x => x.kind === slot && x.match >= 0.5).sort((x, y) => y.match - x.match)[0];
+        if (b) { patch[slot] = b.id; patch[slot + 'Title'] = b.title; }
+      });
+      if (Object.keys(patch).length) this.setYt(yr, c, patch);
+      const filled = [patch.live && 'live', patch.mv && 'music video'].filter(Boolean);
+      this.setState(s => ({ cands: { ...s.cands, [k]: cands }, rowMsg: { ...s.rowMsg, [k]: !cands.length ? 'No results' : filled.length ? 'Auto-filled ' + filled.join(' + ') : 'No confident match — pick one below' } }));
+    } catch (e) {
+      this.setState(s => ({ rowMsg: { ...s.rowMsg, [k]: e.message } }));
+      throw e;
+    }
+  }
+
+  async findAll(yr) {
+    const list = this.entriesFor(yr);
+    this._stop = false;
+    this.setState({ busy: true });
+    let n = 0;
+    for (const t of list) {
+      if (this._stop) break;
+      n++;
+      const cur = this.curYt(yr, t[0]);
+      if (cur.live && cur.mv) continue;
+      this.setState({ prog: 'Searching ' + n + ' of ' + list.length + ': ' + t[1] + '…' });
+      try { await this.findOne(yr, t); } catch (e) { this.setState({ busy: false, prog: 'Stopped: ' + e.message }); return; }
+      await new Promise(r => setTimeout(r, 150));
+    }
+    this.setState({ busy: false, prog: this._stop ? 'Stopped.' : 'Done — checked ' + list.length + ' entries.' });
+  }
+
+  renderVals() {
+    const D = window.ESC_DATA, S = this.state;
+    const blank = { decades: [], tabs: [], cur: {}, res: { rows: [] }, v: { rows: [] }, tabResults: true, tabVideos: false, tabExport: false, savedNote: '' };
+    if (!D) return blank;
+    const C = D.countries, A = D.archive || {}, store = this.st();
+    const ord = n => { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+    const bg = c => (c ? 'url("' + this.flag(c) + '")' : 'none');
+    const years = [...new Set(Object.keys(A).concat(Object.keys(D.years)).map(Number))].sort((a, b) => b - a);
+    const year = S.year ?? Math.max(...Object.keys(D.years).map(Number));
+    const statusOf = y => D.years[y] ? 'bundled' : store.years[y] && store.years[y].entries && store.years[y].entries.length ? 'imported' : y === 2020 ? 'cancelled' : 'winner';
+    const STATUS = { bundled: ['Bundled with the site', '#ffd23f'], imported: ['Imported via CMS', '#2de2f5'], cancelled: ['Cancelled', '#6f69a8'], winner: ['Winner only — not imported yet', '#a9a3e0'] };
+    const DOT = { bundled: '#ffd23f', imported: '#2de2f5', cancelled: 'transparent', winner: 'rgba(255, 255, 255, .22)' };
+    const pick = y => this.setState({ year: y, preview: null, msg: '', msgKind: '', prog: '' });
+
+    const decMap = {};
+    years.forEach(y => { const d = Math.floor(y / 10) * 10; (decMap[d] = decMap[d] || []).push(y); });
+    const decades = Object.keys(decMap).map(Number).sort((a, b) => b - a).map(d => ({
+      label: d + 's',
+      years: decMap[d].map(y => ({ year: y, city: (D.years[y] && D.years[y].city) || (A[y] || [])[0] || '', pick: () => pick(y), dot: DOT[statusOf(y)],
+        bg: y === year ? 'rgba(255, 63, 180, .2)' : 'transparent', color: y === year ? '#fff' : '#e8e4ff' }))
+    }));
+
+    const pill = on => ({ border: on ? 'transparent' : 'rgba(255, 255, 255, .16)', color: on ? '#fff' : '#e8e4ff', bg: on ? 'linear-gradient(90deg, #ff3fb4, #9b5cff)' : 'rgba(255, 255, 255, .04)' });
+    const tabs = [['results', 'Results'], ['videos', 'Videos'], ['export', 'Publish']].map(([k, label]) => ({ label, ...pill(S.tab === k), pick: () => this.setState({ tab: k }) }));
+
+    const st = statusOf(year), a = A[year] || [];
+    const city = (D.years[year] && D.years[year].city) || a[0] || '';
+    const cur = { title: city + ' ' + year, status: STATUS[st][0], statusColor: STATUS[st][1], flagBg: bg(a[2]),
+      sub: a[2] ? 'Won by ' + C[a[2]] + ' — ' + a[3] + ', “' + a[4] + '”' : (a[5] || '') };
+
+    const entriesNow = this.entriesFor(year);
+    const src = S.preview || entriesNow;
+    const rows = src.slice().sort((x, y) => (x[3] == null) - (y[3] == null) || (x[3] || 0) - (y[3] || 0) || String(x[7]).localeCompare(String(y[7])) || (x[9] || 99) - (y[9] || 99)).map(t => {
+      const [c, ar, so, p, j, tv, , s7, , sfp, , tot] = t;
+      const total = tot != null ? tot : j != null && tv != null ? j + tv : null;
+      const semiName = s7 === 'SF2' ? 'Semi 2' : s7 === 'SF' ? 'Semi' : 'Semi 1';
+      return { place: p || '—', placeColor: p === 1 ? '#ffd23f' : '#c8c2ff', flagBg: bg(c), country: C[c] || c, artist: ar, song: so,
+        jury: j != null ? j : '—', tele: tv != null ? tv : '—', total: total != null ? total : '—',
+        stage: s7 === 'A' ? 'Final · auto-qualified' : s7 === 'DQ' ? 'Disqualified' : s7 && s7.indexOf('SF') === 0 ? semiName + (sfp ? ' · ' + ord(sfp) : '') : p ? 'Final' : '—' };
+    });
+    const imp = store.years[year];
+    const res = {
+      canImport: st !== 'bundled' && st !== 'cancelled', importLabel: S.busy ? 'Importing…' : st === 'imported' ? 'Re-import from Wikipedia' : 'Import from Wikipedia',
+      importNow: () => { if (!S.busy) this.importWiki(year); },
+      hasPreview: !!S.preview, save: () => this.saveImport(year), discard: () => this.setState({ preview: null, msg: '', msgKind: '' }),
+      canRemove: st === 'imported' && !S.preview, remove: () => this.removeImport(year),
+      wikiUrl: 'https://en.wikipedia.org/wiki/Eurovision_Song_Contest_' + year,
+      msg: S.msg || (st === 'bundled' ? 'These results ship with the site in esc-data.js — edit that file to change them.'
+        : st === 'imported' ? 'Imported from ' + (imp.source || 'Wikipedia') + ' on ' + new Date(imp.importedAt).toLocaleDateString() + '.'
+        : st === 'cancelled' ? 'No contest was held in 2020.'
+        : 'Pull the line-up, running order and scores from Wikipedia. You review everything before it goes live.'),
+      msgColor: S.msgKind === 'err' ? '#ff8fd6' : S.msgKind === 'ok' ? '#4fe8f7' : '#c8c2ff',
+      hasRows: rows.length > 0, rows, tableBorder: S.preview ? 'rgba(255, 210, 63, .55)' : 'rgba(255, 255, 255, .09)'
+    };
+
+    const hasKey = !!S.apiKey.trim();
+    const vrows = entriesNow.map(t => {
+      const [c, ar, so] = t, k = year + '-' + c, cy = this.curYt(year, c);
+      const slots = [['live', 'Live performance', '#ff8fd6'], ['mv', 'Music video', '#4fe8f7']].map(([slot, label, col]) => {
+        const id = cy[slot];
+        return { label, labelColor: col, has: !!id, icon: id ? '' : '▶',
+          thumbBg: id ? 'url("https://i.ytimg.com/vi/' + id + '/mqdefault.jpg")' : 'none',
+          slotBg: id ? 'rgba(255, 255, 255, .05)' : 'transparent', slotBorder: id ? 'rgba(255, 255, 255, .12)' : 'rgba(255, 255, 255, .08)',
+          title: id ? (cy[slot + 'Title'] || 'youtu.be/' + id) : 'Not linked yet',
+          clear: () => this.setYt(year, c, { [slot]: '', [slot + 'Title']: '' }),
+          watch: id ? 'https://youtu.be/' + id : '',
+          search: 'https://www.youtube.com/results?search_query=' + encodeURIComponent(ar + ' ' + so + ' Eurovision ' + year + (slot === 'live' ? ' live' : ' official music video')) };
+      });
+      const cands = (S.cands[k] || []).map(x => ({ ...x, thumbBg: 'url("' + x.thumb + '")',
+        kindLabel: x.kind === 'live' ? 'Live' : x.kind === 'mv' ? 'Music video' : 'Other',
+        kindColor: x.kind === 'other' ? '#e8e4ff' : '#0b1040', kindBg: x.kind === 'live' ? '#ff6fc8' : x.kind === 'mv' ? '#2de2f5' : 'rgba(9, 13, 53, .8)',
+        border: x.id === cy.live || x.id === cy.mv ? 'rgba(255, 210, 63, .7)' : 'rgba(255, 255, 255, .08)',
+        matchLabel: Math.round(x.match * 100) + '% match',
+        useLive: () => this.setYt(year, c, { live: x.id, liveTitle: x.title }), useMv: () => this.setYt(year, c, { mv: x.id, mvTitle: x.title }) }));
+      const pv = S.paste[k] || '';
+      const assign = slot => () => {
+        const v = pv.trim();
+        const h = v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([\w-]{11})/) || v.match(/^([\w-]{11})$/);
+        if (!h) return this.setState(s => ({ rowMsg: { ...s.rowMsg, [k]: 'That doesn’t look like a YouTube link.' } }));
+        this.setYt(year, c, { [slot]: h[1], [slot + 'Title']: '' });
+        this.setState(s => ({ paste: { ...s.paste, [k]: '' }, rowMsg: { ...s.rowMsg, [k]: 'Linked.' } }));
+      };
+      return { flagBg: bg(c), country: C[c] || c, artist: ar, song: so, slots, cands, hasCands: cands.length > 0, paste: pv,
+        onPaste: e => { const val = e.target.value; this.setState(s => ({ paste: { ...s.paste, [k]: val } })); },
+        toLive: assign('live'), toMv: assign('mv'), cantFind: !hasKey || S.busy,
+        find: () => { if (hasKey) this.findOne(year, t).catch(() => {}); }, msg: S.rowMsg[k] || '' };
+    });
+    const liveN = entriesNow.filter(t => this.curYt(year, t[0]).live).length, mvN = entriesNow.filter(t => this.curYt(year, t[0]).mv).length;
+    const v = { rows: vrows, empty: entriesNow.length === 0, cantFind: !hasKey || S.busy || !entriesNow.length,
+      findLabel: S.busy ? 'Searching…' : hasKey ? 'Find videos for all ' + entriesNow.length + ' entries' : 'Add an API key to auto-find',
+      findAll: () => this.findAll(year), stop: () => { this._stop = true; },
+      counts: entriesNow.length ? liveN + '/' + entriesNow.length + ' live · ' + mvN + '/' + entriesNow.length + ' music videos' : '' };
+
+    const exportJson = JSON.stringify(store, null, 2);
+    const nYears = Object.values(store.years).filter(Y => Y.entries || (Y.yt && Object.keys(Y.yt).length)).length;
+
+    return {
+      decades, tabs, cur, res, v, busy: S.busy, prog: S.prog, apiKey: S.apiKey, official: S.official,
+      tabResults: S.tab === 'results', tabVideos: S.tab === 'videos', tabExport: S.tab === 'export',
+      onKey: e => { const val = e.target.value; this.setState({ apiKey: val }); try { localStorage.setItem('eurofizzion-ytkey', val); } catch (er) {} },
+      onOfficial: e => this.setState({ official: e.target.checked }),
+      exportJson, copyMsg: S.copyMsg,
+      savedNote: 'Saved in this browser · ' + nYears + ' contest' + (nYears === 1 ? '' : 's') + ' with CMS data',
+      download: () => { const b = new Blob([exportJson], { type: 'application/json' }); const u = URL.createObjectURL(b); const el = document.createElement('a'); el.href = u; el.download = 'eurofizzion-cms.json'; el.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); },
+      copy: () => { navigator.clipboard.writeText(exportJson).then(() => this.setState({ copyMsg: 'Copied!' }), () => this.setState({ copyMsg: 'Copy failed — select the text instead.' })); }
+    };
+  }
+}
+</script>
+</body>
+</html>

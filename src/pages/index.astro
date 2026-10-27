@@ -1,0 +1,7 @@
+---
+// The home page is the latest contest with full results.
+import ContestPage from '../components/ContestPage.astro';
+import { latestFullYear } from '../lib/content';
+---
+
+<ContestPage year={latestFullYear} />

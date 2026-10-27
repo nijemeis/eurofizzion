@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+import type { Decade } from '../lib/derive';
+
+interface Props {
+  year: number;
+  city: string;
+  older?: number;
+  newer?: number;
+  decades: Decade[];
+  hasBoard: boolean;
+  hasOdds: boolean;
+  next: string; // e.g. "Burgas 2027"
+}
+const { year, city, older, newer, decades, hasBoard, hasOdds, next } = Astro.props;
+---
+
+<header class="site-header">
+  <nav aria-label="Main">
+    <a href="/" class="wordmark" aria-label="Eurofizzion home"><span class="euro">Euro</span><span class="fizz">fizzion</span></a>
+    <div class="nav-links">
+      <a href="#entries">Entries</a>
+      {hasBoard && <a href="#scoreboard">Scoreboard</a>}
+      {hasOdds && <a href="#odds">Odds</a>}
+      <a href="#next">{next}</a>
+    </div>
+    <div class="year-ctl">
+      {
+        older ? (
+          <a class="year-arrow" href={`/${older}/`} aria-label="Older contest" title="Older contest"><Icon name="left" /></a>
+        ) : (
+          <span class="year-arrow off" aria-hidden="true"><Icon name="left" /></span>
+        )
+      }
+      <button class="year-toggle" type="button" data-tm-open aria-haspopup="dialog" aria-controls="time-machine" aria-expanded="false">
+        {city} {year}<Icon name="down" size={12} />
+      </button>
+      {
+        newer ? (
+          <a class="year-arrow" href={`/${newer}/`} aria-label="Newer contest" title="Newer contest"><Icon name="right" /></a>
+        ) : (
+          <span class="year-arrow off" aria-hidden="true"><Icon name="right" /></span>
+        )
+      }
+    </div>
+  </nav>
+</header>
+
+<div class="tm-backdrop" id="time-machine" data-tm hidden>
+  <div class="tm-panel" role="dialog" aria-modal="true" aria-label="Time machine: pick a contest">
+    <div class="tm-head">
+      <div>
+        <div class="tm-title">Time machine</div>
+        <div class="tm-sub">Every contest since Lugano 1956</div>
+      </div>
+      <div class="tm-legend">
+        <span><i style="background:rgba(255,210,63,.25);border:1px solid rgba(255,210,63,.7)"></i>Full results</span>
+        <span><i style="border:1px solid rgba(255,255,255,.3)"></i>Winner only</span>
+      </div>
+    </div>
+    {
+      decades.map((d) => (
+        <div class="tm-row">
+          <div class="tm-decade">{d.label}</div>
+          <div class="tm-years">
+            {d.years.map((y) => (
+              <a
+                class={`chip chip-${y.state}`}
+                href={`/${y.year}/`}
+                title={y.title}
+                aria-current={y.state === 'selected' ? 'page' : undefined}
+              >
+                {y.year}
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

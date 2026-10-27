@@ -1,0 +1,19 @@
+---
+import { sparkles } from '../lib/derive';
+
+interface Props {
+  count: number;
+  seed: number;
+}
+const stars = sparkles(Astro.props.count, Astro.props.seed);
+---
+
+<div class="sparkles" aria-hidden="true">
+  {
+    stars.map((s) => (
+      <span
+        style={`left:${s.x}%;top:${s.y}%;width:${s.size}px;height:${s.size}px;background:${s.color};filter:drop-shadow(0 0 6px ${s.color});--t:${s.dur}s;--d:${s.delay}s`}
+      />
+    ))
+  }
+</div>

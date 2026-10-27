@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+public/flags/
+.env
+.DS_Store

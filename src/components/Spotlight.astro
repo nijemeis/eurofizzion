@@ -1,0 +1,45 @@
+---
+import Ring from './Ring.astro';
+import type { Spotlight } from '../lib/derive';
+
+interface Props {
+  spot: Spotlight;
+}
+const { spot } = Astro.props;
+---
+
+<section class="wrap spot-section" aria-label="Winner">
+  <div class="spot">
+    <div class="spot-main">
+      <Ring code={spot.code} label={spot.country} class="spot-flag" />
+      <div style="min-width:0">
+        <div class="spot-kicker">{spot.kicker}</div>
+        <div class="spot-artist">{spot.artist}</div>
+        {spot.song && <div class="spot-song">{spot.song}</div>}
+        <div class="spot-country">{spot.country}</div>
+      </div>
+    </div>
+    <div class="spot-side">
+      {
+        spot.stats.length > 0 && (
+          <div class="stats">
+            {spot.stats.map((s) => (
+              <div class="stat">
+                <b class={`tone-${s.tone}`}>{s.v}</b>
+                <span>{s.l}</span>
+              </div>
+            ))}
+          </div>
+        )
+      }
+      {spot.note && <p class="spot-note">{spot.note}</p>}
+      {
+        spot.canWatch && spot.code && (
+          <button type="button" class="cta spot-watch" data-open={spot.code}>
+            ▶ Watch the winning performance
+          </button>
+        )
+      }
+    </div>
+  </div>
+</section>

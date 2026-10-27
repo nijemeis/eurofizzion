@@ -1,0 +1,25 @@
+---
+import Ring from './Ring.astro';
+import { contests, countries } from '../lib/content';
+
+// Every country that appears in any contest file, alphabetically; the list is doubled so the marquee loops seamlessly.
+const codes = [...new Set(Object.values(contests).flatMap((c) => c.entries.map((e) => e.country)))]
+  .filter((c) => countries[c])
+  .sort((a, b) => countries[a].localeCompare(countries[b]));
+const loop = codes.concat(codes);
+---
+
+<div class="parade" aria-hidden="true">
+  <div class="parade-mask">
+    <div class="parade-track">
+      {
+        loop.map((c) => (
+          <span class="parade-item">
+            <Ring code={c} />
+            <span>{countries[c]}</span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>

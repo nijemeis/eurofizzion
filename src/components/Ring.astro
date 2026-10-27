@@ -1,0 +1,18 @@
+---
+// A flag inside the rainbow ring, the way every flag on the site is shown.
+interface Props {
+  code: string | null;
+  label?: string;
+  class?: string;
+}
+const { code, label, class: cls } = Astro.props;
+---
+
+<span class:list={['ring', cls]}>
+  <span
+    class="flag"
+    role={label ? 'img' : undefined}
+    aria-label={label}
+    style={code ? `background-image:url(/flags/${code}.svg)` : undefined}
+  ></span>
+</span>

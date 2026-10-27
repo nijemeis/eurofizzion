@@ -1,0 +1,43 @@
+---
+import Ring from './Ring.astro';
+import type { FullView } from '../lib/derive';
+
+interface Props {
+  view: FullView;
+}
+const { view } = Astro.props;
+---
+
+<section class="wrap odds-section" id="odds">
+  <div class="kicker">The bookies’ crystal ball</div>
+  <h2 class="h2" style="margin-bottom:12px">Did the odds get it right?</h2>
+  <p class="odds-insight">{view.oddsInsight}</p>
+  <p class="odds-note">{view.oddsNote}</p>
+
+  <div class="odds-card">
+    <div class="odds-legend">
+      <span><i style="border:2px solid var(--muted)"></i>Position in the betting</span>
+      <span><i style="background:var(--cyan);box-shadow:0 0 10px var(--cyan)"></i>Final placing</span>
+    </div>
+    <div class="orow orow-head">
+      <span>Country</span><span>Odds</span><span class="ends"><span>1st</span><span>{view.lastPlace}</span></span><span style="text-align:right">Movement</span>
+    </div>
+    {
+      view.oddsRows.map((o) => (
+        <button type="button" class:list={['orow', `dir-${o.dir}`, { 'is-winner': o.isWinner }]} data-open={o.c}>
+          <div class="o-who">
+            <Ring code={o.c} />
+            <span>{o.country}</span>
+          </div>
+          <div class="o-odds">{o.oddsLabel}</div>
+          <div class="track" aria-hidden="true">
+            <div class="seg" style={`left:${o.segL}%;width:${o.segW}%`} />
+            <div class="dot dot-odds" style={`left:${o.oddsX}%`} />
+            <div class="dot dot-place" style={`left:${o.placeX}%`} />
+          </div>
+          <div class="o-delta">{o.deltaLabel}</div>
+        </button>
+      ))
+    }
+  </div>
+</section>

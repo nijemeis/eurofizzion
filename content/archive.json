@@ -1,0 +1,570 @@
+[
+  {
+    "year": 1956,
+    "city": "Lugano",
+    "host": "ch",
+    "winner": "ch",
+    "artist": "Lys Assia",
+    "song": "Refrain",
+    "note": "Only the winner was announced — full scores were never published."
+  },
+  {
+    "year": 1957,
+    "city": "Frankfurt",
+    "host": "de",
+    "winner": "nl",
+    "artist": "Corry Brokken",
+    "song": "Net als toen"
+  },
+  {
+    "year": 1958,
+    "city": "Hilversum",
+    "host": "nl",
+    "winner": "fr",
+    "artist": "André Claveau",
+    "song": "Dors, mon amour"
+  },
+  {
+    "year": 1959,
+    "city": "Cannes",
+    "host": "fr",
+    "winner": "nl",
+    "artist": "Teddy Scholten",
+    "song": "Een beetje"
+  },
+  {
+    "year": 1960,
+    "city": "London",
+    "host": "gb",
+    "winner": "fr",
+    "artist": "Jacqueline Boyer",
+    "song": "Tom Pillibi"
+  },
+  {
+    "year": 1961,
+    "city": "Cannes",
+    "host": "fr",
+    "winner": "lu",
+    "artist": "Jean-Claude Pascal",
+    "song": "Nous les amoureux"
+  },
+  {
+    "year": 1962,
+    "city": "Luxembourg",
+    "host": "lu",
+    "winner": "fr",
+    "artist": "Isabelle Aubret",
+    "song": "Un premier amour"
+  },
+  {
+    "year": 1963,
+    "city": "London",
+    "host": "gb",
+    "winner": "dk",
+    "artist": "Grethe & Jørgen Ingmann",
+    "song": "Dansevise"
+  },
+  {
+    "year": 1964,
+    "city": "Copenhagen",
+    "host": "dk",
+    "winner": "it",
+    "artist": "Gigliola Cinquetti",
+    "song": "Non ho l'età"
+  },
+  {
+    "year": 1965,
+    "city": "Naples",
+    "host": "it",
+    "winner": "lu",
+    "artist": "France Gall",
+    "song": "Poupée de cire, poupée de son"
+  },
+  {
+    "year": 1966,
+    "city": "Luxembourg",
+    "host": "lu",
+    "winner": "at",
+    "artist": "Udo Jürgens",
+    "song": "Merci, Chérie"
+  },
+  {
+    "year": 1967,
+    "city": "Vienna",
+    "host": "at",
+    "winner": "gb",
+    "artist": "Sandie Shaw",
+    "song": "Puppet on a String"
+  },
+  {
+    "year": 1968,
+    "city": "London",
+    "host": "gb",
+    "winner": "es",
+    "artist": "Massiel",
+    "song": "La, la, la"
+  },
+  {
+    "year": 1969,
+    "city": "Madrid",
+    "host": "es",
+    "winner": "es",
+    "artist": "Salomé",
+    "song": "Vivo cantando",
+    "note": "A four-way tie: Spain, the United Kingdom, the Netherlands and France all won."
+  },
+  {
+    "year": 1970,
+    "city": "Amsterdam",
+    "host": "nl",
+    "winner": "ie",
+    "artist": "Dana",
+    "song": "All Kinds of Everything"
+  },
+  {
+    "year": 1971,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "mc",
+    "artist": "Séverine",
+    "song": "Un banc, un arbre, une rue"
+  },
+  {
+    "year": 1972,
+    "city": "Edinburgh",
+    "host": "gb",
+    "winner": "lu",
+    "artist": "Vicky Leandros",
+    "song": "Après toi"
+  },
+  {
+    "year": 1973,
+    "city": "Luxembourg",
+    "host": "lu",
+    "winner": "lu",
+    "artist": "Anne-Marie David",
+    "song": "Tu te reconnaîtras"
+  },
+  {
+    "year": 1974,
+    "city": "Brighton",
+    "host": "gb",
+    "winner": "se",
+    "artist": "ABBA",
+    "song": "Waterloo"
+  },
+  {
+    "year": 1975,
+    "city": "Stockholm",
+    "host": "se",
+    "winner": "nl",
+    "artist": "Teach-In",
+    "song": "Ding-a-dong"
+  },
+  {
+    "year": 1976,
+    "city": "The Hague",
+    "host": "nl",
+    "winner": "gb",
+    "artist": "Brotherhood of Man",
+    "song": "Save Your Kisses for Me"
+  },
+  {
+    "year": 1977,
+    "city": "London",
+    "host": "gb",
+    "winner": "fr",
+    "artist": "Marie Myriam",
+    "song": "L'oiseau et l'enfant"
+  },
+  {
+    "year": 1978,
+    "city": "Paris",
+    "host": "fr",
+    "winner": "il",
+    "artist": "Izhar Cohen & Alphabeta",
+    "song": "A-Ba-Ni-Bi"
+  },
+  {
+    "year": 1979,
+    "city": "Jerusalem",
+    "host": "il",
+    "winner": "il",
+    "artist": "Gali Atari & Milk and Honey",
+    "song": "Hallelujah"
+  },
+  {
+    "year": 1980,
+    "city": "The Hague",
+    "host": "nl",
+    "winner": "ie",
+    "artist": "Johnny Logan",
+    "song": "What's Another Year"
+  },
+  {
+    "year": 1981,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "gb",
+    "artist": "Bucks Fizz",
+    "song": "Making Your Mind Up"
+  },
+  {
+    "year": 1982,
+    "city": "Harrogate",
+    "host": "gb",
+    "winner": "de",
+    "artist": "Nicole",
+    "song": "Ein bißchen Frieden"
+  },
+  {
+    "year": 1983,
+    "city": "Munich",
+    "host": "de",
+    "winner": "lu",
+    "artist": "Corinne Hermès",
+    "song": "Si la vie est cadeau"
+  },
+  {
+    "year": 1984,
+    "city": "Luxembourg",
+    "host": "lu",
+    "winner": "se",
+    "artist": "Herreys",
+    "song": "Diggi-Loo Diggi-Ley"
+  },
+  {
+    "year": 1985,
+    "city": "Gothenburg",
+    "host": "se",
+    "winner": "no",
+    "artist": "Bobbysocks!",
+    "song": "La det swinge"
+  },
+  {
+    "year": 1986,
+    "city": "Bergen",
+    "host": "no",
+    "winner": "be",
+    "artist": "Sandra Kim",
+    "song": "J'aime la vie"
+  },
+  {
+    "year": 1987,
+    "city": "Brussels",
+    "host": "be",
+    "winner": "ie",
+    "artist": "Johnny Logan",
+    "song": "Hold Me Now"
+  },
+  {
+    "year": 1988,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "ch",
+    "artist": "Céline Dion",
+    "song": "Ne partez pas sans moi"
+  },
+  {
+    "year": 1989,
+    "city": "Lausanne",
+    "host": "ch",
+    "winner": "yu",
+    "artist": "Riva",
+    "song": "Rock Me"
+  },
+  {
+    "year": 1990,
+    "city": "Zagreb",
+    "host": "yu",
+    "winner": "it",
+    "artist": "Toto Cutugno",
+    "song": "Insieme: 1992"
+  },
+  {
+    "year": 1991,
+    "city": "Rome",
+    "host": "it",
+    "winner": "se",
+    "artist": "Carola",
+    "song": "Fångad av en stormvind"
+  },
+  {
+    "year": 1992,
+    "city": "Malmö",
+    "host": "se",
+    "winner": "ie",
+    "artist": "Linda Martin",
+    "song": "Why Me?"
+  },
+  {
+    "year": 1993,
+    "city": "Millstreet",
+    "host": "ie",
+    "winner": "ie",
+    "artist": "Niamh Kavanagh",
+    "song": "In Your Eyes"
+  },
+  {
+    "year": 1994,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "ie",
+    "artist": "Paul Harrington & Charlie McGettigan",
+    "song": "Rock 'n' Roll Kids"
+  },
+  {
+    "year": 1995,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "no",
+    "artist": "Secret Garden",
+    "song": "Nocturne"
+  },
+  {
+    "year": 1996,
+    "city": "Oslo",
+    "host": "no",
+    "winner": "ie",
+    "artist": "Eimear Quinn",
+    "song": "The Voice"
+  },
+  {
+    "year": 1997,
+    "city": "Dublin",
+    "host": "ie",
+    "winner": "gb",
+    "artist": "Katrina and the Waves",
+    "song": "Love Shine a Light"
+  },
+  {
+    "year": 1998,
+    "city": "Birmingham",
+    "host": "gb",
+    "winner": "il",
+    "artist": "Dana International",
+    "song": "Diva"
+  },
+  {
+    "year": 1999,
+    "city": "Jerusalem",
+    "host": "il",
+    "winner": "se",
+    "artist": "Charlotte Nilsson",
+    "song": "Take Me to Your Heaven"
+  },
+  {
+    "year": 2000,
+    "city": "Stockholm",
+    "host": "se",
+    "winner": "dk",
+    "artist": "Olsen Brothers",
+    "song": "Fly on the Wings of Love"
+  },
+  {
+    "year": 2001,
+    "city": "Copenhagen",
+    "host": "dk",
+    "winner": "ee",
+    "artist": "Tanel Padar, Dave Benton & 2XL",
+    "song": "Everybody"
+  },
+  {
+    "year": 2002,
+    "city": "Tallinn",
+    "host": "ee",
+    "winner": "lv",
+    "artist": "Marie N",
+    "song": "I Wanna"
+  },
+  {
+    "year": 2003,
+    "city": "Riga",
+    "host": "lv",
+    "winner": "tr",
+    "artist": "Sertab Erener",
+    "song": "Everyway That I Can"
+  },
+  {
+    "year": 2004,
+    "city": "Istanbul",
+    "host": "tr",
+    "winner": "ua",
+    "artist": "Ruslana",
+    "song": "Wild Dances"
+  },
+  {
+    "year": 2005,
+    "city": "Kyiv",
+    "host": "ua",
+    "winner": "gr",
+    "artist": "Helena Paparizou",
+    "song": "My Number One"
+  },
+  {
+    "year": 2006,
+    "city": "Athens",
+    "host": "gr",
+    "winner": "fi",
+    "artist": "Lordi",
+    "song": "Hard Rock Hallelujah"
+  },
+  {
+    "year": 2007,
+    "city": "Helsinki",
+    "host": "fi",
+    "winner": "rs",
+    "artist": "Marija Šerifović",
+    "song": "Molitva"
+  },
+  {
+    "year": 2008,
+    "city": "Belgrade",
+    "host": "rs",
+    "winner": "ru",
+    "artist": "Dima Bilan",
+    "song": "Believe"
+  },
+  {
+    "year": 2009,
+    "city": "Moscow",
+    "host": "ru",
+    "winner": "no",
+    "artist": "Alexander Rybak",
+    "song": "Fairytale"
+  },
+  {
+    "year": 2010,
+    "city": "Oslo",
+    "host": "no",
+    "winner": "de",
+    "artist": "Lena",
+    "song": "Satellite"
+  },
+  {
+    "year": 2011,
+    "city": "Düsseldorf",
+    "host": "de",
+    "winner": "az",
+    "artist": "Ell & Nikki",
+    "song": "Running Scared"
+  },
+  {
+    "year": 2012,
+    "city": "Baku",
+    "host": "az",
+    "winner": "se",
+    "artist": "Loreen",
+    "song": "Euphoria"
+  },
+  {
+    "year": 2013,
+    "city": "Malmö",
+    "host": "se",
+    "winner": "dk",
+    "artist": "Emmelie de Forest",
+    "song": "Only Teardrops"
+  },
+  {
+    "year": 2014,
+    "city": "Copenhagen",
+    "host": "dk",
+    "winner": "at",
+    "artist": "Conchita Wurst",
+    "song": "Rise Like a Phoenix"
+  },
+  {
+    "year": 2015,
+    "city": "Vienna",
+    "host": "at",
+    "winner": "se",
+    "artist": "Måns Zelmerlöw",
+    "song": "Heroes"
+  },
+  {
+    "year": 2016,
+    "city": "Stockholm",
+    "host": "se",
+    "winner": "ua",
+    "artist": "Jamala",
+    "song": "1944"
+  },
+  {
+    "year": 2017,
+    "city": "Kyiv",
+    "host": "ua",
+    "winner": "pt",
+    "artist": "Salvador Sobral",
+    "song": "Amar pelos dois"
+  },
+  {
+    "year": 2018,
+    "city": "Lisbon",
+    "host": "pt",
+    "winner": "il",
+    "artist": "Netta",
+    "song": "Toy"
+  },
+  {
+    "year": 2019,
+    "city": "Tel Aviv",
+    "host": "il",
+    "winner": "nl",
+    "artist": "Duncan Laurence",
+    "song": "Arcade"
+  },
+  {
+    "year": 2020,
+    "city": "Rotterdam",
+    "host": "nl",
+    "note": "Cancelled because of the COVID-19 pandemic."
+  },
+  {
+    "year": 2021,
+    "city": "Rotterdam",
+    "host": "nl",
+    "winner": "it",
+    "artist": "Måneskin",
+    "song": "Zitti e buoni"
+  },
+  {
+    "year": 2022,
+    "city": "Turin",
+    "host": "it",
+    "winner": "ua",
+    "artist": "Kalush Orchestra",
+    "song": "Stefania"
+  },
+  {
+    "year": 2023,
+    "city": "Liverpool",
+    "host": "gb",
+    "winner": "se",
+    "artist": "Loreen",
+    "song": "Tattoo"
+  },
+  {
+    "year": 2024,
+    "city": "Malmö",
+    "host": "se",
+    "winner": "ch",
+    "artist": "Nemo",
+    "song": "The Code"
+  },
+  {
+    "year": 2025,
+    "city": "Basel",
+    "host": "ch",
+    "winner": "at",
+    "artist": "JJ",
+    "song": "Wasted Love"
+  },
+  {
+    "year": 2026,
+    "city": "Vienna",
+    "host": "at",
+    "winner": "bg",
+    "artist": "Dara",
+    "song": "Bangaranga"
+  }
+]
