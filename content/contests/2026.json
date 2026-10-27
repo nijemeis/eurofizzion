@@ -21,7 +21,13 @@
       "oddsRank": 7,
       "status": "",
       "runningOrder": 12,
-      "odds": "35/1"
+      "odds": "35/1",
+      "video": {
+        "live": "EltgrumKJfk",
+        "liveTitle": "DARA - Bangaranga (LIVE) | Bulgaria 🇧🇬 | Grand Final | Winner of Eurovision 2026",
+        "mv": "J3oGYo_mekw",
+        "mvTitle": "DARA - Bangaranga | Bulgaria 🇧🇬 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "il",
@@ -34,7 +40,13 @@
       "oddsRank": 4,
       "status": "",
       "runningOrder": 3,
-      "odds": "13/1"
+      "odds": "13/1",
+      "video": {
+        "live": "E2aL4xRzNXI",
+        "liveTitle": "Noam Bettan - Michelle (LIVE) | Israel 🇮🇱 | Grand Final | Eurovision 2026",
+        "mv": "xWCnWSoG8nI",
+        "mvTitle": "Noam Bettan - Michelle | Israel 🇮🇱 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "ro",
@@ -49,7 +61,10 @@
       "runningOrder": 24,
       "odds": "14/1",
       "video": {
-        "live": "yn0YmI0dPb8"
+        "live": "TpMQ6dhcvvE",
+        "mv": "yn0YmI0dPb8",
+        "mvTitle": "Alexandra Căpitănescu - Choke Me | Romania 🇷🇴 | Official Music Video | #Eurovision2026",
+        "liveTitle": "Alexandra Căpitănescu - Choke Me (LIVE) | Romania 🇷🇴 | Grand Final | Eurovision 2026"
       }
     },
     {
@@ -63,7 +78,13 @@
       "oddsRank": 2,
       "status": "",
       "runningOrder": 8,
-      "odds": "4/1"
+      "odds": "4/1",
+      "video": {
+        "live": "QMm2aqdsrOU",
+        "liveTitle": "Delta Goodrem - Eclipse (LIVE) | Australia 🇦🇺 | Grand Final | Eurovision 2026",
+        "mv": "EUMCr1pnaMY",
+        "mvTitle": "Delta Goodrem - Eclipse | Australia 🇦🇺 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "it",
@@ -76,7 +97,13 @@
       "oddsRank": 8,
       "status": "A",
       "runningOrder": 22,
-      "odds": "50/1"
+      "odds": "50/1",
+      "video": {
+        "live": "rNpFNJLhSfA",
+        "liveTitle": "Sal Da Vinci - Per Sempre Sì (LIVE) | Italy 🇮🇹 | Grand Final | Eurovision 2026",
+        "mv": "V406FAGkhyQ",
+        "mvTitle": "Sal Da Vinci - Per Sempre Sì | Italy 🇮🇹 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "fi",
@@ -89,7 +116,13 @@
       "oddsRank": 1,
       "status": "",
       "runningOrder": 17,
-      "odds": "1/1"
+      "odds": "1/1",
+      "video": {
+        "live": "i8vlDO89YQA",
+        "liveTitle": "Linda Lampenius x Pete Parkkonen - Liekinheitin | Finland 🇫🇮 | First Semi-Final | Eurovision 2026",
+        "mv": "9bfwNIYb96Q",
+        "mvTitle": "Linda Lampenius x Pete Parkkonen - Liekinheitin  | Finland 🇫🇮 | Official Music Video | #Eurovision"
+      }
     },
     {
       "country": "dk",
@@ -102,7 +135,13 @@
       "oddsRank": 6,
       "status": "",
       "runningOrder": 1,
-      "odds": "33/1"
+      "odds": "33/1",
+      "video": {
+        "live": "5lBWuEZ2qyo",
+        "liveTitle": "Søren Torpegaard Lund - Før Vi Går Hjem (LIVE) | Denmark 🇩🇰 | Grand Final | Eurovision 2026",
+        "mv": "xKzEP9dwoss",
+        "mvTitle": "Søren Torpegaard Lund - Før Vi Går Hjem | Denmark 🇩🇰 | National Final Performance | #Eurovision2026"
+      }
     },
     {
       "country": "md",
@@ -115,7 +154,13 @@
       "oddsRank": 12,
       "status": "",
       "runningOrder": 16,
-      "odds": "150/1"
+      "odds": "150/1",
+      "video": {
+        "live": "CKV15yxAsIQ",
+        "liveTitle": "Satoshi - Viva, Moldova! (LIVE) | Moldova 🇲🇩 | Grand Final | Eurovision 2026",
+        "mv": "SViojHjNSzc",
+        "mvTitle": "Satoshi - Viva, Moldova!  | Moldova 🇲🇩 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "ua",
@@ -128,7 +173,13 @@
       "oddsRank": 13,
       "status": "",
       "runningOrder": 7,
-      "odds": "160/1"
+      "odds": "160/1",
+      "video": {
+        "live": "JYHhcKhzE-o",
+        "liveTitle": "LELÉKA - Ridnym (LIVE) | Ukraine 🇺🇦 | Grand Final | Eurovision 2026",
+        "mv": "SoEXezpblAc",
+        "mvTitle": "LELÉKA - Ridnym | Ukraine 🇺🇦 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "gr",
@@ -141,7 +192,13 @@
       "oddsRank": 3,
       "status": "",
       "runningOrder": 6,
-      "odds": "10/1"
+      "odds": "10/1",
+      "video": {
+        "live": "Rfd-6uAG4Rc",
+        "liveTitle": "Akylas - Ferto (LIVE) | Greece 🇬🇷 | Grand Final | Eurovision 2026",
+        "mv": "NGwNTd_DA9s",
+        "mvTitle": "Akylas - Ferto | Greece 🇬🇷 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "fr",
@@ -154,7 +211,13 @@
       "oddsRank": 9,
       "status": "A",
       "runningOrder": 15,
-      "odds": "66/1"
+      "odds": "66/1",
+      "video": {
+        "live": "L0jwLyIJaQQ",
+        "liveTitle": "Monroe - Regarde ! (LIVE) | France 🇫🇷 | Grand Final | Eurovision",
+        "mv": "ujoCYrvvTYQ",
+        "mvTitle": "Monroe - Regarde ! | France 🇫🇷 | Official Music Video #Eurovision2026"
+      }
     },
     {
       "country": "pl",
@@ -167,7 +230,13 @@
       "oddsRank": 20,
       "status": "",
       "runningOrder": 18,
-      "odds": "500/1"
+      "odds": "500/1",
+      "video": {
+        "live": "NRTkNIyT_S0",
+        "liveTitle": "ALICJA - Pray (LIVE) | Poland 🇵🇱 | Grand Final | Eurovision 2026",
+        "mv": "q78cnYIoF9Y",
+        "mvTitle": "ALICJA - Pray | Poland 🇵🇱 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "al",
@@ -180,7 +249,13 @@
       "oddsRank": 14,
       "status": "",
       "runningOrder": 5,
-      "odds": "175/1"
+      "odds": "175/1",
+      "video": {
+        "live": "doGkDemPcFE",
+        "liveTitle": "Alis - Nân (LIVE) | Albania 🇦🇱 | Grand Final | Eurovision 2026",
+        "mv": "b9AdRrA554o",
+        "mvTitle": "Alis - Nân | Albania 🇦🇱 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "no",
@@ -193,7 +268,13 @@
       "oddsRank": 18,
       "status": "",
       "runningOrder": 23,
-      "odds": "250/1"
+      "odds": "250/1",
+      "video": {
+        "live": "e7GWq-GeeD0",
+        "liveTitle": "JONAS LOVV - YA YA YA (LIVE) | Norway 🇳🇴 | Grand Final | Eurovision 2026",
+        "mv": "MasllzWk_bQ",
+        "mvTitle": "JONAS LOVV - YA YA YA | Norway 🇳🇴 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "hr",
@@ -206,7 +287,13 @@
       "oddsRank": 17,
       "status": "",
       "runningOrder": 13,
-      "odds": "200/1"
+      "odds": "200/1",
+      "video": {
+        "live": "-qtoDzlS-rk",
+        "liveTitle": "LELEK - Andromeda (LIVE) | Croatia 🇭🇷 | First Semi-Final | Eurovision 2026",
+        "mv": "vl7Jqnw10sU",
+        "mvTitle": "LELEK - Andromeda | Croatia 🇭🇷 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "cz",
@@ -219,7 +306,13 @@
       "oddsRank": 11,
       "status": "",
       "runningOrder": 11,
-      "odds": "125/1"
+      "odds": "125/1",
+      "video": {
+        "live": "XC_OUHdMOr0",
+        "liveTitle": "Daniel Zizka - CROSSROADS (LIVE) | Czechia 🇨🇿 | Grand Final | Eurovision 2026",
+        "mv": "6ea25aRGpLo",
+        "mvTitle": "Daniel Zizka - CROSSROADS | Czechia 🇨🇿 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "rs",
@@ -232,7 +325,13 @@
       "oddsRank": 22,
       "status": "",
       "runningOrder": 9,
-      "odds": "500/1"
+      "odds": "500/1",
+      "video": {
+        "live": "0Nuwjfp06Xc",
+        "liveTitle": "LAVINA - Kraj Mene (LIVE) | Serbia 🇷🇸 | Grand Final | Eurovision 2026",
+        "mv": "FJTLKBOOE98",
+        "mvTitle": "LAVINA - Kraj Mene | Serbia 🇷🇸 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "mt",
@@ -245,7 +344,13 @@
       "oddsRank": 10,
       "status": "",
       "runningOrder": 10,
-      "odds": "80/1"
+      "odds": "80/1",
+      "video": {
+        "live": "03FaNB7J0A4",
+        "liveTitle": "AIDAN - Bella (LIVE) | Malta 🇲🇹 | Grand Final | Eurovision 2026",
+        "mv": "CW6mQLBh6Js",
+        "mvTitle": "AIDAN - Bella | Malta 🇲🇹 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "cy",
@@ -258,7 +363,13 @@
       "oddsRank": 16,
       "status": "",
       "runningOrder": 21,
-      "odds": "200/1"
+      "odds": "200/1",
+      "video": {
+        "live": "7i-k5QR6A6I",
+        "liveTitle": "Antigoni - JALLA (LIVE) | Cyprus 🇨🇾 | Grand Final | Eurovision 2026",
+        "mv": "TzSs51BiQrE",
+        "mvTitle": "Antigoni - JALLA | Cyprus 🇨🇾 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "se",
@@ -271,7 +382,13 @@
       "oddsRank": 15,
       "status": "",
       "runningOrder": 20,
-      "odds": "200/1"
+      "odds": "200/1",
+      "video": {
+        "live": "6pmj0jbFKGU",
+        "liveTitle": "FELICIA - My System (LIVE) | Sweden 🇸🇪 | Grand Final | Eurovision 2026",
+        "mv": "ibbfS8iG450",
+        "mvTitle": "FELICIA - My System | Sweden 🇸🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "be",
@@ -284,7 +401,13 @@
       "oddsRank": 24,
       "status": "",
       "runningOrder": 4,
-      "odds": "800/1"
+      "odds": "800/1",
+      "video": {
+        "live": "hz8CWouTIoo",
+        "liveTitle": "ESSYLA - Dancing on the Ice (LIVE) | Belgium 🇧🇪 | First Semi-Final | Eurovision 2026",
+        "mv": "9sfI4g6DWTU",
+        "mvTitle": "ESSYLA - Dancing on the Ice | Belgium 🇧🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "lt",
@@ -297,7 +420,13 @@
       "oddsRank": 25,
       "status": "",
       "runningOrder": 19,
-      "odds": "800/1"
+      "odds": "800/1",
+      "video": {
+        "live": "RYmEt4mm_oU",
+        "liveTitle": "Lion Ceccah - Sólo Quiero Más (LIVE) | Lithuania 🇱🇹 | Grand Final | Eurovision 2026",
+        "mv": "0H-PXnbhG7A",
+        "mvTitle": "Lion Ceccah - Sólo Quiero Más | Lithuania 🇱🇹 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "de",
@@ -310,7 +439,13 @@
       "oddsRank": 21,
       "status": "A",
       "runningOrder": 2,
-      "odds": "500/1"
+      "odds": "500/1",
+      "video": {
+        "live": "KnKVUztvN3M",
+        "liveTitle": "Sarah Engels - Fire (LIVE) | Germany 🇩🇪 | Grand Final | Eurovision 2026",
+        "mv": "AzvRc3eH_rA",
+        "mvTitle": "Sarah Engels - Fire | Germany 🇩🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "at",
@@ -323,7 +458,13 @@
       "oddsRank": 23,
       "status": "A",
       "runningOrder": 25,
-      "odds": "800/1"
+      "odds": "800/1",
+      "video": {
+        "live": "54QfFpYXFH4",
+        "liveTitle": "COSMÓ - Tanzschein (LIVE) | Austria 🇦🇹 | Grand Final | Eurovision 2026",
+        "mv": "zPGP9ZphxiY",
+        "mvTitle": "COSMÓ - Tanzschein | Austria 🇦🇹 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "gb",
@@ -336,7 +477,13 @@
       "oddsRank": 19,
       "status": "A",
       "runningOrder": 14,
-      "odds": "400/1"
+      "odds": "400/1",
+      "video": {
+        "live": "I0tqgGVQkew",
+        "liveTitle": "LOOK MUM NO COMPUTER - Eins, Zwei, Drei (LIVE) | United Kingdom 🇬🇧 | Grand Final | Eurovision 2026",
+        "mv": "niMKvJ-Itq8",
+        "mvTitle": "LOOK MUM NO COMPUTER - Eins, Zwei, Drei | United Kingdom 🇬🇧 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "ch",
@@ -350,7 +497,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 108
+      "semiPoints": 108,
+      "video": {
+        "live": "ujoHtVkrx54",
+        "liveTitle": "Veronica Fusaro - Alice (LIVE) | Switzerland 🇨🇭 | Second Semi-Final | Eurovision 2026",
+        "mv": "PfpYGAzW5dM",
+        "mvTitle": "Veronica Fusaro - Alice | Switzerland 🇨🇭 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "ee",
@@ -364,7 +517,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 79
+      "semiPoints": 79,
+      "video": {
+        "live": "FfvawqmkXnA",
+        "liveTitle": "Vanilla Ninja - Too Epic To Be True (LIVE) | Estonia 🇪🇪 | First Semi-Final | Eurovision 2026",
+        "mv": "lOiWuol3t3o",
+        "mvTitle": "Vanilla Ninja - Too Epic To Be True | Estonia 🇪🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "pt",
@@ -378,7 +537,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 74
+      "semiPoints": 74,
+      "video": {
+        "live": "kWXyEWtB7KM",
+        "liveTitle": "Bandidos do Cante - Rosa (LIVE) | Portugal 🇵🇹 | First Semi-Final | Eurovision 2026",
+        "mv": "jyHaE6GqaaQ",
+        "mvTitle": "Bandidos do Cante - Rosa | Portugal 🇵🇹 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "me",
@@ -392,7 +557,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 71
+      "semiPoints": 71,
+      "video": {
+        "live": "_Xo12vfHqtk",
+        "liveTitle": "Tamara Živković - Nova Zora (LIVE) | Montenegro 🇲🇪 | First Semi-Final | Eurovision 2026",
+        "mv": "nuvy2d60HbI",
+        "mvTitle": "Tamara Živković - Nova Zora | Montenegro 🇲🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "lu",
@@ -406,7 +577,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 60
+      "semiPoints": 60,
+      "video": {
+        "live": "-oTfj9ysTJ0",
+        "liveTitle": "Eva Marija - Mother Nature (LIVE) | Luxembourg 🇱🇺 | Second Semi-Final | Eurovision 2026",
+        "mv": "DmVfJSRqgnI",
+        "mvTitle": "Eva Marija - Mother Nature | Luxembourg 🇱🇺 | National Final Performance | #Eurovision2026"
+      }
     },
     {
       "country": "lv",
@@ -420,7 +597,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 49
+      "semiPoints": 49,
+      "video": {
+        "live": "m8QhLXwxGpg",
+        "liveTitle": "Atvara - Ēnā (LIVE) | Latvia 🇱🇻 | Second Semi-Final | Eurovision 2026",
+        "mv": "6C2ivaB5D00",
+        "mvTitle": "Atvara - Ēnā | Latvia 🇱🇻 | National Final Performance #Eurovision2026"
+      }
     },
     {
       "country": "am",
@@ -434,7 +617,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 49
+      "semiPoints": 49,
+      "video": {
+        "live": "Pw8UJGEDF-4",
+        "liveTitle": "SIMÓN - Paloma Rumba (LIVE) | Armenia 🇦🇲 | Second Semi-Final | Eurovision 2026",
+        "mv": "5EXoK-lgocw",
+        "mvTitle": "SIMÓN - Paloma Rumba | Armenia 🇦🇲 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "sm",
@@ -448,7 +637,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 41
+      "semiPoints": 41,
+      "video": {
+        "live": "VhwoT8ah9R8",
+        "liveTitle": "SENHIT - Superstar (LIVE) | San Marino 🇸🇲 | First Semi-Final | Eurovision 2026",
+        "mv": "wOQe-fQSFxg",
+        "mvTitle": "SENHIT - Superstar | San Marino 🇸🇲 | National Final Performance | #Eurovision2026"
+      }
     },
     {
       "country": "ge",
@@ -462,7 +657,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 5
+      "semiPoints": 5,
+      "video": {
+        "live": "6LzvIh9FQ0Q",
+        "liveTitle": "Bzikebi - On Replay (LIVE) | Georgia 🇬🇪 | First Semi-Final | Eurovision 2026",
+        "mv": "coh-lygCINY",
+        "mvTitle": "Bzikebi - On Replay | Georgia 🇬🇪 | Official Music Video | #Eurovision2026"
+      }
     },
     {
       "country": "az",
@@ -476,7 +677,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 2
+      "semiPoints": 2,
+      "video": {
+        "live": "LQDvYwYIT54",
+        "liveTitle": "JIVA - Just Go (LIVE) | Azerbaijan 🇦🇿 | Second Semi-Final | Eurovision 2026",
+        "mv": "iMDBPe25JhM",
+        "mvTitle": "JIVA - Just Go | Azerbaijan 🇦🇿 | Official Music Video | #Eurovision2026"
+      }
     }
   ]
 }
