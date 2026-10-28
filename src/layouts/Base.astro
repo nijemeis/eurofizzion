@@ -33,6 +33,17 @@ const canonicalUrl = new URL(canonical, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <link rel="preconnect" href="https://i.ytimg.com" />
+    <!-- Google tag (gtag.js). is:inline keeps Astro from bundling or rewriting it. Public pages only; the CMS has its own layout. -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-B4TRVQCWR4"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-B4TRVQCWR4');
+    </script>
   </head>
   <body>
     <slot />
