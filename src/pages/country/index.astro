@@ -1,0 +1,42 @@
+---
+// All countries, alphabetically, each linking to its page.
+import SiteChrome from '../../components/SiteChrome.astro';
+import Ring from '../../components/Ring.astro';
+import { archive, contests, countries, countryList } from '../../lib/content';
+import { countryView } from '../../lib/derive';
+
+const tiles = countryList.map((c) => {
+  const v = countryView(c.code, contests, archive, countries);
+  const first = v.entries[v.entries.length - 1]?.year;
+  return { ...c, n: v.counts.all, wins: v.counts.win, first };
+});
+---
+
+<SiteChrome
+  title="Every Eurovision country — all entries by nation | Eurofizzion"
+  description={`All ${tiles.length} countries that have taken part in the Eurovision Song Contest, with every entry they have sent.`}
+  canonical="/country/"
+>
+  <section class="wrap entries-section" style="padding-top:64px">
+    <div class="kicker">Every nation</div>
+    <h1 class="h2">Countries</h1>
+    <p class="lede">{tiles.length} countries · pick one to see every song it has sent, from the latest to the first.</p>
+    <div class="country-grid">
+      {
+        tiles.map((t) => (
+          <a class="ctile" href={`/country/${t.slug}/`}>
+            <Ring code={t.code} />
+            <span style="min-width:0">
+              <b>{t.name}</b>
+              <small>
+                {t.n} {t.n === 1 ? 'entry' : 'entries'}
+                {t.first ? ` · since ${t.first}` : ''}
+              </small>
+            </span>
+            {t.wins > 0 && <span class="wins">★ {t.wins}</span>}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</SiteChrome>

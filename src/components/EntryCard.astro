@@ -1,0 +1,37 @@
+---
+// One entry as a video card. Used on contest pages (label = running order) and country pages (label = city + year).
+import Ring from './Ring.astro';
+import Icon from './Icon.astro';
+import type { EntryView } from '../lib/derive';
+
+interface Props {
+  e: EntryView;
+  openKey: string; // which modal entry the card opens
+  tags: string; // space-separated filter tags
+  label: string; // top-left chip
+}
+const { e, openKey, tags, label } = Astro.props;
+---
+
+<button type="button" class="card" data-open={openKey} data-tags={tags} aria-label={`${e.country}: ${e.artist}, “${e.song}” (${label}) — play`}>
+  <div class="thumb">
+    <div class="thumb-rim" style={`background-image:url(/flags/${e.c}.svg)`}></div>
+    {e.thumb && <div class="thumb-img" style={`background-image:url(${e.thumb})`} />}
+    <div class="thumb-shade"></div>
+    <div class="thumb-ro">{label}</div>
+    <div class={`badge badge-${e.badge}`}>{e.placeLabel}</div>
+    <div class="thumb-play">
+      <div class="play"><Icon name="play" size={18} /></div>
+    </div>
+    {e.thumb && <div class="thumb-fmt">{e.formats}</div>}
+    <div class="thumb-country">
+      <Ring code={e.c} />
+      <span>{e.country}</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="card-artist">{e.artist}</div>
+    <div class="card-song">“{e.song}”</div>
+    {e.subLabel && <div class="card-meta">{e.subLabel}</div>}
+  </div>
+</button>

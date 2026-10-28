@@ -10,7 +10,7 @@ import Odds from './Odds.astro';
 import NextContest from './NextContest.astro';
 import Footer from './Footer.astro';
 import VideoModal from './VideoModal.astro';
-import { allYears, archive, contests, countries, upcoming } from '../lib/content';
+import { allYears, archive, contests, countries, countryHref, upcoming } from '../lib/content';
 import { contestView, decades, emptyView } from '../lib/derive';
 
 interface Props {
@@ -57,7 +57,14 @@ const description = full
     </main>
     <Footer />
   </div>
-  {full && <VideoModal view={full} />}
+  {
+    full && (
+      <VideoModal
+        board={full}
+        entries={full.entries.map((e) => ({ ...e, key: e.c, year, yearTitle: full.yearTitle, link: countryHref(e.c), linkLabel: `All ${e.country} entries →` }))}
+      />
+    )
+  }
   <script>
     import '../scripts/site.ts';
   </script>

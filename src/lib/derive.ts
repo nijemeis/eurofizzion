@@ -331,3 +331,89 @@ export function sparkles(count: number, seed: number) {
     color: colors[i % 6],
   }));
 }
+
+/* ---------- Country pages ---------- */
+
+export const slugify = (name: string) =>
+  name
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+export type CountryEntry = EntryView & {
+  year: number;
+  city: string;
+  yearTitle: string;
+  hosted: boolean;
+  winnerOnly: boolean; // no contest file for this year: only the archive's winner row
+  tags: string; // filter tags: final / top10 / win
+};
+
+export type CountryView = {
+  code: string;
+  name: string;
+  slug: string;
+  entries: CountryEntry[]; // newest first
+  stats: Stat[];
+  counts: { all: number; final: number; top10: number; win: number };
+  coverage: string;
+};
+
+export function countryView(code: string, contests: Record<number, Contest>, archive: Record<number, ArchiveRow>, C: Countries): CountryView {
+  const name = C[code] || code.toUpperCase();
+  const years = [...new Set([...Object.keys(archive), ...Object.keys(contests)].map(Number))].sort((a, b) => b - a);
+  const entries: CountryEntry[] = [];
+  for (const y of years) {
+    const c = contests[y];
+    const a = archive[y];
+    const city = c?.city || a?.city || '';
+    const hosted = (c?.hostCode || a?.host) === code;
+    const base = { year: y, city, yearTitle: city + ' ' + y, hosted };
+    const e = c?.entries.find((x) => x.country === code);
+    if (e) {
+      const v = entryView(e, y, C);
+      entries.push({ ...v, ...base, winnerOnly: false, roLabel: base.yearTitle, tags: tagsOf(v.place) });
+    } else if (!c && a?.winner === code) {
+      const v = entryView({ country: code, artist: a.artist || '', song: a.song || '', place: 1, jury: null, televote: null, total: null, oddsRank: null, status: '', runningOrder: null }, y, C);
+      entries.push({ ...v, ...base, winnerOnly: true, roLabel: base.yearTitle, subLabel: 'Full results not on file yet', tags: tagsOf(1) });
+    }
+  }
+  const finals = entries.filter((e) => e.place);
+  const wins = years.filter((y) => (archive[y]?.winner || contests[y]?.entries.find((x) => x.place === 1)?.country) === code);
+  const best = finals.length ? Math.min(...finals.map((e) => e.place!)) : null;
+  const first = entries[entries.length - 1];
+  const stats: Stat[] = [
+    { v: entries.length, l: entries.length === 1 ? 'entry' : 'entries', tone: 'plain' },
+    { v: wins.length, l: wins.length === 1 ? 'win' : 'wins', tone: 'gold' },
+    { v: best ? ord(best) : '—', l: 'best placing', tone: 'jury' },
+    { v: first ? first.year : '—', l: 'first entry on file', tone: 'tele' },
+  ];
+  // Missing line-ups only matter from about when this country's history on file starts.
+  const since = first ? first.year - 1 : Infinity;
+  const missing = years.filter((y) => !contests[y] && archive[y]?.winner && y >= since).sort((a, b) => a - b);
+  const coverage = missing.length
+    ? `The full line-up for ${missing.join(', ')} isn’t on file yet${missing.length > 1 ? '; those years' : ', so that year'} only show${missing.length > 1 ? '' : 's'} the winner.`
+    : '';
+  return {
+    code,
+    name,
+    slug: slugify(name),
+    entries,
+    stats,
+    counts: { all: entries.length, final: finals.length, top10: finals.filter((e) => e.place! <= 10).length, win: wins.length },
+    coverage,
+  };
+}
+
+const tagsOf = (place: number | null) => (place ? ['final', place <= 10 ? 'top10' : '', place === 1 ? 'win' : ''].filter(Boolean).join(' ') : 'semi');
+
+// Countries that have at least one entry or win on file, alphabetically.
+export function countryCodes(contests: Record<number, Contest>, archive: Record<number, ArchiveRow>, C: Countries) {
+  const set = new Set<string>();
+  for (const c of Object.values(contests)) for (const e of c.entries) set.add(e.country);
+  for (const a of Object.values(archive)) if (a.winner) set.add(a.winner);
+  return [...set].filter((c) => C[c]).sort((a, b) => C[a].localeCompare(C[b]));
+}

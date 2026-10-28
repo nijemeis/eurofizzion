@@ -1,19 +1,22 @@
 ---
 import Icon from './Icon.astro';
-import type { FullView } from '../lib/derive';
+import type { EntryView, FullView } from '../lib/derive';
 
+export type ModalEntry = EntryView & { key: string; year: number; yearTitle: string; link: string | null; linkLabel: string };
 interface Props {
-  view: FullView;
+  entries: ModalEntry[];
+  board?: FullView; // contest pages: data for the scoreboard and vote reveal
 }
-const { view } = Astro.props;
+const { entries, board } = Astro.props;
 // Everything the modal and the scoreboard need on the client, inlined into the page. No fetches at view time.
 const data = {
-  year: view.year,
-  yearTitle: view.yearTitle,
-  hasSplit: view.hasSplit,
-  maxTotal: view.maxTotal,
-  revealOrder: view.revealOrder,
-  entries: view.entries.map((e) => ({
+  year: board?.year ?? null,
+  yearTitle: board?.yearTitle ?? '',
+  hasSplit: board?.hasSplit ?? false,
+  maxTotal: board?.maxTotal ?? 1,
+  revealOrder: board?.revealOrder ?? [],
+  entries: entries.map((e) => ({
+    key: e.key,
     c: e.c,
     country: e.country,
     artist: e.artist,
@@ -27,6 +30,10 @@ const data = {
     badge: e.badge,
     placeLabel: e.placeLabel,
     subLabel: e.subLabel,
+    year: e.year,
+    yearTitle: e.yearTitle,
+    link: e.link,
+    linkLabel: e.linkLabel,
   })),
 };
 ---
@@ -69,7 +76,10 @@ const data = {
         </div>
         <div class="bar"><i class="bj" data-m-jw></i><i class="bt" data-m-tw></i></div>
       </div>
-      <div class="m-sub" data-m-sub></div>
+      <div class="m-foot">
+        <span class="m-sub" data-m-sub></span>
+        <a class="m-link" data-m-link hidden></a>
+      </div>
     </div>
   </div>
 </div>

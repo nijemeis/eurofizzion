@@ -4,6 +4,7 @@ import countriesJson from '../../content/countries.json';
 import archiveJson from '../../content/archive.json';
 import upcomingJson from '../../content/upcoming.json';
 import type { ArchiveRow, Contest, Countries, Upcoming } from './types';
+import { countryCodes, slugify } from './derive';
 
 const contestFiles = import.meta.glob<Contest>('../../content/contests/*.json', { eager: true, import: 'default' });
 
@@ -26,3 +27,7 @@ for (const c of Object.values(contests)) {
 
 export const allYears = Object.keys(archive).map(Number).sort((a, b) => b - a);
 export const latestFullYear = Math.max(...Object.keys(contests).map(Number));
+
+// Country pages: /country/{slug}/ for every country with an entry or win on file.
+export const countryList = countryCodes(contests, archive, countries).map((code) => ({ code, name: countries[code], slug: slugify(countries[code]) }));
+export const countryHref = (code: string) => (countryList.some((c) => c.code === code) ? `/country/${slugify(countries[code])}/` : null);

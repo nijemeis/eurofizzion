@@ -1,6 +1,5 @@
 ---
-import Ring from './Ring.astro';
-import Icon from './Icon.astro';
+import EntryCard from './EntryCard.astro';
 import type { EmptyView, FullView } from '../lib/derive';
 
 interface Props {
@@ -32,30 +31,7 @@ const full = view.kind === 'full' ? view : null;
     full ? (
       <div class="grid">
         {full.entries.map((e) => (
-          <button type="button" class="card" data-open={e.c} data-stage={e.place ? 'final' : 'semi'} aria-label={`${e.country}: ${e.artist}, “${e.song}” — play`}>
-            <div class="thumb">
-              <div class="thumb-rim" style={`background-image:url(/flags/${e.c}.svg)`} />
-              {e.thumb && <div class="thumb-img" style={`background-image:url(${e.thumb})`} />}
-              <div class="thumb-shade" />
-              <div class="thumb-ro">{e.roLabel}</div>
-              <div class={`badge badge-${e.badge}`}>{e.placeLabel}</div>
-              <div class="thumb-play">
-                <div class="play">
-                  <Icon name="play" size={18} />
-                </div>
-              </div>
-              {e.thumb && <div class="thumb-fmt">{e.formats}</div>}
-              <div class="thumb-country">
-                <Ring code={e.c} />
-                <span>{e.country}</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="card-artist">{e.artist}</div>
-              <div class="card-song">“{e.song}”</div>
-              {e.subLabel && <div class="card-meta">{e.subLabel}</div>}
-            </div>
-          </button>
+          <EntryCard e={e} openKey={e.c} tags={e.place ? 'final' : 'semi'} label={e.roLabel} />
         ))}
       </div>
     ) : (

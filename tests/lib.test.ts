@@ -5,7 +5,7 @@ import zlib from 'node:zlib';
 import { parseHTML } from 'linkedom';
 import { parseWiki } from '../src/lib/wiki.ts';
 import { scoreItems, bestFor, parseYouTubeId } from '../src/lib/youtube.ts';
-import { contestView, ord } from '../src/lib/derive.ts';
+import { contestView, countryView, ord, slugify } from '../src/lib/derive.ts';
 import { mergeImport, setVideo, summarise } from '../src/lib/cms.ts';
 import type { Contest } from '../src/lib/types.ts';
 
@@ -109,4 +109,25 @@ test('mergeImport keeps videos and odds; summarise describes changes', () => {
   assert.deepEqual(summarise({ 1999: { ...c2026, year: 1999 } }, {}), ['1999: 35 entries imported, 1 video linked']);
   const cleared = setVideo(c2026, 'ro', { live: '' });
   assert.equal(cleared.entries.find((e) => e.country === 'ro')?.video, undefined);
+});
+
+test('countryView lists every entry newest first, with wins from the archive', () => {
+  const contests = { 2026: c2026, 2025: { ...c2026, year: 2025, city: 'Basel', hostCode: 'ch', entries: c2026.entries.map((e) => (e.country === 'bg' ? { ...e, place: 3 } : e)) } };
+  const archive = {
+    1956: { year: 1956, city: 'Lugano', host: 'ch', winner: 'ch', artist: 'Lys Assia', song: 'Refrain' },
+    2025: { year: 2025, city: 'Basel', host: 'ch', winner: 'at' },
+    2026: { year: 2026, city: 'Vienna', host: 'at', winner: 'bg' },
+  };
+  const bg = countryView('bg', contests, archive, countries);
+  assert.deepEqual(bg.entries.map((e) => [e.year, e.place, e.roLabel]), [[2026, 1, 'Vienna 2026'], [2025, 3, 'Basel 2025']]);
+  assert.deepEqual(bg.stats.map((s) => s.v), [2, 1, '1st', 2025]);
+  assert.deepEqual(bg.counts, { all: 2, final: 2, top10: 2, win: 1 });
+  const ch = countryView('ch', contests, archive, countries);
+  const lugano = ch.entries.find((e) => e.year === 1956)!;
+  assert.equal(lugano.winnerOnly, true);
+  assert.equal(lugano.artist, 'Lys Assia');
+  assert.match(ch.coverage, /1956 isn’t on file yet/);
+  assert.equal(countryView('at', contests, archive, countries).entries.find((e) => e.year === 2026)?.hosted, true);
+  assert.equal(slugify('Bosnia and Herzegovina'), 'bosnia-and-herzegovina');
+  assert.equal(slugify('Serbia & Montenegro'), 'serbia-and-montenegro');
 });

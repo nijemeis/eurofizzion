@@ -1,0 +1,43 @@
+---
+// Header, flag parade, next-contest section and footer around pages that aren't a single contest.
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import FlagParade from './FlagParade.astro';
+import NextContest from './NextContest.astro';
+import Footer from './Footer.astro';
+import { allYears, archive, contests, countries, latestFullYear, upcoming } from '../lib/content';
+import { decades } from '../lib/derive';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+}
+const year = latestFullYear;
+const i = allYears.indexOf(year);
+---
+
+<Base {...Astro.props}>
+  <div class="page">
+    <Header
+      year={year}
+      city={contests[year]?.city || archive[year]?.city || ''}
+      older={allYears[i + 1]}
+      newer={allYears[i - 1]}
+      decades={decades(allYears, year, archive, new Set(Object.keys(contests).map(Number)), countries)}
+      hasBoard={false}
+      hasOdds={false}
+      next={`${upcoming.city} ${upcoming.year}`}
+    />
+    <FlagParade />
+    <main>
+      <slot />
+      <NextContest up={upcoming} />
+    </main>
+    <Footer />
+  </div>
+  <slot name="after" />
+  <script>
+    import '../scripts/site.ts';
+  </script>
+</Base>

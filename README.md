@@ -5,14 +5,14 @@ An unofficial Eurovision Song Contest fan site (eurofizzion.com / eurofizzion.eu
 **The site is fully static.** Every page is pre-built HTML. A visitor never triggers a database query, a
 function call or an API request. The CMS saves edits as drafts in your browser, and **Publish** commits them
 all to GitHub in **one commit**. Netlify rebuilds the site once on that push, which takes about 5 seconds for
-all 73 pages.
+all 126 pages.
 
 ## What's where
 
 | Path | What |
 |---|---|
 | `content/` | **All site content, as JSON.** `countries.json`, `archive.json` (every contest's city, host and winner), `upcoming.json` (next contest), `contests/{year}.json` (full results; only for imported years). |
-| `src/pages/` | `/` (latest full contest), `/{year}/` for every archive year, `/admin/` (CMS). |
+| `src/pages/` | `/` (latest full contest), `/{year}/` for every archive year, `/country/` and `/country/{name}/` (every entry a country has sent, newest first), `/admin/` (CMS). |
 | `src/lib/derive.ts` | Every derived number (rankings, favourites, biggest split, odds insight…), computed at build time. |
 | `src/lib/wiki.ts` | Wikipedia results parser used by the CMS import. |
 | `src/scripts/site.ts` | The only JavaScript on public pages: countdown, time machine, filters, scoreboard and vote reveal, video modal. It reads data already in the page. |

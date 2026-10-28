@@ -2,6 +2,7 @@
 // All data is already in the page; nothing here calls a server.
 
 type E = {
+  key: string;
   c: string;
   country: string;
   artist: string;
@@ -15,8 +16,12 @@ type E = {
   badge: string;
   placeLabel: string;
   subLabel: string;
+  year: number;
+  yearTitle: string;
+  link: string | null;
+  linkLabel: string;
 };
-type Data = { year: number; yearTitle: string; hasSplit: boolean; maxTotal: number; revealOrder: string[]; entries: E[] };
+type Data = { year: number | null; yearTitle: string; hasSplit: boolean; maxTotal: number; revealOrder: string[]; entries: E[] };
 
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel)!;
 const $$ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => [...root.querySelectorAll<T>(sel)];
@@ -24,6 +29,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const dataEl = document.getElementById('contest-data');
 const D: Data | null = dataEl ? JSON.parse(dataEl.textContent || 'null') : null;
 const byCode = new Map((D?.entries || []).map((e) => [e.c, e]));
+const byKey = new Map((D?.entries || []).map((e) => [e.key, e]));
 const pressed = (els: HTMLElement[], on: (el: HTMLElement) => boolean) => els.forEach((el) => el.setAttribute('aria-pressed', String(on(el))));
 
 /* ---------- Countdown ---------- */
@@ -62,7 +68,7 @@ filterBtns.forEach((btn) =>
   btn.addEventListener('click', () => {
     const f = btn.dataset.filter;
     pressed(filterBtns, (b) => b === btn);
-    $$('.card[data-stage]').forEach((card) => (card.hidden = f !== 'all' && card.dataset.stage !== f));
+    $$('.card[data-tags]').forEach((card) => (card.hidden = f !== 'all' && !card.dataset.tags!.split(' ').includes(f!)));
   }),
 );
 
@@ -178,20 +184,20 @@ if (modal && D) {
       frame.append(f);
     }
     empty.hidden = !!vid;
-    const q = e.country + ' ' + e.artist + ' ' + e.song + ' Eurovision ' + D.year + ' ' + (vtype === 'live' ? 'live' : 'official music video');
+    const q = e.country + ' ' + e.artist + ' ' + e.song + ' Eurovision ' + e.year + ' ' + (vtype === 'live' ? 'live' : 'official music video');
     $<HTMLAnchorElement>('[data-m-search]', modal).href = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
     $('[data-m-empty-text]', modal).textContent = vtype === 'live' ? 'No live performance linked yet' : 'No official music video linked yet';
   };
 
-  const openModal = (c: string) => {
-    const e = byCode.get(c);
+  const openModal = (key: string) => {
+    const e = byKey.get(key);
     if (!e) return;
     open = e;
     vtype = e.live ? 'live' : e.mv ? 'mv' : 'live';
     const flag = 'url(/flags/' + e.c + '.svg)';
     $('[data-m-flag]', modal).style.backgroundImage = flag;
     $('[data-m-blur]', modal).style.backgroundImage = flag;
-    $('[data-m-label]', modal).textContent = e.country + ' · ' + D.yearTitle;
+    $('[data-m-label]', modal).textContent = e.country + ' · ' + e.yearTitle;
     const badge = $('[data-m-badge]', modal);
     badge.className = 'badge badge-' + e.badge;
     badge.textContent = e.placeLabel;
@@ -207,6 +213,12 @@ if (modal && D) {
       $('[data-m-tw]', modal).style.width = (e.tele! / (e.total || 1)) * 100 + '%';
     }
     $('[data-m-sub]', modal).textContent = e.subLabel;
+    const link = $<HTMLAnchorElement>('[data-m-link]', modal);
+    link.hidden = !e.link;
+    if (e.link) {
+      link.href = e.link;
+      link.textContent = e.linkLabel;
+    }
     lastFocus = document.activeElement as HTMLElement;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
