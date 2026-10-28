@@ -1,0 +1,143 @@
+{
+  "year": 1959,
+  "city": "Cannes",
+  "host": "France",
+  "hostCode": "fr",
+  "source": "Wikipedia",
+  "sourced": false,
+  "importedAt": "2026-10-28T09:04:17.451Z",
+  "entries": [
+    {
+      "country": "fr",
+      "artist": "Jean Philippe",
+      "song": "Oui oui oui oui",
+      "place": 3,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 1
+    },
+    {
+      "country": "dk",
+      "artist": "Birthe Wilke",
+      "song": "Uh, jeg ville ønske jeg var dig",
+      "place": 5,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 2
+    },
+    {
+      "country": "it",
+      "artist": "Domenico Modugno",
+      "song": "Piove",
+      "place": 6,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 3
+    },
+    {
+      "country": "mc",
+      "artist": "Jacques Pills",
+      "song": "Mon ami Pierrot",
+      "place": 11,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 4
+    },
+    {
+      "country": "nl",
+      "artist": "Teddy Scholten",
+      "song": "Een beetje",
+      "place": 1,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 5
+    },
+    {
+      "country": "de",
+      "artist": "Alice and Ellen Kessler",
+      "song": "Heut' woll'n wir tanzen geh'n",
+      "place": 8,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 6
+    },
+    {
+      "country": "se",
+      "artist": "Brita Borg",
+      "song": "Augustin",
+      "place": 9,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 7
+    },
+    {
+      "country": "ch",
+      "artist": "Christa Williams",
+      "song": "Irgendwoher",
+      "place": 4,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 8
+    },
+    {
+      "country": "at",
+      "artist": "Ferry Graf",
+      "song": "Der K. und K. Kalypso aus Wien",
+      "place": 9,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 9
+    },
+    {
+      "country": "gb",
+      "artist": "Pearl Carr and Teddy Johnson",
+      "song": "Sing Little Birdie",
+      "place": 2,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 10
+    },
+    {
+      "country": "be",
+      "artist": "Bob Benny",
+      "song": "Hou toch van mij",
+      "place": 6,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 11
+    }
+  ]
+}

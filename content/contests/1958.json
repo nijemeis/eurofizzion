@@ -1,0 +1,131 @@
+{
+  "year": 1958,
+  "city": "Hilversum",
+  "host": "Netherlands",
+  "hostCode": "nl",
+  "source": "Wikipedia",
+  "sourced": false,
+  "importedAt": "2026-10-28T09:04:12.700Z",
+  "entries": [
+    {
+      "country": "it",
+      "artist": "Domenico Modugno",
+      "song": "Nel blu, dipinto di blu",
+      "place": 3,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 1
+    },
+    {
+      "country": "nl",
+      "artist": "Corry Brokken",
+      "song": "Heel de wereld",
+      "place": 9,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 2
+    },
+    {
+      "country": "fr",
+      "artist": "André Claveau",
+      "song": "Dors mon amour",
+      "place": 1,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 3
+    },
+    {
+      "country": "lu",
+      "artist": "Solange Berry",
+      "song": "Un grand amour",
+      "place": 9,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 4
+    },
+    {
+      "country": "se",
+      "artist": "Alice Babs",
+      "song": "Lilla stjärna",
+      "place": 4,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 5
+    },
+    {
+      "country": "dk",
+      "artist": "Raquel Rastenni",
+      "song": "Jeg rev et blad ud af min dagbog",
+      "place": 8,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 6
+    },
+    {
+      "country": "be",
+      "artist": "Fud Leclerc",
+      "song": "Ma petite chatte",
+      "place": 5,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 7
+    },
+    {
+      "country": "de",
+      "artist": "Margot Hielscher",
+      "song": "Für zwei Groschen Musik",
+      "place": 7,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 8
+    },
+    {
+      "country": "at",
+      "artist": "Liane Augustin",
+      "song": "Die ganze Welt braucht Liebe",
+      "place": 5,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 9
+    },
+    {
+      "country": "ch",
+      "artist": "Lys Assia",
+      "song": "Giorgio",
+      "place": 2,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 10
+    }
+  ]
+}

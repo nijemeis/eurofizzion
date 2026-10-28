@@ -1,0 +1,131 @@
+{
+  "year": 1957,
+  "city": "Frankfurt",
+  "host": "Germany",
+  "hostCode": "de",
+  "source": "Wikipedia",
+  "sourced": false,
+  "importedAt": "2026-10-28T09:04:06.933Z",
+  "entries": [
+    {
+      "country": "be",
+      "artist": "Bobbejaan Schoepen",
+      "song": "Straatdeuntje",
+      "place": 8,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 1
+    },
+    {
+      "country": "lu",
+      "artist": "Danièle Dupré",
+      "song": "Tant de peine",
+      "place": 4,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 2
+    },
+    {
+      "country": "gb",
+      "artist": "Patricia Bredin",
+      "song": "All",
+      "place": 7,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 3
+    },
+    {
+      "country": "it",
+      "artist": "Nunzio Gallo",
+      "song": "Corde della mia chitarra",
+      "place": 6,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 4
+    },
+    {
+      "country": "at",
+      "artist": "Bob Martin",
+      "song": "Wohin, kleines Pony?",
+      "place": 10,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 5
+    },
+    {
+      "country": "nl",
+      "artist": "Corry Brokken",
+      "song": "Net als toen",
+      "place": 1,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 6
+    },
+    {
+      "country": "de",
+      "artist": "Margot Hielscher",
+      "song": "Telefon, Telefon",
+      "place": 4,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 7
+    },
+    {
+      "country": "fr",
+      "artist": "Paule Desjardins",
+      "song": "La Belle Amour",
+      "place": 2,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 8
+    },
+    {
+      "country": "dk",
+      "artist": "Birthe Wilke and Gustav Winckler",
+      "song": "Skibet skal sejle i nat",
+      "place": 3,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 9
+    },
+    {
+      "country": "ch",
+      "artist": "Lys Assia",
+      "song": "L'Enfant que j'étais",
+      "place": 8,
+      "jury": null,
+      "televote": null,
+      "total": null,
+      "oddsRank": null,
+      "status": "",
+      "runningOrder": 10
+    }
+  ]
+}
