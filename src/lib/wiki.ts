@@ -106,7 +106,9 @@ export function parseWiki(doc: Document, countries: Countries): { entries: Entry
       if (list.length) res.push({ kind, list });
     } else if (kind === 'F' || kind === 'X') {
       // A jury/televote split table: three numbers per country, one of which is the sum of the other two.
-      const htxt = rows.filter((r) => !r.querySelector('td')).map((r) => r.textContent).join(' ').toLowerCase();
+      // Read the column order from every header cell: on real articles "Jury score" and "Televoting score"
+      // share a row with a "Voting procedure used" data cell, so filtering whole header rows misses them.
+      const htxt = [...el.querySelectorAll('th')].map((c) => c.textContent).join(' ').toLowerCase();
       const jPos = htxt.search(/jury/), tPos = htxt.search(/televot/);
       if (jPos < 0 || tPos < 0) return;
       const m: Record<string, { jury: number; tele: number }> = {};

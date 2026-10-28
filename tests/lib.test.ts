@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import zlib from 'node:zlib';
 import { parseHTML } from 'linkedom';
 import { parseWiki } from '../src/lib/wiki.ts';
 import { scoreItems, bestFor, parseYouTubeId } from '../src/lib/youtube.ts';
@@ -33,6 +34,22 @@ test('parseWiki reads finals, semis and the jury/televote split', () => {
   assert.deepEqual({ s: by.pl.status, p: by.pl.semiPlace, pts: by.pl.semiPoints, place: by.pl.place }, { s: 'SF1', p: 12, pts: 35, place: null });
   assert.equal(by.mt.status, 'SF2');
   assert.equal(entries.find((e) => e.country === 'nl'), undefined); // national selection table skipped
+});
+
+test('parseWiki reads a real Wikipedia article (2019, Parsoid HTML)', () => {
+  // Saved from the REST API in October 2026 (CC BY-SA, Wikipedia contributors).
+  const html = zlib.gunzipSync(fs.readFileSync(new URL('./fixtures/wikipedia-esc-2019.html.gz', import.meta.url))).toString('utf8');
+  const { document } = parseHTML(html);
+  const { entries, msg } = parseWiki(document, countries);
+  assert.match(msg, /Found 26 finalists and 15 semi-final non-qualifiers, with the jury\/televote split/);
+  const by = Object.fromEntries(entries.map((e) => [e.country, e]));
+  assert.deepEqual([by.nl.place, by.nl.jury, by.nl.televote, by.nl.total, by.nl.runningOrder], [1, 237, 261, 498, 12]);
+  assert.deepEqual([by.no.place, by.no.jury, by.no.televote], [6, 40, 291]);
+  assert.deepEqual([by.it.status, by.it.place, by.it.total], ['A', 2, 472]);
+  assert.equal(by.il.status, 'A'); // host
+  assert.equal(by.is.song, 'Hatrið mun sigra');
+  assert.deepEqual([by.lt.status, by.lt.semiPlace, by.lt.semiPoints], ['SF2', 11, 93]);
+  assert.ok(entries.filter((e) => e.place).every((e) => e.jury! + e.televote! === e.total));
 });
 
 test('parseWiki reports a page without results', () => {
