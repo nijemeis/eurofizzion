@@ -9,7 +9,9 @@ import { mergeImport, setVideo, summarise } from '../src/lib/cms.ts';
 import type { Contest } from '../src/lib/types.ts';
 
 const countries = JSON.parse(fs.readFileSync(new URL('../content/countries.json', import.meta.url), 'utf8'));
+// Live content changes whenever the CMS publishes, so tests use the 2026 results with known videos only.
 const c2026: Contest = JSON.parse(fs.readFileSync(new URL('../content/contests/2026.json', import.meta.url), 'utf8'));
+c2026.entries = c2026.entries.map(({ video: _v, ...e }) => (e.country === 'ro' ? { ...e, video: { live: 'yn0YmI0dPb8' } } : e));
 const fixture = fs.readFileSync(new URL('./fixtures/wiki-sample.html', import.meta.url), 'utf8');
 
 test('ord', () => {
