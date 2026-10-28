@@ -17,7 +17,13 @@
       "total": 38,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 1
+      "runningOrder": 1,
+      "video": {
+        "live": "EGRzSefqOm0",
+        "liveTitle": "We Are Domi - Lights Off (LIVE) | Czechia 🇨🇿 | Grand Final | Eurovision 2022",
+        "mv": "QRgj3enaAhI",
+        "mvTitle": "We Are Domi - Lights Off - Czech Republic 🇨🇿 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "ro",
@@ -29,7 +35,13 @@
       "total": 65,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 2
+      "runningOrder": 2,
+      "video": {
+        "live": "nPpuwy79sHs",
+        "liveTitle": "WRS - Llámame - LIVE - Romania 🇷🇴 - Grand Final - Eurovision 2022",
+        "mv": "Ru3y4ivY3lQ",
+        "mvTitle": "WRS - Llámame - Romania 🇷🇴 - National Final Performance - Eurovision 2022"
+      }
     },
     {
       "country": "pt",
@@ -41,7 +53,13 @@
       "total": 207,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 3
+      "runningOrder": 3,
+      "video": {
+        "live": "mZtbD47u6yI",
+        "liveTitle": "MARO - Saudade Saudade (LIVE) | Portugal 🇵🇹 | Grand Final | Eurovision 2022",
+        "mv": "eQul-rkcGPQ",
+        "mvTitle": "MARO - Saudade Saudade - Portugal 🇵🇹 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "fi",
@@ -53,7 +71,13 @@
       "total": 38,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 4
+      "runningOrder": 4,
+      "video": {
+        "live": "LSi9nfr65FE",
+        "liveTitle": "The Rasmus - Jezebel (LIVE) | Finland 🇫🇮 | Grand Final | Eurovision 2022",
+        "mv": "IwHijzdNN2A",
+        "mvTitle": "The Rasmus - Jezebel - Finland 🇫🇮 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "ch",
@@ -65,7 +89,13 @@
       "total": 78,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 5
+      "runningOrder": 5,
+      "video": {
+        "live": "hq2HCmHv5p4",
+        "liveTitle": "Marius Bear - Boys Do Cry (LIVE) | Switzerland 🇨🇭 | Grand Final | Eurovision 2022",
+        "mv": "EnsqrM40uaY",
+        "mvTitle": "Marius Bear - Boys Do Cry - Switzerland 🇨🇭 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "fr",
@@ -77,7 +107,13 @@
       "total": 17,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 6
+      "runningOrder": 6,
+      "video": {
+        "live": "H1lcGXwOqJI",
+        "liveTitle": "Alvan & Ahez - Fulenn (LIVE) | France 🇫🇷 | Grand Final | Eurovision 2022",
+        "mv": "CO07xLUlK2g",
+        "mvTitle": "Alvan & Ahez - Fulenn - France 🇫🇷 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "no",
@@ -89,7 +125,13 @@
       "total": 182,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 7
+      "runningOrder": 7,
+      "video": {
+        "live": "adCU2rQyDeY",
+        "liveTitle": "Subwoolfer - Give That Wolf A Banana (LIVE) (LIVE) | Norway 🇳🇴 | Grand Final | Eurovision 2022",
+        "mv": "O_AvUlCQ_Cc",
+        "mvTitle": "Subwoolfer - Give That Wolf A Banana - Norway 🇳🇴 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "am",
@@ -101,7 +143,13 @@
       "total": 61,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 8
+      "runningOrder": 8,
+      "video": {
+        "live": "DAJ6vfmD_ic",
+        "liveTitle": "Rosa Linn - Snap - LIVE - Armenia 🇦🇲 - Grand Final - Eurovision 2022",
+        "mv": "gVqGKkm7xBE",
+        "mvTitle": "Rosa Linn - Snap - Armenia 🇦🇲 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "it",
@@ -113,7 +161,13 @@
       "total": 268,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 9
+      "runningOrder": 9,
+      "video": {
+        "live": "blEy4xHuMbY",
+        "liveTitle": "Mahmood & Blanco - Brividi (LIVE) | Italy 🇮🇹 | Grand Final | Eurovision 2022",
+        "mv": "Beqe14HYY5o",
+        "mvTitle": "Mahmood & BLANCO - Brividi - Italy 🇮🇹 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "es",
@@ -125,7 +179,13 @@
       "total": 459,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 10
+      "runningOrder": 10,
+      "video": {
+        "live": "jSQYTt4xg3I",
+        "liveTitle": "Chanel - SloMo (LIVE) | Spain 🇪🇸 | Grand Final | Eurovision 2022",
+        "mv": "N3eiW6E0ldc",
+        "mvTitle": "Chanel - SloMo - Spain 🇪🇸 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "nl",
@@ -137,7 +197,13 @@
       "total": 171,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 11
+      "runningOrder": 11,
+      "video": {
+        "live": "sgOnu7ux2-k",
+        "liveTitle": "S10 - De Diepte (LIVE) | Netherlands 🇳🇱 | Grand Final | Eurovision 2022",
+        "mv": "v2m-MGSys0k",
+        "mvTitle": "S10 - De Diepte - Netherlands 🇳🇱 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "ua",
@@ -149,7 +215,13 @@
       "total": 631,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 12
+      "runningOrder": 12,
+      "video": {
+        "live": "F1fl60ypdLs",
+        "liveTitle": "Kalush Orchestra - Stefania (LIVE) | Ukraine 🇺🇦 | Grand Final | Winner of Eurovision 2022",
+        "mv": "UiEGVYOruLk",
+        "mvTitle": "Kalush Orchestra - Stefania - Ukraine 🇺🇦 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "de",
@@ -161,7 +233,13 @@
       "total": 6,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 13
+      "runningOrder": 13,
+      "video": {
+        "live": "2BYIou-oWXA",
+        "liveTitle": "Malik Harris - Rockstars (LIVE) | Germany 🇩🇪 | Grand Final | Eurovision 2022",
+        "mv": "Oy-s-IZIHkI",
+        "mvTitle": "Malik Harris - Rockstars - Germany 🇩🇪  - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "lt",
@@ -173,7 +251,13 @@
       "total": 128,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 14
+      "runningOrder": 14,
+      "video": {
+        "live": "BVqSTVJhD44",
+        "liveTitle": "Monika Liu - Sentimentai (LIVE) | Lithuania 🇱🇹 | Grand Final | Eurovision 2022",
+        "mv": "acya6UcJP1k",
+        "mvTitle": "Monika Liu - Sentimentai - Lithuania 🇱🇹 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "az",
@@ -185,7 +269,13 @@
       "total": 106,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 15
+      "runningOrder": 15,
+      "video": {
+        "live": "tegPzHEL4ms",
+        "liveTitle": "Nadir Rustamli - Fade To Black - LIVE - Azerbaijan 🇦🇿 - Grand Final - Eurovision 2022",
+        "mv": "TGd1AFKR_-E",
+        "mvTitle": "Nadir Rustamli - Fade To Black - Azerbaijan 🇦🇿 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "be",
@@ -197,7 +287,13 @@
       "total": 64,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 16
+      "runningOrder": 16,
+      "video": {
+        "live": "sB09advfF6E",
+        "liveTitle": "Jérémie Makiese - Miss You (LIVE) | Belgium 🇧🇪 | Grand Final | Eurovision 2022",
+        "mv": "GZ3mLO4uFjY",
+        "mvTitle": "Jérémie Makiese - Miss You - Belgium 🇧🇪 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "gr",
@@ -209,7 +305,13 @@
       "total": 215,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 17
+      "runningOrder": 17,
+      "video": {
+        "live": "BWeT0nJpB3Y",
+        "liveTitle": "Amanda Georgiadi Tenfjord - Die Together - LIVE - Greece 🇬🇷 - Grand Final - Eurovision 2022",
+        "mv": "Uv7PcRKXZDg",
+        "mvTitle": "Amanda Georgiadi Tenfjord - Die Together - Greece 🇬🇷 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "is",
@@ -221,7 +323,13 @@
       "total": 20,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 18
+      "runningOrder": 18,
+      "video": {
+        "live": "G71c48O3j-s",
+        "liveTitle": "Systur - Með Hækkandi Sól (LIVE) | Iceland 🇮🇸 | Grand Final | Eurovision 2022",
+        "mv": "vk9D10EyxHA",
+        "mvTitle": "Systur - Með Hækkandi Sól - Iceland 🇮🇸 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "md",
@@ -233,7 +341,13 @@
       "total": 253,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 19
+      "runningOrder": 19,
+      "video": {
+        "live": "DUqf_zO2QaI",
+        "liveTitle": "Zdob şi Zdub & Advahov Brothers - Trenulețul (LIVE) | Moldova 🇲🇩 | Grand Final | Eurovision 2022",
+        "mv": "C9RJQPZsj8E",
+        "mvTitle": "Zdob şi Zdub & Advahov Brothers - Trenuleţul - Moldova 🇲🇩 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "se",
@@ -245,7 +359,13 @@
       "total": 438,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 20
+      "runningOrder": 20,
+      "video": {
+        "live": "i777psA2gP4",
+        "liveTitle": "Cornelia Jakobs - Hold Me Closer (LIVE) | Sweden 🇸🇪 | Grand Final | Eurovision 2022",
+        "mv": "wWDThAfryW4",
+        "mvTitle": "Cornelia Jakobs - Hold Me Closer - Sweden 🇸🇪 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "au",
@@ -257,7 +377,13 @@
       "total": 125,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 21
+      "runningOrder": 21,
+      "video": {
+        "live": "wosfFz2FJPU",
+        "liveTitle": "Sheldon Riley - Not The Same (LIVE) | Australia 🇦🇺 | Grand Final | Eurovision 2022",
+        "mv": "ByUD4d89_is",
+        "mvTitle": "Sheldon Riley - Not The Same - Australia 🇦🇺 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "gb",
@@ -269,7 +395,13 @@
       "total": 466,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 22
+      "runningOrder": 22,
+      "video": {
+        "live": "RZ0hqX_92zI",
+        "liveTitle": "Sam Ryder - SPACE MAN (LIVE) | United Kingdom 🇬🇧 | Grand Final | Eurovision 2022",
+        "mv": "udsMTb2NIak",
+        "mvTitle": "Sam Ryder - SPACE MAN - United Kingdom 🇬🇧 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "pl",
@@ -281,7 +413,13 @@
       "total": 151,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 23
+      "runningOrder": 23,
+      "video": {
+        "live": "jRVDZ6446eM",
+        "liveTitle": "Ochman - River (LIVE) | Poland 🇵🇱 | Grand Final | Eurovision 2022",
+        "mv": "wh47vgUwInU",
+        "mvTitle": "Ochman - River - Poland 🇵🇱 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "rs",
@@ -293,7 +431,13 @@
       "total": 312,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 24
+      "runningOrder": 24,
+      "video": {
+        "live": "nBtQj1MfNYA",
+        "liveTitle": "Konstrakta - In Corpore Sano (LIVE) | Serbia 🇷🇸 | Grand Final | Eurovision 2022",
+        "mv": "3S1jrYq87Zw",
+        "mvTitle": "Konstrakta - In Corpore Sano - Serbia 🇷🇸 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "ee",
@@ -305,7 +449,13 @@
       "total": 141,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 25
+      "runningOrder": 25,
+      "video": {
+        "live": "GdTpQmMem8U",
+        "liveTitle": "Stefan - Hope (LIVE) | Estonia 🇪🇪 | Grand Final | Eurovision 2022",
+        "mv": "bKhSlSx00-I",
+        "mvTitle": "STEFAN - Hope - Estonia 🇪🇪 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "al",
@@ -319,7 +469,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 58
+      "semiPoints": 58,
+      "video": {
+        "live": "45tzlLjJ6sA",
+        "liveTitle": "Ronela Hajati - Sekret - Albania 🇦🇱 - Live On Tape - Eurovision 2022",
+        "mv": "iMu47raqbcc",
+        "mvTitle": "Ronela Hajati - Sekret - Albania 🇦🇱  - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "lv",
@@ -333,7 +489,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 55
+      "semiPoints": 55,
+      "video": {
+        "live": "TM0_0WfuxSk",
+        "liveTitle": "Citi Zēni - Eat Your Salad (LIVE) | Latvia 🇱🇻 | First Semi-Final | Eurovision 2022",
+        "mv": "DbDj9mBI4g0",
+        "mvTitle": "Citi Zēni - Eat Your Salad - Latvia 🇱🇻 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "si",
@@ -347,7 +509,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 17,
-      "semiPoints": 15
+      "semiPoints": 15,
+      "video": {
+        "live": "S1tFqoflsT8",
+        "liveTitle": "LPS - Disko (LIVE) | Slovenia 🇸🇮 | First Semi-Final | Eurovision 2022",
+        "mv": "g8Ezl7xucCU",
+        "mvTitle": "LPS - Disko - Slovenia 🇸🇮 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "bg",
@@ -361,7 +529,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 16,
-      "semiPoints": 29
+      "semiPoints": 29,
+      "video": {
+        "live": "EwZTI5AoTg4",
+        "liveTitle": "Intelligent Music Project - Intention (LIVE) | Bulgaria 🇧🇬 | First Semi-Final | Eurovision 2022",
+        "mv": "HySI2igCcx4",
+        "mvTitle": "Intelligent Music Project - Intention - Bulgaria 🇧🇬 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "hr",
@@ -375,7 +549,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 75
+      "semiPoints": 75,
+      "video": {
+        "live": "9vBQdtW3mJE",
+        "liveTitle": "Mia Dimšić - Guilty Pleasure (LIVE) | Croatia 🇭🇷 | First Semi-Final | Eurovision 2022",
+        "mv": "4mTLfWMSNtw",
+        "mvTitle": "Mia Dimšić - Guilty Pleasure - Croatia 🇭🇷  - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "dk",
@@ -389,7 +569,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 55
+      "semiPoints": 55,
+      "video": {
+        "live": "cVg6MpVR2Pw",
+        "liveTitle": "REDDI - The Show (LIVE) | Denmark 🇩🇰 | First Semi-Final | Eurovision 2022",
+        "mv": "xqakAZP4D24",
+        "mvTitle": "Reddi - The Show - Denmark 🇩🇰 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "at",
@@ -403,7 +589,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 42
+      "semiPoints": 42,
+      "video": {
+        "live": "dMgjHYwXSuo",
+        "liveTitle": "LUM!X feat. Pia Maria - Halo (LIVE) | Austria 🇦🇹 | First Semi-Final | Eurovision 2022",
+        "mv": "tF6LY7lnVFU",
+        "mvTitle": "LUM!X feat. Pia Maria - Halo - Austria 🇦🇹 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "il",
@@ -417,7 +609,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 61
+      "semiPoints": 61,
+      "video": {
+        "mv": "WNFeohWlA20",
+        "mvTitle": "Michael Ben David - I.M - Israel 🇮🇱 - Official Music Video - Eurovision 2022",
+        "live": "XgXjPUsjx4Y",
+        "liveTitle": "Michael Ben David - I.M (LIVE) | Israel 🇮🇱 | Second Semi-Final | Eurovision 2022"
+      }
     },
     {
       "country": "ge",
@@ -431,7 +629,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 18,
-      "semiPoints": 22
+      "semiPoints": 22,
+      "video": {
+        "live": "zXiZAbqETvk",
+        "liveTitle": "Circus Mircus - Lock Me In - LIVE - Georgia 🇬🇪 - Second Semi-Final - Eurovision 2022",
+        "mv": "qgukml7zDAA",
+        "mvTitle": "Circus Mircus - Lock Me In - Georgia 🇬🇪 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "mt",
@@ -445,7 +649,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 16,
-      "semiPoints": 47
+      "semiPoints": 47,
+      "video": {
+        "live": "DFCFM5qtvms",
+        "liveTitle": "Emma Muscat - I Am What I Am (LIVE) | Malta 🇲🇹 | Second Semi-Final | Eurovision 2022",
+        "mv": "df-fks-Pj-8",
+        "mvTitle": "Emma Muscat - I Am What I Am - Malta 🇲🇹 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "sm",
@@ -459,7 +669,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 50
+      "semiPoints": 50,
+      "video": {
+        "live": "vCmX64N_sXM",
+        "liveTitle": "Achille Lauro - Stripper (LIVE) | San Marino 🇸🇲 | Second Semi-Final | Eurovision 2022",
+        "mv": "xipYsQtS1s8",
+        "mvTitle": "Achille Lauro - Stripper (Stripped Back Version) - San Marino 🇸🇲 - Eurovision House Party 2022"
+      }
     },
     {
       "country": "cy",
@@ -473,7 +689,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 63
+      "semiPoints": 63,
+      "video": {
+        "live": "W2IUdTl-gAI",
+        "liveTitle": "Andromache - Ela (LIVE) | Cyprus 🇨🇾 | Second Semi-Final | Eurovision 2022",
+        "mv": "GM8CY08UT6I",
+        "mvTitle": "Andromache - Ela - Cyprus 🇨🇾 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "ie",
@@ -487,7 +709,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 47
+      "semiPoints": 47,
+      "video": {
+        "live": "Kq2AJrWm04s",
+        "liveTitle": "Brooke - That’s Rich (LIVE) | Ireland 🇮🇪 | Second Semi-Final | Eurovision 2022",
+        "mv": "pkHzvy-Pscw",
+        "mvTitle": "Brooke - That's Rich - Ireland 🇮🇪 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "mk",
@@ -501,7 +729,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 76
+      "semiPoints": 76,
+      "video": {
+        "live": "zvOihqB4eKk",
+        "liveTitle": "Andrea - Circles - LIVE - North Macedonia 🇲🇰 - Second Semi-Final - Eurovision 2022",
+        "mv": "EzOpAduUlmo",
+        "mvTitle": "Andrea - Circles - North Macedonia 🇲🇰 - Official Music Video - Eurovision 2022"
+      }
     },
     {
       "country": "me",
@@ -515,7 +749,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 17,
-      "semiPoints": 33
+      "semiPoints": 33,
+      "video": {
+        "live": "L-ViRVRiGl0",
+        "liveTitle": "Vladana - Breathe (LIVE) | Montenegro 🇲🇪 | Second Semi-Final | Eurovision 2022",
+        "mv": "7e3GiXy7SLc",
+        "mvTitle": "Vladana - Breathe - Montenegro 🇲🇪 - Official Music Video - Eurovision 2022"
+      }
     }
   ]
 }
