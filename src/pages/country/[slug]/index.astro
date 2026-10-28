@@ -12,6 +12,8 @@ export function getStaticPaths() {
 }
 const { code } = Astro.props;
 const v = countryView(code, contests, archive, countries);
+// Longest word sets the heading size, so long names shrink instead of breaking mid-word.
+const chars = Math.max(6, ...v.name.split(/\s+/).map((w) => w.length));
 const span = v.entries.length ? `${v.entries[v.entries.length - 1].year}–${v.entries[0].year}` : '';
 const filters = [
   ['all', 'All', v.counts.all],
@@ -30,9 +32,9 @@ const filters = [
     <div class="country-card">
       <div class="spot-main">
         <Ring code={code} label={v.name} class="spot-flag" />
-        <div style="min-width:0">
+        <div class="country-text">
           <div class="kicker">Every entry from</div>
-          <h1 class="country-name">{v.name}</h1>
+          <h1 class="country-name" style={`--chars:${chars}`}>{v.name}</h1>
           <a class="country-back" href="/country/">← All countries</a>
         </div>
       </div>

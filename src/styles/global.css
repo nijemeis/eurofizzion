@@ -368,7 +368,10 @@ button.orow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px;
 /* ---------- Country pages ---------- */
 .country-hero { padding-top: 56px; }
 .country-card { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 28px; align-items: center; padding: 32px; border-radius: 32px; background: linear-gradient(120deg, rgba(255, 63, 180, .16), rgba(155, 92, 255, .12) 45%, rgba(45, 226, 245, .12)); border: 1px solid rgba(255, 63, 180, .35); box-shadow: 0 0 60px rgba(255, 63, 180, .12); }
-.country-name { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 6vw, 76px); line-height: 1; letter-spacing: -0.03em; margin: 8px 0 0; overflow-wrap: anywhere; }
+.country-text { flex: 1; min-width: 0; align-self: stretch; container-type: inline-size; }
+/* Never break inside a word: the font shrinks so the longest word (--chars letters) fits the box.
+   Unbounded 800 is up to about 0.84em per letter (W, M), so 100cqi / (chars * .86) always fits. */
+.country-name { font-family: var(--display); font-weight: 800; font-size: min(76px, calc(100cqi / (var(--chars, 6) * .86))); line-height: 1.02; letter-spacing: -0.03em; margin: 8px 0 0; overflow-wrap: normal; word-break: normal; hyphens: manual; text-wrap: balance; }
 .country-back { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--cyan-t); }
 .country-back:hover { color: var(--gold); }
 .country-note { font-size: 13px; color: var(--faint); margin: 0; }
