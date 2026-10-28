@@ -1,0 +1,60 @@
+---
+// Cookie consent bar. Hidden until the script below finds no saved choice; reopened by any [data-consent-open] link.
+---
+
+<div class="consent" data-consent role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+  <div class="consent-text">
+    <b>Cookies? Only if you say so.</b>
+    <span>We’d like to use Google Analytics to see which contests and countries people enjoy most. It sets cookies and sends visit data to Google. Nothing loads unless you accept. <a href="/privacy/">Privacy</a></span>
+  </div>
+  <div class="consent-actions">
+    <button type="button" class="consent-btn consent-no" data-consent-choice="denied">Decline</button>
+    <button type="button" class="consent-btn consent-yes" data-consent-choice="granted">Accept</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var bar = document.querySelector('[data-consent]');
+    var get = function () {
+      try {
+        return localStorage.getItem('ef-consent');
+      } catch (e) {
+        return null;
+      }
+    };
+    var set = function (v) {
+      try {
+        localStorage.setItem('ef-consent', v);
+      } catch (e) {}
+    };
+    if (!get()) bar.hidden = false;
+    bar.addEventListener('click', function (ev) {
+      var choice = ev.target.closest && ev.target.closest('[data-consent-choice]');
+      if (!choice) return;
+      var v = choice.getAttribute('data-consent-choice');
+      set(v);
+      bar.hidden = true;
+      if (v === 'granted') window.efAnalytics();
+      else if (window.efGtagLoaded) {
+        // Withdrawn after accepting: stop collection and remove Google Analytics cookies.
+        gtag('consent', 'update', { analytics_storage: 'denied' });
+        document.cookie.split(';').forEach(function (c) {
+          var name = c.split('=')[0].trim();
+          if (name === '_ga' || name.indexOf('_ga_') === 0) {
+            var host = location.hostname.replace(/^www\./, '');
+            document.cookie = name + '=; Max-Age=0; path=/';
+            document.cookie = name + '=; Max-Age=0; path=/; domain=.' + host;
+          }
+        });
+      }
+    });
+    document.addEventListener('click', function (ev) {
+      var open = ev.target.closest && ev.target.closest('[data-consent-open]');
+      if (!open) return;
+      ev.preventDefault();
+      bar.hidden = false;
+      bar.querySelector('.consent-yes').focus();
+    });
+  })();
+</script>

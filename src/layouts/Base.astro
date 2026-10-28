@@ -7,6 +7,7 @@ import '@fontsource/dm-sans/700.css';
 import '@fontsource/kaushan-script/400.css';
 import '@fontsource/pacifico/latin-400.css';
 import '../styles/global.css';
+import Consent from '../components/Consent.astro';
 
 interface Props {
   title: string;
@@ -33,19 +34,35 @@ const canonicalUrl = new URL(canonical, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <link rel="preconnect" href="https://i.ytimg.com" />
-    <!-- Google tag (gtag.js). is:inline keeps Astro from bundling or rewriting it. Public pages only; the CMS has its own layout. -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-B4TRVQCWR4"></script>
+    <!--
+      Google Analytics with consent (Google Consent Mode v2, "basic" mode): gtag.js is only loaded after the
+      visitor clicks Accept, so nothing is sent to Google before that. The choice lives in localStorage.
+      is:inline keeps Astro from bundling it. Public pages only; the CMS has its own layout.
+    -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag('js', new Date());
-
-      gtag('config', 'G-B4TRVQCWR4');
+      gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+      window.efAnalytics = function () {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        if (window.efGtagLoaded) return;
+        window.efGtagLoaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-B4TRVQCWR4';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-B4TRVQCWR4');
+      };
+      try {
+        if (localStorage.getItem('ef-consent') === 'granted') window.efAnalytics();
+      } catch (e) {}
     </script>
   </head>
   <body>
     <slot />
+    <Consent />
   </body>
 </html>
