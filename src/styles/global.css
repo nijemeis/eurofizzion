@@ -332,6 +332,9 @@ button.orow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px;
 .foot-links { display: flex; gap: 18px; font-weight: 700; }
 .foot-links a { color: var(--muted); }
 .foot-links a:hover { color: var(--gold); }
+.foot-credit { display: block; margin-top: 8px; }
+.foot-credit a { color: var(--muted); font-weight: 700; }
+.foot-credit a:hover { color: var(--gold); }
 
 /* ---------- Text pages ---------- */
 .prose { max-width: 820px; }
