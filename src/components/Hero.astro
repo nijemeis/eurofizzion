@@ -21,12 +21,13 @@ const units = ['days', 'hours', 'minutes', 'seconds'];
       class="hero-logo"
       width={1400}
       widths={[640, 960, 1400]}
-      sizes="(max-width: 960px) 100vw, 940px"
+      sizes="(min-width: 1000px) 680px, 100vw"
       format="webp"
       quality={82}
       loading="eager"
       fetchpriority="high"
     />
+    <div class="hero-side">
     <div class="hero-line">The countdown to {up.city} is on</div>
     <div class="countdown" data-countdown={up.finalISO} role="timer" aria-label={`Countdown to the ${up.city} ${up.year} Grand Final`}>
       {
@@ -44,6 +45,7 @@ const units = ['days', 'hours', 'minutes', 'seconds'];
     <div class="hero-ctas">
       <a href="#entries" class="cta cta-gold">Watch every entry</a>
       {hasBoard && <a href="#scoreboard" class="cta cta-pink">Replay the vote</a>}
+    </div>
     </div>
   </div>
 </section>
