@@ -74,12 +74,12 @@ const filters = [
       </div>
     </div>
     <div class="grid">
-      {v.entries.map((e) => <EntryCard e={e} openKey={String(e.year)} tags={e.tags} label={e.hosted ? `${e.yearTitle} · Host` : e.yearTitle} />)}
+      {v.entries.map((e) => <EntryCard e={e} openKey={e.key} tags={e.tags} label={e.hosted ? `${e.yearTitle} · Host` : e.yearTitle} />)}
     </div>
   </section>
 
   <VideoModal
     slot="after"
-    entries={v.entries.map((e) => ({ ...e, key: String(e.year), link: `/${e.year}/`, linkLabel: `Open ${e.yearTitle} →` }))}
+    entries={v.entries.map((e) => ({ ...e, link: `/${e.year}/`, linkLabel: `Open ${e.yearTitle} →` }))}
   />
 </SiteChrome>

@@ -24,7 +24,7 @@ const { view } = Astro.props;
     </div>
     {
       view.oddsRows.map((o) => (
-        <button type="button" class:list={['orow', `dir-${o.dir}`, { 'is-winner': o.isWinner }]} data-open={o.c}>
+        <button type="button" class:list={['orow', `dir-${o.dir}`, { 'is-winner': o.isWinner }]} data-open={o.key}>
           <div class="o-who">
             <Ring code={o.c} />
             <span>{o.country}</span>

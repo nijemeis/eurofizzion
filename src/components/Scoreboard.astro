@@ -50,7 +50,7 @@ const phaseText = hasSplit
   <div class:list={['board', { 'no-split': !hasSplit }]} style={`--n:${finals.length}`}>
     {
       finals.map((e, i) => (
-        <div class:list={['brow', { lead: i === 0 }]} style={`--rank:${i}`} data-c={e.c} data-open={e.c} tabindex="0" role="button" aria-label={`${e.country}, ${e.total ?? 'no'} points — play`}>
+        <div class:list={['brow', { lead: i === 0 }]} style={`--rank:${i}`} data-c={e.c} data-open={e.key} tabindex="0" role="button" aria-label={`${e.country}, ${e.total ?? 'no'} points — play`}>
           <div class="b-rank" data-rank>{i + 1}</div>
           <div class="b-who">
             <Ring code={e.c} />

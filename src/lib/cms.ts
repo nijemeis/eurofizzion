@@ -4,9 +4,11 @@ import type { ArchiveRow, Contest, Countries, Entry, Video } from './types.ts';
 // An import replaces the line-up and scores, but keeps what the editor added by hand:
 // videos and odds per country, and the contest's venue, date, note and edition.
 export function mergeImport(year: number, imported: Entry[], existing: Contest | undefined, a: ArchiveRow | undefined, C: Countries): Contest {
+  // Match by country and song first, so two entries from one country (1956) keep their own videos.
+  const bySong = new Map((existing?.entries || []).map((e) => [e.country + '|' + e.song.toLowerCase(), e]));
   const old = new Map((existing?.entries || []).map((e) => [e.country, e]));
   const entries = imported.map((e) => {
-    const o = old.get(e.country);
+    const o = bySong.get(e.country + '|' + e.song.toLowerCase()) || old.get(e.country);
     const out: Entry = { ...e };
     if (o?.oddsRank != null) out.oddsRank = o.oddsRank;
     if (o?.odds) out.odds = o.odds;
@@ -29,11 +31,12 @@ export function mergeImport(year: number, imported: Entry[], existing: Contest |
   };
 }
 
-export function setVideo(c: Contest, country: string, patch: Partial<Video>): Contest {
+// By entry index, not country: in 1956 every country sent two songs.
+export function setVideo(c: Contest, index: number, patch: Partial<Video>): Contest {
   return {
     ...c,
-    entries: c.entries.map((e) => {
-      if (e.country !== country) return e;
+    entries: c.entries.map((e, i) => {
+      if (i !== index) return e;
       const video: Video = { ...e.video, ...patch };
       for (const k of Object.keys(video) as (keyof Video)[]) if (!video[k]) delete video[k];
       const { video: _old, ...rest } = e;

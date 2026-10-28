@@ -102,12 +102,12 @@ test('mergeImport keeps videos and odds; summarise describes changes', () => {
   assert.equal(merged.entries.find((e) => e.country === 'fi')?.odds, '1/1');
   assert.equal(merged.venue, 'Wiener Stadthalle');
 
-  const withVid = setVideo(c2026, 'bg', { live: 'abcdefghijk' });
+  const withVid = setVideo(c2026, c2026.entries.findIndex((e) => e.country === 'bg'), { live: 'abcdefghijk' });
   assert.deepEqual(summarise({ 2026: withVid }, { 2026: c2026 }), ['2026: 1 video linked']);
   assert.deepEqual(summarise({ 2026: null }, { 2026: c2026 }), ['2026: results removed']);
   assert.deepEqual(summarise({ 2026: c2026 }, { 2026: c2026 }), []);
   assert.deepEqual(summarise({ 1999: { ...c2026, year: 1999 } }, {}), ['1999: 35 entries imported, 1 video linked']);
-  const cleared = setVideo(c2026, 'ro', { live: '' });
+  const cleared = setVideo(c2026, c2026.entries.findIndex((e) => e.country === 'ro'), { live: '' });
   assert.equal(cleared.entries.find((e) => e.country === 'ro')?.video, undefined);
 });
 
@@ -130,4 +130,18 @@ test('countryView lists every entry newest first, with wins from the archive', (
   assert.equal(countryView('at', contests, archive, countries).entries.find((e) => e.year === 2026)?.hosted, true);
   assert.equal(slugify('Bosnia and Herzegovina'), 'bosnia-and-herzegovina');
   assert.equal(slugify('Serbia & Montenegro'), 'serbia-and-montenegro');
+});
+
+test('1956: two songs per country get their own keys; no filters or scoreboard data', () => {
+  const c1956: Contest = JSON.parse(fs.readFileSync(new URL('../content/contests/1956.json', import.meta.url), 'utf8'));
+  const v = contestView(c1956, countries);
+  const keys = v.entries.map((e) => e.key);
+  assert.equal(new Set(keys).size, 14);
+  assert.equal(v.spot.key, 'ch-9'); // "Refrain", 9th in the running order
+  assert.equal(v.entries[0].song, 'Refrain');
+  assert.equal(v.counts, null);
+  assert.equal(v.sub, '14 songs · 24 May 1956 · Teatro Kursaal');
+  assert.ok(v.finals.every((e) => e.total == null));
+  const nl = countryView('nl', { 1956: c1956 }, {}, countries);
+  assert.deepEqual(nl.entries.map((e) => [e.key, e.song]), [['1956-1', 'De vogels van Holland'], ['1956-8', 'Voorgoed voorbij']]);
 });

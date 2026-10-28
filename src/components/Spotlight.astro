@@ -34,8 +34,8 @@ const { spot } = Astro.props;
       }
       {spot.note && <p class="spot-note">{spot.note}</p>}
       {
-        spot.canWatch && spot.code && (
-          <button type="button" class="cta spot-watch" data-open={spot.code}>
+        spot.canWatch && spot.key && (
+          <button type="button" class="cta spot-watch" data-open={spot.key}>
             ▶ Watch the winning performance
           </button>
         )

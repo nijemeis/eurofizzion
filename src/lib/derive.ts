@@ -16,6 +16,7 @@ export const ytSearch = (q: string) => 'https://www.youtube.com/results?search_q
 
 export type EntryView = {
   c: string;
+  key: string; // what a card opens in the video modal: the country, or country-runningOrder when it sent two songs (1956)
   country: string;
   artist: string;
   song: string;
@@ -46,6 +47,7 @@ export function entryView(e: Entry, year: number, C: Countries): EntryView {
   const id = live || mv;
   return {
     c,
+    key: c,
     country: C[c] || c.toUpperCase(),
     artist: e.artist,
     song: e.song,
@@ -80,6 +82,7 @@ export function entryView(e: Entry, year: number, C: Countries): EntryView {
 export type Stat = { v: string | number; l: string; tone: 'gold' | 'jury' | 'tele' | 'plain' };
 
 export type Spotlight = {
+  key: string | null; // video modal entry for the watch button
   kicker: string;
   code: string | null; // flag; null for the cancelled year
   country: string;
@@ -96,6 +99,7 @@ export type Highlight = { kicker: string; tone: 'jury' | 'tele' | 'gold'; c: str
 
 export type OddsRow = {
   c: string;
+  key: string;
   country: string;
   oddsLabel: string;
   oddsX: number;
@@ -139,6 +143,13 @@ export type EmptyView = {
 export function contestView(Y: Contest, C: Countries, A?: ArchiveRow): FullView {
   const year = Y.year;
   const all = Y.entries.map((e) => entryView(e, year, C));
+  // In 1956 each country sent two songs, so the country alone doesn't identify an entry.
+  const perCountry = new Map<string, number>();
+  for (const e of all) perCountry.set(e.c, (perCountry.get(e.c) || 0) + 1);
+  all.forEach((e, i) => {
+    if (perCountry.get(e.c)! > 1) e.key = e.c + '-' + (Y.entries[i].runningOrder ?? i);
+  });
+  const semis = all.filter((e) => e.isSemi);
   const finals = all.filter((e) => e.place).sort((a, b) => a.place! - b.place!);
   const nq = all.filter((e) => !e.place);
   const N = finals.length;
@@ -155,6 +166,7 @@ export function contestView(Y: Contest, C: Countries, A?: ArchiveRow): FullView 
     if (second && second.total != null) stats.push({ v: '+' + (winner.total - second.total), l: 'vs ' + second.country, tone: 'plain' });
   }
   const spot: Spotlight = {
+    key: winner?.key ?? null,
     kicker: '★ Winner · ' + yearTitle,
     code: winner?.c ?? null,
     country: winner?.country ?? '',
@@ -198,6 +210,7 @@ export function contestView(Y: Contest, C: Countries, A?: ArchiveRow): FullView 
       const d = e.oddsRank! - e.place!;
       return {
         c: e.c,
+        key: e.key,
         country: e.country,
         oddsLabel: e.odds || '#' + e.oddsRank,
         oddsX: x(e.oddsRank!),
@@ -232,7 +245,7 @@ export function contestView(Y: Contest, C: Countries, A?: ArchiveRow): FullView 
     : 'Approximate pre-final betting order for the top ' + oddsRows.length + ' — fan-compiled.';
 
   const sub = [all.length + ' songs'];
-  if (nq.length) sub.push(N + ' in the Grand Final');
+  if (semis.length) sub.push(N + ' in the Grand Final');
   if (Y.date) sub.push(Y.date);
   if (Y.venue) sub.push(Y.venue);
   if (Y.source === 'Wikipedia') sub.push('Results via Wikipedia');
@@ -244,7 +257,7 @@ export function contestView(Y: Contest, C: Countries, A?: ArchiveRow): FullView 
     sub: sub.join(' · '),
     spot,
     entries: finals.concat(nq),
-    counts: nq.length ? { all: all.length, final: N, semi: nq.length } : null,
+    counts: semis.length ? { all: all.length, final: N, semi: nq.length } : null,
     hasSplit,
     finals,
     maxTotal,
@@ -271,8 +284,9 @@ export function emptyView(year: number, A: ArchiveRow | undefined, C: Countries)
       ? 'The full line-up and scoreboard for ' + yearTitle + ' haven’t been added yet.'
       : 'The ' + year + ' contest in ' + city + ' was cancelled because of the COVID-19 pandemic.',
     spot: wc
-      ? { kicker: '★ Winner · ' + yearTitle, code: wc, country: C[wc] || wc, artist: A?.artist || '', song: A?.song || '', stats: [], note: A?.note || '', canWatch: false }
+      ? { key: null, kicker: '★ Winner · ' + yearTitle, code: wc, country: C[wc] || wc, artist: A?.artist || '', song: A?.song || '', stats: [], note: A?.note || '', canWatch: false }
       : {
+          key: null,
           kicker: 'Cancelled · ' + yearTitle,
           code: null,
           country: city + ', ' + (C[A?.host || ''] || ''),
@@ -372,13 +386,17 @@ export function countryView(code: string, contests: Record<number, Contest>, arc
     const city = c?.city || a?.city || '';
     const hosted = (c?.hostCode || a?.host) === code;
     const base = { year: y, city, yearTitle: city + ' ' + y, hosted };
-    const e = c?.entries.find((x) => x.country === code);
-    if (e) {
-      const v = entryView(e, y, C);
-      entries.push({ ...v, ...base, winnerOnly: false, roLabel: base.yearTitle, tags: tagsOf(v.place) });
+    const mine = c?.entries.filter((x) => x.country === code) || [];
+    if (mine.length) {
+      for (const e of mine) {
+        const v = entryView(e, y, C);
+        // Two songs in one year (1956): key by running order so each opens its own video.
+        const key = mine.length > 1 ? y + '-' + (e.runningOrder ?? mine.indexOf(e)) : String(y);
+        entries.push({ ...v, ...base, key, winnerOnly: false, roLabel: base.yearTitle, tags: tagsOf(v.place) });
+      }
     } else if (!c && a?.winner === code) {
       const v = entryView({ country: code, artist: a.artist || '', song: a.song || '', place: 1, jury: null, televote: null, total: null, oddsRank: null, status: '', runningOrder: null }, y, C);
-      entries.push({ ...v, ...base, winnerOnly: true, roLabel: base.yearTitle, subLabel: 'Full results not on file yet', tags: tagsOf(1) });
+      entries.push({ ...v, ...base, key: String(y), winnerOnly: true, roLabel: base.yearTitle, subLabel: 'Full results not on file yet', tags: tagsOf(1) });
     }
   }
   const finals = entries.filter((e) => e.place);

@@ -31,7 +31,7 @@ const full = view.kind === 'full' ? view : null;
     full ? (
       <div class="grid">
         {full.entries.map((e) => (
-          <EntryCard e={e} openKey={e.c} tags={e.place ? 'final' : 'semi'} label={e.roLabel} />
+          <EntryCard e={e} openKey={e.key} tags={e.place ? 'final' : 'semi'} label={e.roLabel} />
         ))}
       </div>
     ) : (

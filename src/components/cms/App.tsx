@@ -118,13 +118,14 @@ export default function App({ data }: { data: Data }) {
   };
 
   /* ---------- Videos ---------- */
-  const patchVideo = (y: number, c: string, patch: Record<string, string>) => {
+  const patchVideo = (y: number, i: number, patch: Record<string, string>) => {
     const cur = current(y);
-    if (cur) putDraft(y, setVideo(cur, c, patch));
+    if (cur) putDraft(y, setVideo(cur, i, patch));
   };
 
-  async function findOne(y: number, e: Entry) {
-    const k = y + '-' + e.country;
+  async function findOne(y: number, i: number) {
+    const e = current(y)!.entries[i];
+    const k = y + '-' + i;
     setRowMsg((s) => ({ ...s, [k]: 'Searching…' }));
     const q = new URLSearchParams({ artist: e.artist, song: e.song, year: String(y), official: official ? '1' : '0' });
     const r = await fetch('/admin/api/youtube?' + q);
@@ -134,7 +135,7 @@ export default function App({ data }: { data: Data }) {
       throw new Error(j.error);
     }
     const list: Candidate[] = j.candidates;
-    const v = current(y)?.entries.find((x) => x.country === e.country)?.video || {};
+    const v = current(y)?.entries[i]?.video || {};
     const patch: Record<string, string> = {};
     for (const slot of ['live', 'mv'] as const) {
       if (v[slot]) continue;
@@ -144,7 +145,7 @@ export default function App({ data }: { data: Data }) {
         patch[slot + 'Title'] = b.title;
       }
     }
-    if (Object.keys(patch).length) patchVideo(y, e.country, patch);
+    if (Object.keys(patch).length) patchVideo(y, i, patch);
     const filled = [patch.live && 'live', patch.mv && 'music video'].filter(Boolean);
     setCands((s) => ({ ...s, [k]: list }));
     setRowMsg((s) => ({ ...s, [k]: !list.length ? 'No results' : filled.length ? 'Auto-filled ' + filled.join(' + ') : 'No confident match — pick one below' }));
@@ -158,11 +159,11 @@ export default function App({ data }: { data: Data }) {
     for (const e of list) {
       if (stopRef.current) break;
       n++;
-      const v = current(y)?.entries.find((x) => x.country === e.country)?.video;
+      const v = current(y)?.entries[n - 1]?.video;
       if (v?.live && v?.mv) continue; // never spend quota on complete entries
       setProg('Searching ' + n + ' of ' + list.length + ': ' + e.artist + '…');
       try {
-        await findOne(y, e);
+        await findOne(y, n - 1);
       } catch (err) {
         setBusy(false);
         setProg('Stopped: ' + (err as Error).message);
@@ -359,7 +360,7 @@ export default function App({ data }: { data: Data }) {
                     const total = e.total ?? (e.jury != null && e.televote != null ? e.jury + e.televote : null);
                     const semi = e.status === 'SF2' ? 'Semi 2' : e.status === 'SF' ? 'Semi' : 'Semi 1';
                     return (
-                      <div class="tr" key={e.country}>
+                      <div class="tr" key={e.country + e.song}>
                         <span class="pl" style={{ color: e.place === 1 ? '#ffd23f' : undefined }}>{e.place || '—'}</span>
                         <span class="who">
                           <i class="flag" style={{ backgroundImage: flag(e.country) }} />
@@ -420,14 +421,14 @@ export default function App({ data }: { data: Data }) {
 
               {!cur && <div class="empty-box">Import this contest’s results first — videos are linked per entry.</div>}
 
-              {cur?.entries.map((e) => {
-                const k = year + '-' + e.country;
+              {cur?.entries.map((e, i) => {
+                const k = year + '-' + i;
                 const v = e.video || {};
                 const list = (cands[k] || []).map((x) => ({ ...x, used: x.id === v.live || x.id === v.mv }));
                 const assign = (slot: 'live' | 'mv') => {
                   const id = parseYouTubeId(paste[k] || '');
                   if (!id) return setRowMsg((s) => ({ ...s, [k]: 'That doesn’t look like a YouTube link.' }));
-                  patchVideo(year, e.country, { [slot]: id, [slot + 'Title']: '' });
+                  patchVideo(year, i, { [slot]: id, [slot + 'Title']: '' });
                   setPaste((s) => ({ ...s, [k]: '' }));
                   setRowMsg((s) => ({ ...s, [k]: 'Linked.' }));
                 };
@@ -468,7 +469,7 @@ export default function App({ data }: { data: Data }) {
                                     <a href={'https://youtu.be/' + id} target="_blank" rel="noopener" class="link-muted">
                                       Watch
                                     </a>
-                                    <button class="link-pink" onClick={() => patchVideo(year, e.country, { [slot]: '', [slot + 'Title']: '' })}>
+                                    <button class="link-pink" onClick={() => patchVideo(year, i, { [slot]: '', [slot + 'Title']: '' })}>
                                       Clear
                                     </button>
                                   </>
@@ -492,7 +493,7 @@ export default function App({ data }: { data: Data }) {
                       <button class="btn btn-sm btn-out-cyan" onClick={() => assign('mv')}>
                         → Music video
                       </button>
-                      <button class="btn btn-sm btn-gold" disabled={busy} onClick={() => findOne(year, e).catch(() => {})}>
+                      <button class="btn btn-sm btn-gold" disabled={busy} onClick={() => findOne(year, i).catch(() => {})}>
                         Find on YouTube
                       </button>
                       <span class="rowmsg">{rowMsg[k] || ''}</span>
@@ -508,10 +509,10 @@ export default function App({ data }: { data: Data }) {
                             <div class="cand-title">{x.title}</div>
                             <div class="cand-channel">{x.channel}</div>
                             <div class="cand-actions">
-                              <button class="btn btn-xs btn-out-pink" onClick={() => patchVideo(year, e.country, { live: x.id, liveTitle: x.title })}>
+                              <button class="btn btn-xs btn-out-pink" onClick={() => patchVideo(year, i, { live: x.id, liveTitle: x.title })}>
                                 Use as live
                               </button>
-                              <button class="btn btn-xs btn-out-cyan" onClick={() => patchVideo(year, e.country, { mv: x.id, mvTitle: x.title })}>
+                              <button class="btn btn-xs btn-out-cyan" onClick={() => patchVideo(year, i, { mv: x.id, mvTitle: x.title })}>
                                 Use as MV
                               </button>
                             </div>

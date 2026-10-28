@@ -20,7 +20,8 @@ const { year } = Astro.props;
 const contest = contests[year];
 const view = contest ? contestView(contest, countries, archive[year]) : emptyView(year, archive[year], countries);
 const full = view.kind === 'full' ? view : null;
-const hasBoard = !!full && full.finals.length > 0;
+// 1956 has a winner but no published points, so no scoreboard.
+const hasBoard = !!full && full.finals.some((e) => e.total != null);
 const hasOdds = !!full && full.oddsRows.length > 1;
 
 const i = allYears.indexOf(year);
@@ -61,7 +62,7 @@ const description = full
     full && (
       <VideoModal
         board={full}
-        entries={full.entries.map((e) => ({ ...e, key: e.c, year, yearTitle: full.yearTitle, link: countryHref(e.c), linkLabel: `All ${e.country} entries →` }))}
+        entries={full.entries.map((e) => ({ ...e, key: e.key, year, yearTitle: full.yearTitle, link: countryHref(e.c), linkLabel: `All ${e.country} entries →` }))}
       />
     )
   }
