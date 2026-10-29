@@ -1,5 +1,6 @@
 ---
 import Sparkles from './Sparkles.astro';
+import NewsBar from './NewsBar.astro';
 import { countries } from '../lib/content';
 import type { Upcoming } from '../lib/types';
 
@@ -54,5 +55,7 @@ const chips = [
       }
       <div class="part-foot">Entries appear here as each country picks its act.</div>
     </div>
+
+    <NewsBar />
   </div>
 </section>

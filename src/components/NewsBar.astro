@@ -1,0 +1,34 @@
+---
+// Latest eurovision.com stories (content/news.json, refreshed daily by a GitHub Action).
+// Hidden entirely while there are no stories.
+import newsJson from '../../content/news.json';
+import { newsDate, type NewsItem } from '../lib/news';
+
+const items = (newsJson.items as NewsItem[]).slice(0, 8);
+---
+
+{
+  items.length > 0 && (
+    <div class="news">
+      <div class="news-head">
+        <div class="next-kicker" style="font-size:24px">The latest from eurovision.com</div>
+        <a class="news-all" href={newsJson.source} target="_blank" rel="noopener">
+          All stories ↗
+        </a>
+      </div>
+      <div class="news-row">
+        {items.map((n) => (
+          <a class="news-card" href={n.url} target="_blank" rel="noopener">
+            <div class="news-img">{n.image && <img src={n.image} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />}</div>
+            <div class="news-body">
+              {n.date && <time datetime={n.date}>{newsDate(n.date)}</time>}
+              <b>{n.title}</b>
+              {n.excerpt && <p>{n.excerpt}</p>}
+              <span class="news-more">Read on eurovision.com ↗</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}

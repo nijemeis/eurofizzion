@@ -26,6 +26,15 @@ Fonts are self-hosted (Fontsource), flags are self-hosted, and the logo is conve
 (2.4 MB → 35–105 kB). The only third-party requests come from YouTube: thumbnails from `i.ytimg.com`, and the
 `youtube-nocookie.com` player, which is only created when someone presses play.
 
+## News bar
+
+The next-contest section shows the latest stories from [eurovision.com/stories](https://www.eurovision.com/stories/): image, date, title and a short excerpt, each linking to eurovision.com.
+
+- `.github/workflows/news.yml` runs `scripts/fetch-news.ts` every day at 06:17 UTC (free on a public repo). It saves up to 8 stories to `content/news.json` and commits **only when the stories changed**, so Netlify rebuilds only on days with new news.
+- It reads the story links on the stories page, then each story's standard share tags (`og:title`, `og:description`, `og:image`, `article:published_time`), so it doesn't depend on eurovision.com's page layout.
+- If eurovision.com can't be read, the run fails (GitHub emails you) and the old news stays on the site. The bar is hidden while there are no stories.
+- Run it by hand: GitHub → **Actions → Update news → Run workflow**. Change the time in the `cron` line.
+
 ## Develop
 
 Requires Node 24 (see `.nvmrc`; Astro 7 needs ≥ 22.23).
