@@ -1,3 +1,8 @@
 {
-  "feeds": []
+  "feeds": [
+    {
+      "name": "Eurovoix",
+      "url": "https://eurovoix.com/category/eurovision/eurovision-2027/feed/"
+    }
+  ]
 }
