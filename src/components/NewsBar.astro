@@ -1,20 +1,17 @@
 ---
-// Latest eurovision.com stories (content/news.json, refreshed daily by a GitHub Action).
-// Hidden entirely while there are no stories.
-import newsJson from '../../content/news.json';
-import { newsDate, type NewsItem } from '../lib/news';
+// News bar: the editor's picks first, then the latest feed items. Hidden while there are none.
+import picksJson from '../../content/news-picks.json';
+import feedJson from '../../content/news.json';
+import { mergeNews, newsDate, type NewsItem } from '../lib/news';
 
-const items = (newsJson.items as NewsItem[]).slice(0, 8);
+const items = mergeNews(picksJson.items as NewsItem[], feedJson.items as NewsItem[]);
 ---
 
 {
   items.length > 0 && (
     <div class="news">
       <div class="news-head">
-        <div class="next-kicker" style="font-size:24px">The latest from eurovision.com</div>
-        <a class="news-all" href={newsJson.source} target="_blank" rel="noopener">
-          All stories ↗
-        </a>
+        <div class="next-kicker" style="font-size:24px">The latest Eurovision news</div>
       </div>
       <div class="news-row">
         {items.map((n) => (
@@ -24,7 +21,7 @@ const items = (newsJson.items as NewsItem[]).slice(0, 8);
               {n.date && <time datetime={n.date}>{newsDate(n.date)}</time>}
               <b>{n.title}</b>
               {n.excerpt && <p>{n.excerpt}</p>}
-              <span class="news-more">Read on eurovision.com ↗</span>
+              <span class="news-more">Read on {n.source} ↗</span>
             </div>
           </a>
         ))}

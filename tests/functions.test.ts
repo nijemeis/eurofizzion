@@ -79,3 +79,15 @@ test('youtube search scores results and keeps the key server-side', async () => 
   assert.equal(u.searchParams.get('q'), 'Nemo The Code Eurovision 2024');
   assert.ok(!JSON.stringify(j).includes('"k"'));
 });
+
+test('publish accepts the news files in the right shape only', async () => {
+  const ok = await publish(post({ files: { 'news-picks.json': JSON.stringify({ items: [{ title: 'T', url: 'https://x.test/a' }] }), 'news-feeds.json': JSON.stringify({ feeds: [{ name: 'F', url: 'https://x.test/feed' }] }) } }));
+  assert.equal(ok.status, 200);
+  const tree = calls.find((c) => c.url.endsWith('/git/trees'))!.body;
+  assert.deepEqual(tree.tree.map((t: any) => t.path), ['content/news-picks.json', 'content/news-feeds.json']);
+  calls = [];
+  const bad = await publish(post({ files: { 'news-picks.json': JSON.stringify({ items: [{ title: 'T', url: 'javascript:alert(1)' }] }) } }));
+  assert.equal(bad.status, 400);
+  assert.equal((await publish(post({ files: { 'news-feeds.json': null } }))).status, 400);
+  assert.equal(calls.length, 0);
+});

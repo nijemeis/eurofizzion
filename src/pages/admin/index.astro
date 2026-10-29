@@ -9,8 +9,10 @@ import '@fontsource/pacifico/latin-400.css';
 import '../../styles/cms.css';
 import App from '../../components/cms/App.tsx';
 import { archive, contests, countries } from '../../lib/content';
+import newsPicks from '../../../content/news-picks.json';
+import newsFeeds from '../../../content/news-feeds.json';
 
-const data = { contests, archive, countries, builtAt: new Date().toISOString() };
+const data = { contests, archive, countries, news: { picks: newsPicks.items, feeds: newsFeeds.feeds }, builtAt: new Date().toISOString() };
 ---
 
 <!doctype html>

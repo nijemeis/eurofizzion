@@ -6,15 +6,21 @@ import { parseWiki } from '../../lib/wiki';
 import { bestFor, parseYouTubeId, type Candidate } from '../../lib/youtube';
 import { mergeImport, setVideo, stable, summarise } from '../../lib/cms';
 import { ord } from '../../lib/derive';
+import type { Feed, NewsItem } from '../../lib/news';
+import News from './News';
 
-type Data = { contests: Record<number, Contest>; archive: Record<number, ArchiveRow>; countries: Countries; builtAt: string };
+type NewsData = { picks: NewsItem[]; feeds: Feed[] };
+type Data = { contests: Record<number, Contest>; archive: Record<number, ArchiveRow>; countries: Countries; news: NewsData; builtAt: string };
 type Drafts = Record<number, Contest | null>; // null = remove the published results
-type Published = { at: string; files: Drafts };
+type NewsDraft = Partial<NewsData>; // only the parts the editor changed
+type Published = { at: string; files: Drafts; news?: NewsDraft };
 type Tab = 'results' | 'videos' | 'publish';
 type Msg = { text: string; kind: '' | 'ok' | 'err' };
 
 const DRAFTS_KEY = 'eurofizzion-drafts';
 const PUBLISHED_KEY = 'eurofizzion-published';
+const NEWS_KEY = 'eurofizzion-news-drafts';
+const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
 const load = <T,>(key: string, fallback: T): T => {
   try {
@@ -51,6 +57,21 @@ export default function App({ data }: { data: Data }) {
     }
     return out;
   }, [recent]);
+  const publishedNews: NewsData = { ...data.news, ...(recent?.news || {}) };
+  const [newsDraft, setNewsDraft] = useState<NewsDraft>(() => load(NEWS_KEY, {}));
+  const [view, setView] = useState<'year' | 'news'>('year');
+  const [newsTab, setNewsTab] = useState<'edit' | 'publish'>('edit');
+  useEffect(() => save(NEWS_KEY, Object.keys(newsDraft).length ? newsDraft : null), [newsDraft]);
+  const picks = newsDraft.picks ?? publishedNews.picks;
+  const feeds = newsDraft.feeds ?? publishedNews.feeds;
+  // A news draft identical to what's published isn't a change.
+  const putNews = (k: keyof NewsData, v: NewsItem[] | Feed[]) =>
+    setNewsDraft((d) => {
+      const next = { ...d, [k]: v };
+      if (same(v, publishedNews[k])) delete next[k];
+      return next;
+    });
+  const newsChanged = (Object.keys(newsDraft) as (keyof NewsData)[]).filter((k) => !same(newsDraft[k], publishedNews[k]));
 
   const years = useMemo(
     () => [...new Set([...Object.keys(A), ...Object.keys(published), ...Object.keys(drafts)].map(Number))].sort((a, b) => b - a),
@@ -177,12 +198,17 @@ export default function App({ data }: { data: Data }) {
 
   /* ---------- Publish ---------- */
   const changed = Object.keys(drafts).map(Number).filter(isDraft);
-  const summary = summarise(Object.fromEntries(changed.map((y) => [y, drafts[y]])), published);
+  const summary = [
+    ...newsChanged.map((k) => (k === 'picks' ? `News: ${picks.length} pick${picks.length === 1 ? '' : 's'}` : `News feeds: ${feeds.length}`)),
+    ...summarise(Object.fromEntries(changed.map((y) => [y, drafts[y]])), published),
+  ];
 
   async function publish() {
     setPub({ busy: true });
     const files: Record<string, string | null> = {};
     for (const y of changed) files[`contests/${y}.json`] = drafts[y] ? stable(drafts[y]!) : null;
+    if (newsChanged.includes('picks')) files['news-picks.json'] = JSON.stringify({ items: picks }, null, 2) + '\n';
+    if (newsChanged.includes('feeds')) files['news-feeds.json'] = JSON.stringify({ feeds }, null, 2) + '\n';
     try {
       const r = await fetch('/admin/api/publish', {
         method: 'POST',
@@ -191,11 +217,16 @@ export default function App({ data }: { data: Data }) {
       });
       const j = await r.json().catch(() => ({ error: 'Publish failed (' + r.status + ')' }));
       if (j.error) throw new Error(j.error);
-      const rec: Published = { at: new Date().toISOString(), files: { ...(recent?.files || {}), ...Object.fromEntries(changed.map((y) => [y, drafts[y]])) } };
+      const rec: Published = {
+        at: new Date().toISOString(),
+        files: { ...(recent?.files || {}), ...Object.fromEntries(changed.map((y) => [y, drafts[y]])) },
+        news: { ...(recent?.news || {}), ...Object.fromEntries(newsChanged.map((k) => [k, newsDraft[k]])) },
+      };
       save(PUBLISHED_KEY, rec);
       setRecent(rec);
       draftsRef.current = {};
       setDrafts({});
+      setNewsDraft({});
       setPub({ busy: false, done: { ...j, lines: summary } });
     } catch (e) {
       setPub({ busy: false, error: (e as Error).message });
@@ -217,12 +248,77 @@ export default function App({ data }: { data: Data }) {
     cancelled: ['Cancelled', '#6f69a8'],
     winner: ['Winner only — not imported yet', '#a9a3e0'],
   } as const;
-  const nDrafts = changed.length;
+  const nDrafts = changed.length + newsChanged.length;
 
   const rowsFor = (src: Entry[]) =>
     src
       .slice()
       .sort((x, y) => +(x.place == null) - +(y.place == null) || (x.place || 0) - (y.place || 0) || x.status.localeCompare(y.status) || (x.semiPlace || 99) - (y.semiPlace || 99));
+
+  const publishBox = (
+    <div class="box">
+      <p class="lead">
+        Your edits are drafts saved in this browser. Publishing commits them all to GitHub in <b>one commit</b>; Netlify then rebuilds the site once (usually under a minute).
+        Visitors only ever get the pre-built pages.
+      </p>
+      {pub.done && (
+        <div class="done">
+          <b>Published.</b> Commit{' '}
+          <a href={pub.done.commitUrl} target="_blank" rel="noopener">
+            {pub.done.sha.slice(0, 7)}
+          </a>{' '}
+          · {pub.done.lines.join(' · ')}
+          <br />
+          {pub.done.deploysUrl ? (
+            <a href={pub.done.deploysUrl} target="_blank" rel="noopener">
+              Netlify build started — watch the deploy log ↗
+            </a>
+          ) : (
+            'Netlify build started.'
+          )}
+        </div>
+      )}
+      {pub.error && <div class="msg msg-err">Publish failed: {pub.error}. Your drafts are still here; try again.</div>}
+      {summary.length ? (
+        <>
+          <ul class="summary">
+            {summary.map((l) => (
+              <li key={l}>{l}</li>
+            ))}
+          </ul>
+          <div class="row">
+            <button class="btn btn-gold" disabled={pub.busy} onClick={publish}>
+              {pub.busy ? 'Publishing…' : 'Publish changes'}
+            </button>
+            <button
+              class="btn btn-ghost"
+              disabled={pub.busy}
+              onClick={() => {
+                if (confirm('Discard every unpublished change?')) {
+                  draftsRef.current = {};
+                  setDrafts({});
+                  setNewsDraft({});
+                }
+              }}
+            >
+              Discard all drafts
+            </button>
+          </div>
+          <details>
+            <summary>Show the files that will be committed</summary>
+            {changed.map((y) => (
+              <div key={y}>
+                <div class="file">content/contests/{y}.json {drafts[y] ? '' : '(deleted)'}</div>
+                {drafts[y] && <textarea readOnly value={stable(drafts[y]!)} />}
+              </div>
+            ))}
+          </details>
+        </>
+      ) : (
+        !pub.done && <div class="msg msg-plain">No unpublished changes.</div>
+      )}
+    </div>
+  );
 
   return (
     <div class="cms">
@@ -243,6 +339,13 @@ export default function App({ data }: { data: Data }) {
 
       <div class="cms-layout">
         <aside class="cms-side">
+          <button class={'side-year side-news' + (view === 'news' ? ' on' : '')} onClick={() => setView('news')}>
+            <b>News</b>
+            <span>
+              {picks.length} pick{picks.length === 1 ? '' : 's'} · {feeds.length} feed{feeds.length === 1 ? '' : 's'}
+            </span>
+            {newsChanged.length > 0 && <i style={{ background: '#2de2f5' }} />}
+          </button>
           <div class="side-legend">
             <span><i style="background:#ffd23f" />Published</span>
             <span><i style="background:#2de2f5" />Draft (unpublished)</span>
@@ -257,7 +360,7 @@ export default function App({ data }: { data: Data }) {
                 {decades[d].map((y) => {
                   const s = statusOf(y);
                   return (
-                    <button key={y} class={'side-year' + (y === year ? ' on' : '')} onClick={() => pick(y)}>
+                    <button key={y} class={'side-year' + (view === 'year' && y === year ? ' on' : '')} onClick={() => (setView('year'), pick(y))}>
                       <b>{y}</b>
                       <span>{current(y)?.city || A[y]?.city || ''}</span>
                       <i style={{ background: s === 'draft' ? '#2de2f5' : s === 'published' ? '#ffd23f' : s === 'cancelled' ? 'transparent' : 'rgba(255,255,255,.22)' }} />
@@ -269,6 +372,27 @@ export default function App({ data }: { data: Data }) {
         </aside>
 
         <main class="cms-main">
+          {view === 'news' ? (
+            <>
+              <div class="cms-title">
+                <div>
+                  <div class="cms-status" style={{ color: newsChanged.length ? '#2de2f5' : '#ffd23f' }}>{newsChanged.length ? 'Draft — not published yet' : 'Published'}</div>
+                  <h1>News</h1>
+                  <div class="cms-sub">The news bar in the next-contest section: your picks first, then the latest feed stories.</div>
+                </div>
+                <div class="tabs">
+                  <button class={'pill' + (newsTab === 'edit' ? ' on' : '')} onClick={() => setNewsTab('edit')}>
+                    Edit
+                  </button>
+                  <button class={'pill' + (newsTab === 'publish' ? ' on' : '')} onClick={() => setNewsTab('publish')}>
+                    {nDrafts ? `Publish (${nDrafts})` : 'Publish'}
+                  </button>
+                </div>
+              </div>
+              {newsTab === 'publish' ? publishBox : <News picks={picks} feeds={feeds} setPicks={(v) => putNews('picks', v)} setFeeds={(v) => putNews('feeds', v)} />}
+            </>
+          ) : (
+          <>
           <div class="cms-title">
             <div class="cms-who">
               <div class="ring ring-lg">
@@ -526,68 +650,8 @@ export default function App({ data }: { data: Data }) {
             </>
           )}
 
-          {tab === 'publish' && (
-            <div class="box">
-              <p class="lead">
-                Your edits are drafts saved in this browser. Publishing commits them all to GitHub in <b>one commit</b>; Netlify then rebuilds the site once (usually under a minute).
-                Visitors only ever get the pre-built pages.
-              </p>
-              {pub.done && (
-                <div class="done">
-                  <b>Published.</b> Commit{' '}
-                  <a href={pub.done.commitUrl} target="_blank" rel="noopener">
-                    {pub.done.sha.slice(0, 7)}
-                  </a>{' '}
-                  · {pub.done.lines.join(' · ')}
-                  <br />
-                  {pub.done.deploysUrl ? (
-                    <a href={pub.done.deploysUrl} target="_blank" rel="noopener">
-                      Netlify build started — watch the deploy log ↗
-                    </a>
-                  ) : (
-                    'Netlify build started.'
-                  )}
-                </div>
-              )}
-              {pub.error && <div class="msg msg-err">Publish failed: {pub.error}. Your drafts are still here; try again.</div>}
-              {summary.length ? (
-                <>
-                  <ul class="summary">
-                    {summary.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                  <div class="row">
-                    <button class="btn btn-gold" disabled={pub.busy} onClick={publish}>
-                      {pub.busy ? 'Publishing…' : 'Publish changes'}
-                    </button>
-                    <button
-                      class="btn btn-ghost"
-                      disabled={pub.busy}
-                      onClick={() => {
-                        if (confirm('Discard every unpublished change?')) {
-                          draftsRef.current = {};
-                          setDrafts({});
-                        }
-                      }}
-                    >
-                      Discard all drafts
-                    </button>
-                  </div>
-                  <details>
-                    <summary>Show the files that will be committed</summary>
-                    {changed.map((y) => (
-                      <div key={y}>
-                        <div class="file">content/contests/{y}.json {drafts[y] ? '' : '(deleted)'}</div>
-                        {drafts[y] && <textarea readOnly value={stable(drafts[y]!)} />}
-                      </div>
-                    ))}
-                  </details>
-                </>
-              ) : (
-                !pub.done && <div class="msg msg-plain">No unpublished changes.</div>
-              )}
-            </div>
+          {tab === 'publish' && publishBox}
+          </>
           )}
         </main>
       </div>

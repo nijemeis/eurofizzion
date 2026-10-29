@@ -28,12 +28,14 @@ Fonts are self-hosted (Fontsource), flags are self-hosted, and the logo is conve
 
 ## News bar
 
-The next-contest section shows the latest stories from [eurovision.com/stories](https://www.eurovision.com/stories/): image, date, title and a short excerpt, each linking to eurovision.com.
+The next-contest section has a news bar: image, date, title and a short excerpt per story, each linking to its source. It's hidden while there are no stories. Two sources, both managed in the CMS under **News**:
 
-- `.github/workflows/news.yml` runs `scripts/fetch-news.ts` every day at 06:17 UTC (free on a public repo). It saves up to 8 stories to `content/news.json` and commits **only when the stories changed**, so Netlify rebuilds only on days with new news.
-- It reads the story links on the stories page, then each story's standard share tags (`og:title`, `og:description`, `og:image`, `article:published_time`), so it doesn't depend on eurovision.com's page layout.
-- If eurovision.com can't be read, the run fails (GitHub emails you) and the old news stays on the site. The bar is hidden while there are no stories.
-- Run it by hand: GitHub → **Actions → Update news → Run workflow**. Change the time in the `cron` line.
+- **Your picks** (`content/news-picks.json`): stories you add by hand. Paste a link and click **Fill in from the page** to pull the title, image, text and date from the page's share tags (via the `link-preview` function); some sites block this, so you can always type them in. Picks are shown first.
+- **Feeds** (`content/news-feeds.json`): RSS or Atom feed links. `.github/workflows/news.yml` runs `scripts/fetch-news.ts` every day at 06:17 UTC (free on a public repo), saves the newest items to `content/news.json`, and commits **only when they changed**, so Netlify rebuilds only on days with new stories. If no feed can be read, the run fails (GitHub emails you) and the old stories stay.
+
+The bar shows up to 8 cards: picks first, then feed stories by date, without duplicates. Run the feed update by hand: GitHub → **Actions → Update news → Run workflow**.
+
+eurovision.com itself answers automated requests with 403, so it can't be a feed; add its stories as picks instead.
 
 ## Develop
 

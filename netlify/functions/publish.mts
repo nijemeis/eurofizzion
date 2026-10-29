@@ -1,4 +1,4 @@
-// CMS only: commits every changed content/contests/*.json file to GitHub in ONE commit.
+// CMS only: commits every changed content file (contests, news picks, feed list) to GitHub in ONE commit.
 // Netlify then rebuilds the site once, on that push. Nothing is committed per click.
 import type { Config } from '@netlify/functions';
 import { checkAuth, json } from '../lib/auth.ts';
@@ -6,6 +6,11 @@ import { checkAuth, json } from '../lib/auth.ts';
 type Body = { files: Record<string, string | null>; message?: string };
 
 const PATH_RE = /^contests\/(\d{4})\.json$/;
+// Besides contest files, the CMS may write the editor's news picks and the feed list.
+const NEWS_FILES: Record<string, (v: any) => boolean> = {
+  'news-picks.json': (v) => Array.isArray(v?.items) && v.items.every((n: any) => typeof n?.title === 'string' && /^https?:\/\//.test(n?.url)),
+  'news-feeds.json': (v) => Array.isArray(v?.feeds) && v.feeds.every((f: any) => /^https?:\/\//.test(f?.url)),
+};
 
 export default async (req: Request) => {
   const denied = checkAuth(req, process.env.CMS_PASSWORD);
@@ -26,8 +31,17 @@ export default async (req: Request) => {
   const entries = Object.entries(body.files || {});
   if (!entries.length) return json({ error: 'Nothing to publish' }, 400);
 
-  // Only contest files can be written, and each must be a valid contest for its own year.
+  // Only these files can be written: the news files in their expected shape, and contest files
+  // that are valid contests for their own year.
   for (const [path, content] of entries) {
+    if (NEWS_FILES[path]) {
+      try {
+        if (content === null || !NEWS_FILES[path](JSON.parse(content))) throw new Error();
+      } catch {
+        return json({ error: `${path} is not valid` }, 400);
+      }
+      continue;
+    }
     const m = path.match(PATH_RE);
     if (!m) return json({ error: `Refusing to write ${path}` }, 400);
     if (content === null) continue;
@@ -71,7 +85,7 @@ export default async (req: Request) => {
         ),
       }),
     });
-    const years = entries.map(([p]) => p.match(PATH_RE)![1]).join(', ');
+    const years = entries.map(([p]) => p.match(PATH_RE)?.[1] ?? p.replace('.json', '')).join(', ');
     const commit = await gh('/git/commits', {
       method: 'POST',
       body: JSON.stringify({
