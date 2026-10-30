@@ -312,7 +312,7 @@ export function decades(allYears: number[], current: number, archive: Record<num
       label: d + 's',
       years: map[d]
         .slice()
-        .sort((a, b) => a - b)
+        .sort((a, b) => b - a) // newest first within each decade
         .map((y) => {
           const a = archive[y];
           const wc = a?.winner;
