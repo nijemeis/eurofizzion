@@ -17,7 +17,13 @@
       "total": 39,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 1
+      "runningOrder": 1,
+      "video": {
+        "live": "y1c7gDOaFY0",
+        "liveTitle": "Maraaya - Here For You (LIVE) | Slovenia 🇸🇮 | Grand Final | Eurovision 2015",
+        "mv": "-oOQKYopwJ4",
+        "mvTitle": "Maraaya - Here For You (Slovenia) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "fr",
@@ -29,7 +35,13 @@
       "total": 4,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 2
+      "runningOrder": 2,
+      "video": {
+        "live": "tJful-Jtc9o",
+        "liveTitle": "Lisa Angell - N'oubliez Pas (LIVE) | France 🇫🇷 | Grand Final | Eurovision 2015",
+        "mv": "kG_WJU2s5ho",
+        "mvTitle": "Lisa Angell - N'oubliez pas (France) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "il",
@@ -41,7 +53,13 @@
       "total": 97,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 3
+      "runningOrder": 3,
+      "video": {
+        "live": "-w-2K9U8UIs",
+        "liveTitle": "Nadav Guedj - Golden Boy (LIVE) | Israel 🇮🇱 | Grand Final | Eurovision 2015",
+        "mv": "NdxOCTezeTg",
+        "mvTitle": "Nadav Guedj - Golden Boy - 🇮🇱 Israel - Official Music Video - Eurovision 2015"
+      }
     },
     {
       "country": "ee",
@@ -53,7 +71,13 @@
       "total": 106,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 4
+      "runningOrder": 4,
+      "video": {
+        "live": "Xsx_dIJOtgI",
+        "liveTitle": "Elina Born & Stig Rästa - Goodbye To Yesterday (LIVE) | Estonia 🇪🇪 | Grand Final | Eurovision 2015",
+        "mv": "gSWbx3CvVUk",
+        "mvTitle": "Elina Born & Stig Rästa - Goodbye To Yesterday (Estonia) - LIVE at Eurovision 2015: Semi-Final 1"
+      }
     },
     {
       "country": "gb",
@@ -65,7 +89,13 @@
       "total": 5,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 5
+      "runningOrder": 5,
+      "video": {
+        "live": "Ethyx4A5ajM",
+        "liveTitle": "Electro Velvet - Still In Love With You (LIVE) | United Kingdom 🇬🇧 | Grand Final | Eurovision 2015",
+        "mv": "s6r1tUhl1cQ",
+        "mvTitle": "Electro Velvet - Still In Love With You (United Kingdom) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "am",
@@ -77,7 +107,13 @@
       "total": 34,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 6
+      "runningOrder": 6,
+      "video": {
+        "live": "Z6O8pr7HH94",
+        "liveTitle": "Genealogy - Face The Shadow (Armenia) - LIVE at Eurovision 2015 Grand Final",
+        "mv": "VVVvgD0-Mu0",
+        "mvTitle": "Genealogy - Face The Shadow (Armenia) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "lt",
@@ -89,7 +125,13 @@
       "total": 30,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 7
+      "runningOrder": 7,
+      "video": {
+        "live": "xtB_slM63JA",
+        "liveTitle": "Monika Linkytė and Vaidas Baumila - This Time (LIVE) | Lithuania 🇱🇹 | Grand Final | Eurovision 2015",
+        "mv": "oD0XTvKcUk4",
+        "mvTitle": "Monika Linkytė and Vaidas Baumila - This Time (Lithuania) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "rs",
@@ -101,7 +143,13 @@
       "total": 53,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 8
+      "runningOrder": 8,
+      "video": {
+        "live": "c40kVKIoPvE",
+        "liveTitle": "Bojana Stamenov - Beauty Never Lies (Serbia) - LIVE at Eurovision 2015: Semi-Final 1",
+        "mv": "gXGo70i94S8",
+        "mvTitle": "Bojana Stamenov - Beauty Never Lies (LIVE) | Serbia 🇷🇸 | Grand Final | Eurovision 2015"
+      }
     },
     {
       "country": "no",
@@ -113,7 +161,13 @@
       "total": 102,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 9
+      "runningOrder": 9,
+      "video": {
+        "live": "vY1FCXDojMU",
+        "liveTitle": "Mørland & Debrah Scarlett - A Monster Like Me (LIVE) | Norway 🇳🇴 | Grand Final | Eurovision 2015",
+        "mv": "oVKJK9yb5xY",
+        "mvTitle": "Mørland & Debrah Scarlett - A Monster Like Me (Norway) - LIVE at Eurovision 2015: Semi-Final 2"
+      }
     },
     {
       "country": "se",
@@ -125,7 +179,13 @@
       "total": 365,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 10
+      "runningOrder": 10,
+      "video": {
+        "live": "5sGOwFVUU0I",
+        "liveTitle": "Måns Zelmerlöw - Heroes (LIVE) | Sweden 🇸🇪 | Grand Final | Winner of Eurovision 2015",
+        "mv": "-msutN_OkU4",
+        "mvTitle": "Måns Zelmerlöw - Heroes (Sweden) - LIVE at Eurovision 2015: Semi-Final 2"
+      }
     },
     {
       "country": "cy",
@@ -137,7 +197,13 @@
       "total": 11,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 11
+      "runningOrder": 11,
+      "video": {
+        "live": "RUNEoMBLGc8",
+        "liveTitle": "John Karayiannis - One Thing I Should Have Done (LIVE) | Cyprus 🇨🇾 | Grand Final | Eurovision 2015",
+        "mv": "tXU2Hehc4wY",
+        "mvTitle": "John Karayiannis - One Thing I Should Have Done (Cyprus) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "au",
@@ -149,7 +215,13 @@
       "total": 196,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 12
+      "runningOrder": 12,
+      "video": {
+        "live": "H0EhhZWXTng",
+        "liveTitle": "Guy Sebastian - Tonight Again (LIVE) | Australia 🇦🇺 | Grand Final | Eurovision 2015",
+        "mv": "i7MwzRBEY_M",
+        "mvTitle": "Guy Sebastian - Tonight Again (Australia) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "be",
@@ -161,7 +233,13 @@
       "total": 217,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 13
+      "runningOrder": 13,
+      "video": {
+        "live": "G48p8eNhnd8",
+        "liveTitle": "Loïc Nottet - Rhythm Inside (LIVE) | Belgium 🇧🇪 | Grand Final | Eurovision 2015",
+        "mv": "IjH-HYAFICg",
+        "mvTitle": "Loïc Nottet - Rhythm Inside (Belgium) - LIVE at Eurovision 2015: Semi-Final 1"
+      }
     },
     {
       "country": "at",
@@ -173,7 +251,13 @@
       "total": 0,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 14
+      "runningOrder": 14,
+      "video": {
+        "live": "-f993p0CAV8",
+        "liveTitle": "The Makemakes - I Am Yours (LIVE) | Austria 🇦🇹 | Grand Final | Eurovision 2015",
+        "mv": "duW-PsDbysg",
+        "mvTitle": "The Makemakes - I Am Yours (Austria) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "gr",
@@ -185,7 +269,13 @@
       "total": 23,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 15
+      "runningOrder": 15,
+      "video": {
+        "live": "1RZ2JGC9Nlw",
+        "liveTitle": "Maria Elena Kyriakou - One Last Breath (Greece) - LIVE at Eurovision 2015 Grand Final",
+        "mv": "v7xKMnNcVdM",
+        "mvTitle": "Maria-Elena Kyriakou - One Last Breath (Greece) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "me",
@@ -197,7 +287,13 @@
       "total": 44,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 16
+      "runningOrder": 16,
+      "video": {
+        "live": "MTyi2XeeoJU",
+        "liveTitle": "Knez - Adio (LIVE) | Montenegro 🇲🇪 | Grand Final | Eurovision 2015",
+        "mv": "4giAO-2aICo",
+        "mvTitle": "Knez - Adio - Montenegro 🇲🇪 - Official Music Video - Eurovision 2015"
+      }
     },
     {
       "country": "de",
@@ -209,7 +305,11 @@
       "total": 0,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 17
+      "runningOrder": 17,
+      "video": {
+        "live": "DGMJOchTRPc",
+        "liveTitle": "Ann Sophie - Black Smoke (LIVE) | Germany 🇩🇪 | Grand Final | Eurovision 2015"
+      }
     },
     {
       "country": "pl",
@@ -221,7 +321,13 @@
       "total": 10,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 18
+      "runningOrder": 18,
+      "video": {
+        "live": "TReYIZYloSg",
+        "liveTitle": "Monika Kuszyńska  In The Name Of Love (LIVE) | Poland 🇵🇱 | Grand Final | Eurovision 2015",
+        "mv": "4fjWLzeQ9K8",
+        "mvTitle": "Monika Kuszyńska - In The Name Of Love (Poland) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "lv",
@@ -233,7 +339,13 @@
       "total": 186,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 19
+      "runningOrder": 19,
+      "video": {
+        "live": "-usdXbeGHi8",
+        "liveTitle": "Aminata - Love Injected (LIVE) | Latvia 🇱🇻 | Grand Final | Eurovision 2015",
+        "mv": "tv1ath0XWrc",
+        "mvTitle": "Aminata - Love Injected (Latvia) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "ro",
@@ -245,7 +357,13 @@
       "total": 35,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 20
+      "runningOrder": 20,
+      "video": {
+        "live": "o7iOFkEymXA",
+        "liveTitle": "Voltaj - De La Capat/ All Over Again (Romania) - LIVE at Eurovision 2015: Semi-Final 1",
+        "mv": "WA3wOKHpzEU",
+        "mvTitle": "Voltaj - De la capăt / All Over Again - (Romania) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "es",
@@ -257,7 +375,13 @@
       "total": 15,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 21
+      "runningOrder": 21,
+      "video": {
+        "live": "NsMiJJlElAY",
+        "liveTitle": "Edurne - Amanecer (LIVE) | Spain 🇪🇸 | Grand Final | Eurovision 2015",
+        "mv": "9-g92hNNbPQ",
+        "mvTitle": "Edurne - Amanecer (Spain) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "hu",
@@ -269,7 +393,13 @@
       "total": 19,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 22
+      "runningOrder": 22,
+      "video": {
+        "live": "MdybVsBESQc",
+        "liveTitle": "Boggie - Wars For Nothing (LIVE) | Hungary 🇭🇺 | Grand Final | Eurovision 2015",
+        "mv": "Z52QQG1hboo",
+        "mvTitle": "Boggie - Wars For Nothing (Hungary) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "ge",
@@ -281,7 +411,13 @@
       "total": 51,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 23
+      "runningOrder": 23,
+      "video": {
+        "live": "ddC8lviTERI",
+        "liveTitle": "Nina Sublatti - Warrior (Georgia) - LIVE at Eurovision 2015 Grand Final",
+        "mv": "gWgDzQ0mWTg",
+        "mvTitle": "Nina Sublatti - Warrior (Georgia) - LIVE at Eurovision 2015: Semi-Final 1"
+      }
     },
     {
       "country": "az",
@@ -293,7 +429,13 @@
       "total": 49,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 24
+      "runningOrder": 24,
+      "video": {
+        "live": "IcVrAFtc5YI",
+        "liveTitle": "Elnur Huseynov - Hour Of The Wolf (Azerbaijan) - LIVE at Eurovision 2015 Grand Final",
+        "mv": "kYsj1fFE1Xw",
+        "mvTitle": "Elnur Huseynov - Hour of the wolf (Azerbaijan) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "ru",
@@ -305,7 +447,13 @@
       "total": 303,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 25
+      "runningOrder": 25,
+      "video": {
+        "live": "Q2gbKglCL5s",
+        "liveTitle": "Polina Gagarina - A Million Voices (Russia) - LIVE at Eurovision 2015: Semi-Final 1",
+        "mv": "jBVY7Glcd84",
+        "mvTitle": "Polina Gagarina - A Million Voices 🇷🇺 Russia - Official Music Video - Eurovision 2015"
+      }
     },
     {
       "country": "al",
@@ -317,7 +465,13 @@
       "total": 34,
       "oddsRank": null,
       "status": "",
-      "runningOrder": 26
+      "runningOrder": 26,
+      "video": {
+        "live": "fsH9iVaZSaA",
+        "liveTitle": "Elhaida Dani - I'm Alive (Albania) - LIVE at Eurovision 2015 Grand Final",
+        "mv": "Flj9_lhJZEc",
+        "mvTitle": "Elhaida Dani - Në Jetë (Albania) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "it",
@@ -329,7 +483,13 @@
       "total": 292,
       "oddsRank": null,
       "status": "A",
-      "runningOrder": 27
+      "runningOrder": 27,
+      "video": {
+        "live": "1TOMqZV2jA8",
+        "liveTitle": "Il Volo - Grande Amore (LIVE) | Italy 🇮🇹 | Grand Final | Eurovision 2015",
+        "mv": "4TEpHTVWXnM",
+        "mvTitle": "Il Volo - Grande Amore (Italy) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "md",
@@ -343,7 +503,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 41
+      "semiPoints": 41,
+      "video": {
+        "live": "px1MoZ0k7qY",
+        "liveTitle": "Eduard Romanyuta - I Want Your Love (LIVE) | Moldova 🇲🇩 | First Semi-Final | Eurovision 2015",
+        "mv": "mVN723iwj8c",
+        "mvTitle": "Eduard Romanyuta - I want your love (Moldova) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "nl",
@@ -357,7 +523,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 33
+      "semiPoints": 33,
+      "video": {
+        "live": "O_fs4SPGyF0",
+        "liveTitle": "Trijntje Oosterhuis - Walk Along (LIVE) | Netherlands 🇳🇱 | First Semi-Final | Eurovision 2015",
+        "mv": "eSZwKW3RqT0",
+        "mvTitle": "Trijntje Oosterhuis - Walk Along (The Netherlands) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "fi",
@@ -371,7 +543,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 16,
-      "semiPoints": 13
+      "semiPoints": 13,
+      "video": {
+        "live": "v4Y0HOPL5GU",
+        "liveTitle": "Pertti Kurikan Nimipäivät - Aina Mun Pitää (LIVE) | Finland 🇫🇮 | First Semi-Final | Eurovision 2015",
+        "mv": "OR6BixXmo08",
+        "mvTitle": "Pertti Kurikan Nimipäivät - Aina mun pitää (Finland) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "mk",
@@ -385,7 +563,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 28
+      "semiPoints": 28,
+      "video": {
+        "live": "TtSum7ouImU",
+        "liveTitle": "Daniel Kajmakoski - Autumn Leaves (F.Y.R. Macedonia) - LIVE at Eurovision 2015: Semi-Final 1",
+        "mv": "t8QCt6CJCHc",
+        "mvTitle": "Daniel Kajmakoski - Autumn Leaves (F.Y.R. Macedonia) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "by",
@@ -399,7 +583,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 39
+      "semiPoints": 39,
+      "video": {
+        "live": "Cwjm1lRV4N4",
+        "liveTitle": "Uzari&Maimuna - Time (LIVE) | Belarus 🇧🇾 | First Semi-Final | Eurovision 2015",
+        "mv": "M8ZADtaAvDA",
+        "mvTitle": "Uzari & Maimuna - Time (Belarus) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "dk",
@@ -413,7 +603,13 @@
       "status": "SF1",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 33
+      "semiPoints": 33,
+      "video": {
+        "live": "J--Tgi_iZQ8",
+        "liveTitle": "Anti Social Media - The Way You Are (LIVE) | Denmark 🇩🇰 | First Semi-Final | Eurovision 2015",
+        "mv": "g8u3_DsIN2E",
+        "mvTitle": "Anti Social Media - The Way You Are (Denmark) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "ie",
@@ -427,7 +623,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 12,
-      "semiPoints": 35
+      "semiPoints": 35,
+      "video": {
+        "live": "3B5sdNJF0lk",
+        "liveTitle": "Molly Sterling - Playing With Numbers (LIVE) | Ireland 🇮🇪 | Second Semi-Final | Eurovision 2015",
+        "mv": "zBZ7XSYX90E",
+        "mvTitle": "Molly Sterling - Playing With Numbers (Ireland) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "sm",
@@ -441,7 +643,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 16,
-      "semiPoints": 11
+      "semiPoints": 11,
+      "video": {
+        "live": "FE1KJYNvVAE",
+        "liveTitle": "Anita Simoncini & Michele Perniola - Chain of Lights (LIVE) | San Marino 🇸🇲 | Eurovision 2015",
+        "mv": "l5of_gx0kjA",
+        "mvTitle": "Anita Simoncini & Michele Perniola - Chain of Lights (San Marino) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "mt",
@@ -455,7 +663,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 11,
-      "semiPoints": 43
+      "semiPoints": 43,
+      "video": {
+        "live": "SaJxu3vorLc",
+        "liveTitle": "Amber - Warrior (LIVE) | Malta 🇲🇹 | Second Semi-Final | Eurovision 2015",
+        "mv": "wevxW3l_tkg",
+        "mvTitle": "Amber - Warrior (Malta) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "pt",
@@ -469,7 +683,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 14,
-      "semiPoints": 19
+      "semiPoints": 19,
+      "video": {
+        "live": "vE-LqXkb0ok",
+        "liveTitle": "Leonor Andrade - Há Um Mar Que Nos Separa (LIVE) | Portugal 🇵🇹 | Second Semi-Final | Eurovision 2015",
+        "mv": "xowMYNzYWbE",
+        "mvTitle": "Leonor Andrade - Há um Mar que nos Separa (Portugal) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "cz",
@@ -483,7 +703,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 13,
-      "semiPoints": 33
+      "semiPoints": 33,
+      "video": {
+        "live": "SLz6VeSPXjA",
+        "liveTitle": "Marta Jandová & Václav Noid Bárta - Hope Never Dies (LIVE) | Czechia 🇨🇿 | Eurovision 2015",
+        "mv": "P_o44RdxYTY",
+        "mvTitle": "Marta Jandová and Václav Noid Bárta - Hope Never Dies (Czech Republic) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "is",
@@ -497,7 +723,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 15,
-      "semiPoints": 14
+      "semiPoints": 14,
+      "video": {
+        "live": "0Jl-Hr137uM",
+        "liveTitle": "Maria Olafs - Unbroken (LIVE) | Iceland 🇮🇸 | Second Semi-Final | Eurovision 2015",
+        "mv": "sov_pE1cdFY",
+        "mvTitle": "Maria Olafs - Unbroken (Iceland) 2015 Eurovision Song Contest"
+      }
     },
     {
       "country": "ch",
@@ -511,7 +743,13 @@
       "status": "SF2",
       "runningOrder": null,
       "semiPlace": 17,
-      "semiPoints": 4
+      "semiPoints": 4,
+      "video": {
+        "live": "ya1r_nFHiCQ",
+        "liveTitle": "Mélanie René - Time To Shine (LIVE) | Switzerland 🇨🇭 | Second Semi-Final | Eurovision 2015",
+        "mv": "_n_pXW3p74Q",
+        "mvTitle": "Mélanie René - Time to Shine (Switzerland) 2015 Eurovision Song Contest"
+      }
     }
   ]
 }
