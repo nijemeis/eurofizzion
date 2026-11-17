@@ -12,7 +12,12 @@ const chips = [
   ...up.debut.map((c) => ({ c, label: 'Debut', kind: 'debut' })),
   ...up.returning.map((c) => ({ c, label: 'Returning', kind: 'returning' })),
   ...up.leaving.map((c) => ({ c, label: 'Not returning', kind: 'leaving' })),
+  ...(up.undecided || []).map((c) => ({ c, label: 'Undecided', kind: 'undecided' })),
 ];
+// Every country on the list, alphabetically, with its act once announced.
+const field = (up.participants || [])
+  .map((c) => ({ c, name: countries[c] || c, act: up.acts?.[c] }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <section class="next" id="next">
@@ -40,6 +45,7 @@ const chips = [
       <div class="part-head">
         <b>{up.intending}</b>
         <span>broadcasters have provisionally confirmed for {up.year}</span>
+        {up.participantsAsOf && <small class="part-asof">as of {up.participantsAsOf}</small>}
       </div>
       {
         chips.length > 0 && (
@@ -51,6 +57,21 @@ const chips = [
               </span>
             ))}
           </div>
+        )
+      }
+      {
+        field.length > 0 && (
+          <ul class="part-field">
+            {field.map((p) => (
+              <li>
+                <i class="flag" style={`background-image:url(/flags/${p.c}.svg)`} />
+                <span>
+                  <b>{p.name}</b>
+                  {p.act?.artist && <small>{p.act.artist}{p.act.song ? ` · “${p.act.song}”` : ''}</small>}
+                </span>
+              </li>
+            ))}
+          </ul>
         )
       }
       <div class="part-foot">Entries appear here as each country picks its act.</div>

@@ -63,6 +63,10 @@ export type Upcoming = {
   debut: string[];
   returning: string[];
   leaving: string[];
+  undecided?: string[]; // still deciding, e.g. by an extended deadline
+  participants?: string[]; // country codes on the (provisional) list
+  participantsAsOf?: string; // e.g. "28 October 2026"
+  acts?: Record<string, { artist?: string; song?: string }>; // filled in as each country picks its act
 };
 
 export type Countries = Record<string, string>;

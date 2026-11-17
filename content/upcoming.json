@@ -24,15 +24,64 @@
       "date": "Sat 15 May"
     }
   ],
-  "intending": 33,
+  "intending": 36,
   "debut": [
     "ca"
   ],
   "returning": [
-    "nl",
     "mk"
   ],
   "leaving": [
     "cz"
+  ],
+  "participantsAsOf": "28 October 2026",
+  "participants": [
+    "al",
+    "am",
+    "au",
+    "at",
+    "az",
+    "be",
+    "bg",
+    "ca",
+    "hr",
+    "cy",
+    "dk",
+    "ee",
+    "fi",
+    "fr",
+    "ge",
+    "de",
+    "gr",
+    "il",
+    "it",
+    "lv",
+    "lt",
+    "lu",
+    "mt",
+    "md",
+    "me",
+    "mk",
+    "no",
+    "pl",
+    "pt",
+    "ro",
+    "sm",
+    "rs",
+    "se",
+    "ch",
+    "ua",
+    "gb"
+  ],
+  "acts": {
+    "cy": {
+      "artist": "George Perris"
+    }
+  },
+  "undecided": [
+    "is",
+    "si",
+    "es",
+    "hu"
   ]
 }
