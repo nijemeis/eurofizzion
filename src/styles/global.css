@@ -324,7 +324,16 @@ button.orow:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px;
 .pchip-undecided { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
 .part-asof { font-size: 12px; color: var(--faint); }
 .part-field { list-style: none; margin: 0; padding: 16px 0 0; border-top: 1px solid rgba(255, 255, 255, .08); display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px 14px; }
-.part-field li { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.part-field li { min-width: 0; }
+.part-field .pf { display: flex; align-items: center; gap: 10px; min-width: 0; color: var(--text); border-radius: 999px; }
+.part-field a.pf:hover b { color: var(--gold); }
+a.pf:hover { color: var(--text); }
+/* Linked chips keep their own colours on hover (links turn pink by default). */
+a.pchip:hover { filter: brightness(1.12); }
+a.pchip-debut:hover { color: var(--ink); }
+a.pchip-returning:hover { color: #fff; }
+a.pchip-leaving:hover { color: var(--text-2); }
+a.pchip-undecided:hover { color: var(--muted); }
 .part-field i { width: 26px; height: 26px; flex: none; border-radius: 50%; box-shadow: 0 0 0 2px var(--deep), 0 0 0 3px rgba(255, 255, 255, .18); }
 .part-field span { min-width: 0; display: flex; flex-direction: column; }
 .part-field b { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

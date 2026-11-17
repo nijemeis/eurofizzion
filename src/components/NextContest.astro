@@ -1,7 +1,7 @@
 ---
 import Sparkles from './Sparkles.astro';
 import NewsBar from './NewsBar.astro';
-import { countries } from '../lib/content';
+import { countries, countryHref } from '../lib/content';
 import type { Upcoming } from '../lib/types';
 
 interface Props {
@@ -16,7 +16,7 @@ const chips = [
 ];
 // Every country on the list, alphabetically, with its act once announced.
 const field = (up.participants || [])
-  .map((c) => ({ c, name: countries[c] || c, act: up.acts?.[c] }))
+  .map((c) => ({ c, name: countries[c] || c, act: up.acts?.[c], href: countryHref(c) }))
   .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
@@ -50,27 +50,37 @@ const field = (up.participants || [])
       {
         chips.length > 0 && (
           <div class="part-chips">
-            {chips.map((o) => (
-              <span class={`pchip pchip-${o.kind}`}>
-                <i class="flag" style={`background-image:url(/flags/${o.c}.svg)`} />
-                {countries[o.c] || o.c} · {o.label}
-              </span>
-            ))}
+            {chips.map((o) => {
+              // Linked to the country's page when it has one (a debutant doesn't yet).
+              const href = countryHref(o.c);
+              const Tag = href ? 'a' : 'span';
+              return (
+                <Tag class={`pchip pchip-${o.kind}`} href={href ?? undefined}>
+                  <i class="flag" style={`background-image:url(/flags/${o.c}.svg)`} />
+                  {countries[o.c] || o.c} · {o.label}
+                </Tag>
+              );
+            })}
           </div>
         )
       }
       {
         field.length > 0 && (
           <ul class="part-field">
-            {field.map((p) => (
-              <li>
-                <i class="flag" style={`background-image:url(/flags/${p.c}.svg)`} />
-                <span>
-                  <b>{p.name}</b>
-                  {p.act?.artist && <small>{p.act.artist}{p.act.song ? ` · “${p.act.song}”` : ''}</small>}
-                </span>
-              </li>
-            ))}
+            {field.map((p) => {
+              const Tag = p.href ? 'a' : 'div';
+              return (
+                <li>
+                  <Tag class="pf" href={p.href ?? undefined}>
+                    <i class="flag" style={`background-image:url(/flags/${p.c}.svg)`} />
+                    <span>
+                      <b>{p.name}</b>
+                      {p.act?.artist && <small>{p.act.artist}{p.act.song ? ` · “${p.act.song}”` : ''}</small>}
+                    </span>
+                  </Tag>
+                </li>
+              );
+            })}
           </ul>
         )
       }
